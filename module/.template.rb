@@ -2,7 +2,8 @@
 # template as defined by the required file
 # author: apels <Alice Duchess>
 # module as defined by .plugin.rb
-
+# modules have access to $plugins to be loaded as well as $logs
+# $logs stores unparsed message lines in an array of length 100
 
 
 $LOAD_PATH << './module'
