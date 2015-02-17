@@ -3,6 +3,9 @@
 # author apels Alice Duchess
 # usage:
 # ruby-2.1 ircboats.rb server port channel [logging <true> | <false>] [optional: PASS $PASS]
+# example for non ssl ruby-2.1 ircboats.rb irc.rizon.net 6697 channelname false
+# example for ssl     ruby-2.1 ircboats.rb irc.rizon.net 6697 channelname false
+# example for network with a PASS ruby-2.1 ircboats.rb somenet 6697 channelname false PASS passphrase
 ############################################################################################
 # commands
 # /msg bluckbot `quit : tells the bot to quit
@@ -101,17 +104,17 @@ class Ircbot
 				$logs.delete_at(0)
 				$logs.push(msg)
 				if @logging == true and chan != "#trivia"
-					system("echo \"#{msg}\" >> ../log")
+					system("echo \"#{msg}\" >> ./log")
 				end
 			else
 				$logs.push(msg)
 				if @logging == true and chan != "#trivia"
-					system("echo \"#{msg}\" >> ../log")
+					system("echo \"#{msg}\" >> ./log")
 				end
 			end
 
 			if chan == "bluckbot"
-				system("echo \"#{@serv_name} #{msg}\" >> ../log_p")
+				system("echo \"#{@serv_name} #{msg}\" >> ./log_p")
 				chan = nick
 			end
 
@@ -218,7 +221,7 @@ class Ircbot
 				next
 			end
 
-			if message[0..- 2].match(/^`quit/) and nick == chan
+			if message[0..- 2].match(/^`quit/) and ["apels","iruel","merdach"].include? nick
 				say_to_chan("sorry for the disturbance sempai", chan)
 				quit
 				break
