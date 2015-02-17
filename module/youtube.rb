@@ -57,7 +57,7 @@ class YouTube < Pluginf
 		des = ""
 		description.each {|a| des.concat("#{a}\. ")}
 
-		#response.concat(" \[description: #{des[0..69]}\.\.\.\]")
+		#response.concat(" 「description: #{des[0..69]}\.\.\.」")
 
 
 		#@r = response
