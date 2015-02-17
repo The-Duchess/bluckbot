@@ -104,17 +104,17 @@ class Ircbot
 				$logs.delete_at(0)
 				$logs.push(msg)
 				if @logging == true and chan != "#trivia"
-					system("echo \"#{msg}\" >> ./log")
+					system("echo \"#{msg}\" >> ./res/log")
 				end
 			else
 				$logs.push(msg)
 				if @logging == true and chan != "#trivia"
-					system("echo \"#{msg}\" >> ./log")
+					system("echo \"#{msg}\" >> ./res/log")
 				end
 			end
 
 			if chan == "bluckbot"
-				system("echo \"#{@serv_name} #{msg}\" >> ./log_p")
+				system("echo \"#{@serv_name} #{msg}\" >> ./res/log_p")
 				chan = nick
 			end
 
