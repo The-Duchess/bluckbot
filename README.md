@@ -6,4 +6,4 @@
 
 >note: some modules may have their own files
 
--To create Plugins follow the template ./module/.template.rb
+- To create Plugins follow the template ./module/.template.rb
