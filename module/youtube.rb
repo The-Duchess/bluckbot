@@ -48,10 +48,10 @@ class YouTube < Pluginf
 		likes = video_s.fetch('likeCount').to_s
 		dislikes = video_s.fetch('dislikeCount').to_s
 
-		response.concat("\[\x032title:\x03 #{video_i.fetch('title').to_s}\] ")
-		response.concat("\[\x032uploaded by:\x03 #{video_i.fetch('channelTitle').to_s}\] ")
-		response.concat("\[\x032duration:\x03 #{durat}\] ")
-		response.concat("\[\x032views:\x03 #{viewc}\] \[\x032likes:\x03 #{likes}\] \[\x032dislikes:\x03 #{dislikes}\]")
+		response.concat("「\x032title:\x03 #{video_i.fetch('title').to_s}」 ")
+		response.concat("「\x032uploaded by:\x03 #{video_i.fetch('channelTitle').to_s}」 ")
+		response.concat("「\x032duration:\x03 #{durat}」 ")
+		response.concat("「\x032views:\x03 #{viewc}」 「\x032likes:\x03 #{likes}」 「\x032dislikes:\x03 #{dislikes}」")
 
 		description = video_i.fetch('description')[0..500].to_s.split("\n")
 		des = ""
