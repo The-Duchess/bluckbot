@@ -13,7 +13,7 @@ class Info < Pluginf
 
 	#your definition for script
 	def script(message, nick, chan)
-		@r = "Bluckbot:\ndescription: bluckbot is a modular/plugable irc bot coded in ruby.\nto create plugins, follow the template ./module/.template.rb\nhttps://github.com/The-Duchess/bluckbot\ncreated by apels | iruel <Alice \"Duchess\" Archer>"
+		@r = "Bluckbot v1:\ndescription: bluckbot is a modular/plugable irc bot coded in ruby.\nto create plugins, follow the template ./module/.template.rb\nhttps://github.com/The-Duchess/bluckbot\ncreated by apels | iruel <Alice \"Duchess\" Archer>"
 		return @r
 	end
 end

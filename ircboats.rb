@@ -152,7 +152,7 @@ class Ircbot
 				next
 			end
 
-			if message[0..-2].match(/^`list channels/) and chan == nick and nick.match(/^apels/)
+			if message[0..-2].match(/^`list channels/) and chan == nick
 				quit
 				#list = ""
 				@channel_s.each do |a|
