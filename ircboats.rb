@@ -138,13 +138,6 @@ class Ircbot
 							say "JOIN #{line}"
 							@channel_s.push(line.to_s)
 							next
-						else
-							if @channel_s.include? line
-								next
-							end
-
-							say "JOIN #{line}"
-							@channel_s.push(line.to_s)
 						end
 					end
 				end
