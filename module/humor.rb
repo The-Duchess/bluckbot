@@ -59,7 +59,7 @@ class Joke < Pluginf
 			@jokes.shuffle!
 			begin
 				return @jokes[0].to_s
-			rescue NoMethodError => e
+			rescue => e
 				return "no jokes loaded"
 			end
 		end
