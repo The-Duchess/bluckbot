@@ -258,6 +258,7 @@ class Ircbot
 						say_to_chan("#{response}", chan)
 					end
 				next
+				end
 			end
 		end
 	end
