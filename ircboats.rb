@@ -237,11 +237,11 @@ class Ircbot
 				#the bot to run special commands through modules
 				#say "PRIVMSG #{chan_name} :#{msg}"
 				#format the message to return as PRIVMSG #channel | nick :message text you want to send to a channel or someone
-				if response.match(/^PRIVMSG/)
+				if response.match(/^PRIVMSG /)
 					if response.include? "\n"
 						@res_new = response.split("\n")
 						tokens = @res_new[0].split(' ')
-						1.upto(@res_new.length - 1) { |a| @res_new[a].prepend("#{tokens[0]} #{tokens[1]} :"); @res_new}
+						1.upto(@res_new.length - 1) { |a| @res_new[a].prepend("#{tokens[0]} #{tokens[1]} :")}
 						@res_new.each do |a|
 							say "#{a}"
 						end
