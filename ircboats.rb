@@ -146,7 +146,6 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`list channels/) and chan == nick
-				quit
 				#list = ""
 				@channel_s.each do |a|
 					p a
@@ -232,6 +231,7 @@ class Ircbot
 
 			response = parse(nick, chan, message)
 
+			#if the reponse is actually worth running the send and it is also a string
 			if response.length > 0 and response.class.to_s.downcase == "string"
 				#this grants a form of access to sockets and allows 
 				#the bot to run special commands through modules
