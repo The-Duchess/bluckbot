@@ -27,19 +27,15 @@ class UrbDict < Pluginf
 		@rt = ""
 		message[4..-1].split(" ").each { |a| @srh.concat("#{a.to_s}+")}
 		uri = "http://api.urbandictionary.com/v0/define?term=%s" % @srh
-
-		begin
-			open(uri) do |f|
-				obj = JSON.parse(f.read)
-				if obj['list'].empty?
-					@r = "No result"
-					return @r
-				else
-					@rt = obj['list'][0]['definition'].gsub(/(\r\n)+/, ' ').to_s
-				end
+		
+		open(uri) do |f|
+			obj = JSON.parse(f.read)
+			if obj['list'].empty?
+				@r = "No result"
+				return @r
+			else
+				@rt = obj['list'][0]['definition'].gsub(/(\r\n)+/, ' ').to_s
 			end
-		rescue => e
-			return "an error has happened"
 		end
 
 		@parts = []
