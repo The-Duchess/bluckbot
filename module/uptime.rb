@@ -9,7 +9,7 @@
 $LOAD_PATH << './module'
 require '.pluginf.rb'
 
-class Uptiamu < Pluginf
+class Uptaimu < Pluginf
 	#any functions you may need
 
 	#your definition for script
