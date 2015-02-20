@@ -16,6 +16,7 @@ class Joke < Pluginf
 		@name = name.to_s
 		@help = help
 		@jokes = Array.new
+		@num_j = 0
 		load_j
 	end
 
@@ -27,6 +28,7 @@ class Joke < Pluginf
 					next
 				else
 					@jokes.push(line.to_s)
+					@num_j += 1
 				end
 			end
 		end
@@ -37,6 +39,7 @@ class Joke < Pluginf
 	def add(joke)
 		@jokes.push(joke.to_s)
 		system("echo \"#{joke}\" >> ./res/.jokes")
+		@num_j += 1
 	end
 
 	#your definition for script
@@ -56,9 +59,10 @@ class Joke < Pluginf
 			add(temp[0..-2])
 			return "added"
 		else
-			@jokes.shuffle!
+			#@jokes.shuffle!
+			r = rand(@jokes.length.to_i)
 			begin
-				return @jokes[0].to_s
+				return "「\x0311#{(r.to_i + 1)}\x03/\x0310#{@num_j}\x03」 #{@jokes[r].to_s}"
 			rescue => e
 				return "no jokes loaded"
 			end

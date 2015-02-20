@@ -108,7 +108,7 @@ def parse(nick, chan, message)
     end
 
     if message.match(/^`mass load/)
-        temp_r = ["weather.rb","youtube.rb","urbdict.rb","cat.rb","use.rb","info.rb","flood.rb","dict.rb"]
+        temp_r = ["weather.rb","youtube.rb","urbdict.rb","cat.rb","use.rb","info.rb","flood.rb","smiles.rb","humor.rb"]
         temp_p = []
         $plugins_s.each { |a| temp_p.push("#{a.name.downcase}.rb")}
         temp_r.each do |a|
