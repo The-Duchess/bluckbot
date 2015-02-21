@@ -59,9 +59,18 @@ class Joke < Pluginf
 			add(temp[0..-2])
 			return "added"
 		elsif tokens[1] == "list"
+			temp = String.new
 			temp = "PRIVMSG #{nick} :"
+			temp.encode("iso-8859-1").force_encoding("utf-8")
 			i = 1
-			@jokes.each { |a| temp.concat("「#{i}/#{@num_j}」 #{a}\n"); i += 1}
+			@jokes.each do |a|
+				begin
+					temp.concat("「#{i}/#{@num_j}」 #{a}\n")
+				rescue => e
+					temp.concat("unicode error\n")
+				end
+				i += 1
+			end
 			return temp
 		else
 			#@jokes.shuffle!
