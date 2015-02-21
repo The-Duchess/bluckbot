@@ -12,26 +12,26 @@
 
 >\#network name
 
->NETWORK_N =
+>export NETWORK_N =
 
 >\#Port Number
 
->PORT_V =
+>export PORT_V =
 
 >\#channel name without the #
 
->CHANNEL_N =
+>export CHANNEL_N =
 
 >\#LOGGING TRUE | FALSE
 
->LOGGING_YN =
+>export LOGGING_YN =
 
 >\#WHETHER TO USE PASS TRUE | FALSE
 
->PASS_YN =
+>export PASS_YN =
 
 >\#Passphrase
 
->PASSPHRASE =
+>export PASSPHRASE =
 
 - To create Plugins follow the template ./module/.template.rb
