@@ -6,6 +6,6 @@ if [ $PASS_YN == $TRUE_T ]; then
 	ruby-2.1 ./ircboats.rb $NETWORK_N $PORT_V $CHANNEL_N $LOGGING_YN PASS $PASSPHRASE
 else
 	if [ $PASS_YN == $FALSE_T ]; then
-		ruby-2.1 ./ircboats.rb $NET $PORT $CHANNEL $LOGGING
+		ruby-2.1 ./ircboats.rb $NET $PORT_V $CHANNEL $LOGGING_YN
 	fi
 fi
