@@ -58,14 +58,16 @@ class Joke < Pluginf
 			2.upto(tokens.length - 1) { |a| temp.concat("#{tokens[a]} ")}
 			add(temp[0..-2])
 			return "added"
-		elsif tokens[1] == "list"
+		elsif tokens[1] == "list" and tokens.length == 3
 			temp = String.new
 			temp = "PRIVMSG #{nick} :"
 			temp.encode("iso-8859-1").force_encoding("utf-8")
 			i = 1
 			@jokes.each do |a|
 				begin
-					temp.concat("「#{i}/#{@num_j}」 #{a}\n")
+					if a.include? tokens[2].to_s
+						temp.concat("「#{i}/#{@num_j}」 #{a}\n")
+					end
 				rescue => e
 					temp.concat("unicode error\n")
 				end
