@@ -38,9 +38,10 @@ load 'command.rb'
 
 class Ircbot
 	def initialize(server, port, channel, logging)
-		@serv_name = server
-		@channel = channel
-		@socket = TCPSocket.open(server, port)
+		@serv_name = server.to_s
+		@channel = channel.to_s
+		@port = port.to_i
+		@socket = TCPSocket.open(@serv_name, @port)
 		if port.to_i != 6667
 			ssl_context = OpenSSL::SSL::SSLContext.new
 			ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -57,7 +58,7 @@ class Ircbot
     	say "USER k 0 * test"
     	say "JOIN ##{@channel}"
     	$logs = Array.new
-    	if logging == "true"
+    	if logging.to_s == "true"
     		@logging = true
     	else
     		@logging = false
