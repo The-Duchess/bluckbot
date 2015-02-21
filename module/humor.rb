@@ -58,6 +58,11 @@ class Joke < Pluginf
 			2.upto(tokens.length - 1) { |a| temp.concat("#{tokens[a]} ")}
 			add(temp[0..-2])
 			return "added"
+		elsif tokens[1] == "list"
+			temp = "PRIVMSG #{nick} :"
+			i = 1
+			@jokes.each { |a| temp.concat("「#{i}/#{@num_j}」 #{a}\n"); i += 1}
+			return temp
 		else
 			#@jokes.shuffle!
 			r = rand(@jokes.length.to_i)
