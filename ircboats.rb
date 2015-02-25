@@ -127,8 +127,8 @@ class Ircbot
 				next
 			end
 
-			if message[0..-2].match(/ACTION pets bluckbot/)
-				say_to_chan("#{nick}: ( \x0304◕\x03‿\x0304◕\x03)",chan)
+			if message[0..-2].include? "ACTION pets bluckbot"
+				say_to_chan("#{nick} ( \x0304◕\x03‿\x0304◕\x03)",chan)
 			end
 
 			if message[0..-2].match(/^`load chans/)
