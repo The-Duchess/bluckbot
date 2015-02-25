@@ -42,6 +42,10 @@ class Weather < Pluginf
 		parsed_json = JSON.parse(contents)
 		parsed_json_m = JSON.parse(contents_m)
 
+		#show forcast from morning of day to evening in 4 blocks
+		@hours = [800, 1200, 1800, 2200]
+		@hours_s = ["8AM", "12PM", "6PM", "10PM"]
+		
 		if parsed_json['main'].nil?
 			return "is this place actually real?"
 		elsif 
