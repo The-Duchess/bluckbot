@@ -234,6 +234,13 @@ class Ircbot
 				end
 			end
 
+			if message[0..-2].match(/^`reload /)
+				@respond = parse(nick, chan, "`unload #{message[8..-1]}")
+				say_to_chan(@respond, chan)
+				@respond = parse(nick, chan, "`load #{message[8..-2]}.rb ")
+				say_to_chan(@respond, chan)
+			end
+
 			response = parse(nick, chan, message)
 
 			#if the reponse is actually worth running the send and it is also a string
