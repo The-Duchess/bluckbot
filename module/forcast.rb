@@ -45,7 +45,7 @@ class Weather < Pluginf
 		#show forcast from morning of day to evening in 4 blocks
 		@hours = [800, 1200, 1800, 2200]
 		@hours_s = ["8AM", "12PM", "6PM", "10PM"]
-		
+
 		if parsed_json['main'].nil?
 			return "is this place actually real?"
 		elsif 
@@ -110,7 +110,8 @@ class Weather < Pluginf
 			@url = "http://api.openweathermap.org/data/2.5/forcast/daily?q=#{@ac}&mode=json&units=imperial&cnt=5"
 			@url_m = "http://api.openweathermap.org/data/2.5/forcast/daily?q=#{@ac}&mode=json&units=metric&cnt=5"
 			@r = "RIVMSG #{nick} :"
-			@r = weekly(@url, @url_m)
+			@temp = weekly(@url, @url_m)
+			@r.concat(@temp.to_s)
 		#default to hourly
 		else
 			#@url = tokens[1]
@@ -121,6 +122,7 @@ class Weather < Pluginf
 			@r = hourly(@url, @url_m)
 		end
 
+=begin
 		if parsed_json['main'].nil?
 			@r = "#{@ac.to_s} does not appear to be a valid city name, or maybe you misspelled the country, try again"
 		elsif weather_in_f = (parsed_json['main']['temp']).to_i
@@ -133,6 +135,7 @@ class Weather < Pluginf
 			weathercode = weatherc("#{parsed_json['weather'][0]['id']}")
 			@r.concat("Weather of \x0304#{message[3..-1].to_s}:\x03 #{weathercode} at \x0302#{weather_in_f}°F\x03 or \x0302#{weather_in_c}°C\x03 and winds at \x0311#{parsed_json['wind']['speed']} mph\x03")
 		end
+=end
 
 		return @r
 	end
