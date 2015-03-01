@@ -34,7 +34,7 @@ class PLUGIN < Pluginf
 
 			if message_s.match(sed_a) and chan == chan_s then 
 				included = true
-				string_a = message_s[0..-2].to_s
+				string_a = message_s.to_s
 				nick_a = nick_s.to_s
 				break
 			else
