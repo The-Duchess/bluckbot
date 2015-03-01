@@ -108,7 +108,14 @@ def parse(nick, chan, message)
     end
 
     if message.match(/^`mass load/)
-        temp_r = ["weather.rb","youtube.rb","urbdict.rb","cat.rb","use.rb","info.rb","flood.rb","smiles.rb","humor.rb","eightball.rb","sed.rb"]
+    	temp_r = []
+    	File.open("./res/mods", 'r') do |fr|
+    		while line = fr.gets
+    			line.chomp!
+    			temp_r.push(line.to_s)
+    		end
+    	end
+        #temp_r = ["weather.rb","youtube.rb","urbdict.rb","cat.rb","use.rb","info.rb","flood.rb","smiles.rb","humor.rb","eightball.rb","sed.rb"]
         temp_p = []
         $plugins_s.each { |a| temp_p.push("#{a.name.downcase}.rb")}
         temp_r.each do |a|
