@@ -15,6 +15,8 @@ class PLUGIN < Pluginf
 		command_set = command_s.split("/")
 		sed_a =  Regexp.new(command_set[1])
 		sed_b = command_set[2].to_s
+		p "regex search: #{sed_a.to_s}"
+		p "replace: #{sed_b}"
 		
 		included = false
 		string_a = ""
