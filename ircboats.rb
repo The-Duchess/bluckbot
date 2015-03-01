@@ -6,7 +6,7 @@
 # example for non ssl ruby-2.1 ircboats.rb irc.rizon.net 6697 channelname false
 # example for ssl     ruby-2.1 ircboats.rb irc.rizon.net 6697 channelname false
 # example for network with a PASS ruby-2.1 ircboats.rb somenet 6697 channelname false PASS passphrase
-############################################################################################
+####################################################################################################################
 # commands
 # /msg bluckbot `quit : tells the bot to quit
 # `ignore $NICK : tells the bot to ignore a nick
@@ -23,8 +23,8 @@
 # `list : lists loaded modules
 # `help $MODULE : gives help on a certain module
 # `help modules : gives help for all loaded modules
-# `mass load : loads a preset set of modules
-############################################################################################
+# `mass load : loads a preset set of modules in ./res/.modlist #note: add an extra newline to the end
+####################################################################################################################
 
 require 'socket'
 require 'google/api_client'
