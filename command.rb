@@ -125,8 +125,12 @@ def parse(nick, chan, message)
             end
             
             $LOAD_PATH << './module'
-            load "#{a}"
-            p "loaded #{a}"
+            begin
+            	load "#{a}"
+            rescue => e
+            	p "failed to load #{a}"
+            end
+        
             $LOAD_PATH << './'
         end
     end
