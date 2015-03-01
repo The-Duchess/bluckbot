@@ -23,4 +23,6 @@ touch ./res/log
 touch ./res/log_p
 echo "creating channel list"
 touch ./res/.chanlist
+echo "creating module list"
+touch ./res/.modlist
 echo "setup complete"
