@@ -109,7 +109,7 @@ def parse(nick, chan, message)
 
     if message.match(/^`mass load/)
     	temp_r = []
-    	File.open("./res/mods", 'r') do |fr|
+    	File.open("./res/.modlist", 'r') do |fr|
     		while line = fr.gets
     			line.chomp!
     			temp_r.push(line.to_s)
