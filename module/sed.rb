@@ -49,7 +49,7 @@ class PLUGIN < Pluginf
 		if included then
 		#perform sed search replace on a
 			system("echo \"#{string_a}\" > temp")
-			@r.concat(`sed -e #{command_s} < temp`)
+			@r.concat(`sed -e \"#{command_s}\" < temp`)
 			#@r.concat(string_a.sub(sed_a, sed_b)) #this works as well but does not offer some options
 			system("rm -f temp")
 		else
