@@ -14,7 +14,7 @@ class PLUGIN < Pluginf
 		command_s = message
 		command_set = command_s.split("/")
 		sed_a =  Regexp.new(command_set[1])
-		sed_b = Regexp.new(command_set[2])
+		sed_b = command_set[2].to_s
 		
 		included = false
 		string_a = ""
@@ -48,6 +48,8 @@ class PLUGIN < Pluginf
 		#perform sed search replace on a
 			system("echo \"#{string_a}\" > temp")
 			@r.concat(`sed -e #{command_s} < temp`)
+			#@r.concat(string_a.sub(sed_a, sed_b)) #this works as well but does not offer some options
+			system("rm -f temp")
 		else
 			@r = ""
 		end
