@@ -20,9 +20,13 @@ class PLUGIN < Pluginf
 		string_a = ""
 		nick_a = ""
 
-		$logs.each do |a|
+		length_l = $logs.length.to_i
+		length_l = length_l - 1
+		#$logs.each do |a|
 
-			message_reg_s = a.match(/^(:(?<prefix>\S+) )?(?<command>\S+)( (?!:)(?<params>.+?))?( :(?<trail>.+))?$/)
+		1.upto(length_l) do |a|
+
+			message_reg_s = $logs[a].match(/^(:(?<prefix>\S+) )?(?<command>\S+)( (?!:)(?<params>.+?))?( :(?<trail>.+))?$/)
 			nick_s = message_reg_s[:prefix].to_s.split("!")[0]
 			commands = message_reg_s[:command].to_s
 			chan_s = message_reg_s[:params].to_s
