@@ -23,7 +23,7 @@
 # `list : lists loaded modules
 # `help $MODULE : gives help on a certain module
 # `help modules : gives help for all loaded modules
-# `mass load : loads a preset set of modules in ./res/.modlist #note: add an extra newline to the end
+# `mass load : loads a preset set of modules in ./res/.modlist
 ####################################################################################################################
 
 require 'socket'
