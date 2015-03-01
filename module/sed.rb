@@ -12,9 +12,9 @@ class PLUGIN < Pluginf
 #your definition for script
 	def script(message, nick, chan)
 		command_s = message
-		temp_c = message[1]
-		command_set = command_s.split("#{temp_c}")
-		#command_set = command_s.split("/")
+		#temp_c = message[1]
+		#command_set = command_s.split("#{temp_c}")
+		command_set = command_s.split("/")
 		sed_a =  Regexp.new(command_set[1])
 		sed_b = command_set[2].to_s
 		p "regex search: #{sed_a.to_s}"
@@ -62,8 +62,8 @@ class PLUGIN < Pluginf
 	end
 end
 
-#reg_p = /(^s\/(.*)\/(.*)\/(\w)?)/
-reg_p = /(^s(.)(.*)\2(.*)\2(\w)?)/ #allows for any character for the delimiter in sed search replace
+reg_p = /(^s\/(.*)\/(.*)\/(\w)?)/
+#reg_p = /(^s(.)(.*)\2(.*)\2(\w)?)/ #allows for any character for the delimiter in sed search replace
 na = "sed"
 de = "sed style search replace s/<input text and rules>/<output text and rules>/"
 #plugin = Class_name.new(regex, name, help)
