@@ -63,7 +63,7 @@ class PLUGIN < Pluginf
 end
 
 #reg_p = /(^s\/(.*)\/(.*)\/(\w)?)/
-reg_p = /(^s(.)(.*)\1(.*)\1(\w)?)/ #allows for any character for the delimiter in sed search replace
+reg_p = /(^s(.)(.*)\2(.*)\2(\w)?)/ #allows for any character for the delimiter in sed search replace
 na = "sed"
 de = "sed style search replace s/<input text and rules>/<output text and rules>/"
 #plugin = Class_name.new(regex, name, help)
