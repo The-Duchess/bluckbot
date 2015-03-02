@@ -27,13 +27,6 @@
 ####################################################################################################################
 
 require 'socket'
-require 'google/api_client'
-require 'json'
-require 'uri'
-require 'net/http'
-require 'multi_json'
-require 'date'
-
 load 'command.rb'
 
 class Ircbot
