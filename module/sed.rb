@@ -81,7 +81,8 @@ class PLUGIN < Pluginf
 
 		if included then
 		#perform sed search replace on a
-			system("echo \"#{string_a}\" > temp")
+			#system("echo \"#{string_a}\" > temp")
+			File.open("./temp", 'w') { |fw| fw.puts '#{string_a}' }
 			@r_s = `sed -e \"#{command_s}\" < temp`
 			@r.concat(@r_s.to_s)
 			#@r.concat(string_a.sub(sed_a, sed_b)) #this works as well but does not offer some options
