@@ -83,6 +83,8 @@ class PLUGIN < Pluginf
 		#perform sed search replace on a
 			#system("echo \"#{string_a}\" > temp")
 			File.open("./temp", 'w') { |fw| fw.puts '#{string_a}' }
+			#TO DO:
+			#fixing this potential security issue of directly running a command
 			@r_s = `sed -e \"#{command_s}\" < temp`
 			@r.concat(@r_s.to_s)
 			#@r.concat(string_a.sub(sed_a, sed_b)) #this works as well but does not offer some options
