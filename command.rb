@@ -58,6 +58,7 @@ def parse(nick, chan, message)
 
     if message.match(/^`ls$/)
     	
+    	
     	if not check_admin(nick)
 		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
 	end
