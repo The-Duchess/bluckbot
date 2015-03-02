@@ -235,10 +235,24 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`reload /)
-				@respond = parse(nick, chan, "`unload #{message[8..-1]}")
-				say_to_chan(@respond, chan)
-				@respond = parse(nick, chan, "`load #{message[8..-2]}.rb ")
-				say_to_chan(@respond, chan)
+    				@admins = []
+    				File.open("./res/.admins") do |fr|
+    					while line = fr.gets
+    						line.chomp!
+    						@admins.push(line.to_s)
+    					end
+    				end
+    				
+    				if @admins.include? nick.to_s
+    					@respond = parse(nick, chan, "`unload #{message[8..-1]}")
+					say_to_chan(@respond, chan)
+					@respond = parse(nick, chan, "`load #{message[8..-2]}.rb ")
+					say_to_chan(@respond, chan)
+    				else
+    					say_to_chan("#{nick}: is not in the admin file", chan)
+    					say_to_chan("#{nick}: please contact the bot owner for questions")
+    				end
+
 			end
 
 			response = parse(nick, chan, message)
