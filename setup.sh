@@ -25,4 +25,6 @@ echo "creating channel list"
 touch ./res/.chanlist
 echo "creating module list"
 touch ./res/.modlist
+echo "creating admin list"
+touch ./res/.admins
 echo "setup complete"
