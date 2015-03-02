@@ -4,12 +4,34 @@
 
 $plugins_s = Array.new
 
+#allows some functions of loading or unloading modules or listing files to be restricted
+def check_admin(nick)
+    	@admins = []
+    	File.open("./res/.admins") do |fr|
+    		while line = fr.gets
+    			line.chomp!
+    			@admins.push(line.to_s)
+    		end
+    	end
+    	
+    	if @admins.include? nick.to_s
+    		return true
+    	else
+    		return false
+    	end
+end
+
 def parse(nick, chan, message)
 
     message = message[0..-2].to_s
     p message
 
     if message.match(/^`load/)
+    	
+	if not check_admin(nick)
+		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	end
+    	
     	if message.match(/^`load /) and message.length > 5 then
     		$LOAD_PATH << './module'
     		ls = message.to_s[6..-1]
@@ -35,6 +57,11 @@ def parse(nick, chan, message)
     end
 
     if message.match(/^`ls/)
+    	
+    	if not check_admin(nick)
+		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	end
+    	
     	@r = ""
     	@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1]}
     	@ra.each { |a| @r.concat("#{a} ")}
@@ -88,6 +115,12 @@ def parse(nick, chan, message)
     end
 
     if message.match(/^`unload /)
+    	
+    	#currently disabled to preven the bot getting kicked
+    	#if not check_admin(nick)
+	#	return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	#end
+    	
     	@ii = 0
     	@r = ""
     	$plugins_s.each do |a|
@@ -108,6 +141,11 @@ def parse(nick, chan, message)
     end
 
     if message.match(/^`mass load/)
+    	
+    	if not check_admin(nick)
+		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	end
+    	
     	temp_r = []
     	File.open("./res/.modlist", 'r') do |fr|
     		while line = fr.gets
