@@ -26,7 +26,7 @@ def parse(nick, chan, message)
     message = message[0..-2].to_s
     p message
 
-    if message.match(/^`load/)
+    if message.match(/^`load /)
     	
 	if not check_admin(nick)
 		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
@@ -56,7 +56,7 @@ def parse(nick, chan, message)
     	end
     end
 
-    if message.match(/^`ls/)
+    if message.match(/^`ls$/)
     	
     	if not check_admin(nick)
 		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
@@ -69,7 +69,7 @@ def parse(nick, chan, message)
     end
 
 
-    if message.match(/^`list/)
+    if message.match(/^`list /)
 
     	@r = ""
 
@@ -140,7 +140,7 @@ def parse(nick, chan, message)
     	return "no plugin was unloaded"
     end
 
-    if message.match(/^`mass load/)
+    if message.match(/^`mass load$/)
     	
     	if not check_admin(nick)
 		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
