@@ -38,7 +38,7 @@ class Joke < Pluginf
 
 	def add(joke)
 		@jokes.push(joke.to_s)
-		system("echo \"#{joke}\" >> ./res/.jokes")
+		File.open("./res/.jokes", 'a') { |fw| fw.puts "#{joke}" }
 		@num_j += 1
 	end
 
