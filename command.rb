@@ -26,7 +26,7 @@ def parse(nick, chan, message)
     message = message[0..-2].to_s
     p message
 
-    if message.match(/^`load /)
+    if message.match(/^`load/)
     	
 	if not check_admin(nick)
 		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
@@ -58,7 +58,6 @@ def parse(nick, chan, message)
 
     if message.match(/^`ls$/)
     	
-    	
     	if not check_admin(nick)
 		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
 	end
@@ -70,7 +69,7 @@ def parse(nick, chan, message)
     end
 
 
-    if message.match(/^`list /)
+    if message.match(/^`list/)
 
     	@r = ""
 
