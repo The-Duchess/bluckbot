@@ -13,7 +13,7 @@ class Usage < Pluginf
 
 	#your definition for script
 	def script(message, nick, chan)
-		@r = "commands:\n\/msg bluckbot `join #\$CHAN joins #\$CHAN. \`list displays a list of loaded modules. `ls lists modules. `load $module.rb loads $module.rb"
+		@r = "commands:\n\/msg bluckbot `join #\$CHAN joins #\$CHAN. \`list displays a list of loaded modules. `ls lists modules. `load $module.rb loads $module.rb\nnote:`load and `ls are admin only"
 		return @r
 	end
 end
