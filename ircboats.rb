@@ -247,10 +247,23 @@ class Ircbot
 				next
 			end
 
-			if message[0..- 2].match(/^`quit/) and ["apels","iruel","merdach"].include? nick
-				say_to_chan("sorry for the disturbance sempai", chan)
-				quit
-				break
+			if message[0..- 2].match(/^`quit/)
+				@admins = []
+    				File.open("./res/.admins") do |fr|
+    					while line = fr.gets
+    						line.chomp!
+    						@admins.push(line.to_s)
+    					end
+    				end
+    				
+    				if @admins.include? nick.to_s
+					say_to_chan("sorry for the disturbance sempai", chan)
+					quit
+					break
+				else
+					say_to_chan("#{nick}: is not in the admin file", chan)
+    					say_to_chan("#{nick}: please contact the bot owner for questions")
+    				end
 			end
 
 			if message[0..-2].match(/^`help/)
