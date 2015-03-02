@@ -62,7 +62,7 @@ def parse(nick, chan, message)
 		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
 	end
     	
-    	@r = ""
+    	@r = "PRIVMSG #{nick} :"
     	@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1]}
     	@ra.each { |a| @r.concat("#{a} ")}
     	return @r[0..-1]
