@@ -185,7 +185,7 @@ class Ircbot
 				end
 			end
 
-			if message.match(/^`join ##?/) and chan == nick
+			if message.match(/^`join ##?/)
 				say "JOIN #{message[6..-2]}"
 				if message[6..-2].include? ' '
 					if @channel_s.include? message[6..-2].to_s
