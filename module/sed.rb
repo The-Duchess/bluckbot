@@ -14,9 +14,40 @@ class PLUGIN < Pluginf
 		command_s = message
 		#temp_c = message[1]
 		#command_set = command_s.split("#{temp_c}")
-		command_set = command_s.split("/")
-		sed_a =  Regexp.new(command_set[1])
-		sed_b = command_set[2].to_s
+		#command_set = command_s.split("/")
+		#split will not handle \/ properly
+		msg_l = message.length.to_i - 1
+		temp_sa = ""
+		temp_sb = ""
+		i = 0
+		2.upto(msg_l) do |a|
+			if message[a] == "/" and message[a - 1] != "\\"
+				#we're done
+				break
+				i = i + 1
+			else
+				temp_sa.concat(message[a])
+				i = i + 1
+			end
+		end
+		
+		i = i - 1
+		
+		i.upto(msg_l) do |b|
+			if message[b] == "/" and message[b - 1] != "\\"
+				#we're done
+				break
+			else
+				temp_sb.concat(message[b])
+			end
+		end
+		
+		#this can likely be done with a regex to split on "/" and not if "/" comes after "\"
+		
+		#sed_a =  Regexp.new(command_set[1])
+		#sed_b = command_set[2].to_s
+		sed_a = Regexp.new(temp_sa.to_s)
+		sed_b = temp_sb.to_s
 		p "regex search: #{sed_a.to_s}"
 		p "replace: #{sed_b}"
 		
