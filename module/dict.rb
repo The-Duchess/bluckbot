@@ -33,7 +33,8 @@ class Dict < Pluginf
 		#this is an example of why we hate file IO, over time this will progressively get worse until adding is next to impossible
 		#p save
 		#p "echo '#{object}:#{description}' >> /run/media/alice/HORSECAWK/.dict"
-		system("echo '#{object}:#{description}' >> ./res/.dict")
+		#system("echo '#{object}:#{description}' >> ./res/.dict")
+		File.open("./res/.quotes", 'a') { |fw| fw.puts '#{object}:#{description}' }
 
 		return "added"
 	end
