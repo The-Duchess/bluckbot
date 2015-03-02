@@ -165,20 +165,46 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`msg /) and nick == chan
-				arg = message[0..-2].split(' ')
-				message_t = ""
-				2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ")}
-				say_to_chan(message_t[0..-2], arg[1].to_s)
-				next
+				@admins = []
+    				File.open("./res/.admins") do |fr|
+    					while line = fr.gets
+    						line.chomp!
+    						@admins.push(line.to_s)
+    					end
+    				end
+    				
+    				if @admins.include? nick.to_s
+					arg = message[0..-2].split(' ')
+					message_t = ""
+					2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ")}
+					say_to_chan(message_t[0..-2], arg[1].to_s)
+					next
+				else
+					say_to_chan("#{nick}: is not in the admin file", chan)
+    					say_to_chan("#{nick}: please contact the bot owner for questions")
+    				end
 			end
 
-			if message[0..-2].match(/^`k /) and ["apels","iruel","merdach"].include? nick
-				reason = ""
-				tokens = message[0..-2].split(' ')
-				user = tokens[1].to_s
-				2.upto(tokens.length - 1) { |a| reason.concat("#{tokens[a].to_s}")}
+			if message[0..-2].match(/^`k /)
+				@admins = []
+    				File.open("./res/.admins") do |fr|
+    					while line = fr.gets
+    						line.chomp!
+    						@admins.push(line.to_s)
+    					end
+    				end
+    				
+    				if @admins.include? nick.to_s
+					reason = ""
+					tokens = message[0..-2].split(' ')
+					user = tokens[1].to_s
+					2.upto(tokens.length - 1) { |a| reason.concat("#{tokens[a].to_s}")}
 
-				say "KICK #{chan} #{user} \"#{reason}\""
+					say "KICK #{chan} #{user} \"#{reason}\""
+				else
+					say_to_chan("#{nick}: is not in the admin file", chan)
+    					say_to_chan("#{nick}: please contact the bot owner for questions")
+    				end	
 			end
 
 			if message[0..-2].match(/^`ignore /)
