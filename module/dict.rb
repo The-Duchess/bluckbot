@@ -34,7 +34,8 @@ class Dict < Pluginf
 		#p save
 		#p "echo '#{object}:#{description}' >> /run/media/alice/HORSECAWK/.dict"
 		#system("echo '#{object}:#{description}' >> ./res/.dict")
-		File.open("./res/.quotes", mode: 'a') { |fw| fw.puts "#{object}:#{description}" }
+		#File.open("./res/.quotes", mode: 'a') { |fw| fw.puts "#{object}:#{description}" }
+		File.write("./res/.dict", "#{object}:#{description}", File.size("./res/.dict"), mode: 'a')
 
 		return "added"
 	end
