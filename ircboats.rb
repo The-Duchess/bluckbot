@@ -101,19 +101,23 @@ class Ircbot
 				$logs.insert(0, msg)
 				if @logging == true and chan != "#trivia"
 					#system("echo \"#{msg}\" >> ./res/log")
-					File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
+					#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
+					File.write("./res/log", "#{msg}", File.size("./res/log"), mode: 'a')
+
 				end
 			else
 				$logs.insert(0, msg)
 				if @logging == true and chan != "#trivia"
 					#system("echo \"#{msg}\" >> ./res/log")
-					File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
+					#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
+					File.write("./res/log", "#{msg}", File.size("./res/log"), mode: 'a')
 				end
 			end
 
 			if chan == "bluckbot"
 				#system("echo \"#{@serv_name} #{msg}\" >> ./res/log_p")
-				File.open("./res/log_p", 'a') { |fw| fw.puts "#{@serv_name} #{msg}"}
+				#File.open("./res/log_p", 'a') { |fw| fw.puts "#{@serv_name} #{msg}"}
+				File.write("./res/log_p", "#{@serv_name} #{msg}", File.size("./res/log_p"), mode: 'a')
 				chan = nick
 			end
 
