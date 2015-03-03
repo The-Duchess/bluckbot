@@ -46,7 +46,11 @@ class PLUGIN < Pluginf
 		
 		#sed_a =  Regexp.new(command_set[1])
 		#sed_b = command_set[2].to_s
-		sed_a = Regexp.new(temp_sa.to_s)
+		begin
+			sed_a = Regexp.new(temp_sa.to_s)
+		rescue => e
+			return "an error occured. perhaps the regex is invalid."
+		end
 		sed_b = temp_sb.to_s
 		p "regex search: #{sed_a.to_s}"
 		p "replace: #{sed_b}"
