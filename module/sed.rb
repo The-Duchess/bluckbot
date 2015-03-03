@@ -82,7 +82,7 @@ class PLUGIN < Pluginf
 		if included then
 		#perform sed search replace on a
 			#system("echo \"#{string_a}\" > temp")
-			File.open("./temp", 'w') { |fw| fw.puts '#{string_a}' }
+			File.open("./temp", 'w') { |fw| fw.puts "#{string_a}" }
 			#TO DO:
 			#fixing this potential security issue of directly running a command
 			@r_s = `sed -e \"#{command_s}\" < temp`
