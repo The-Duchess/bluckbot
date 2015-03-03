@@ -34,7 +34,7 @@ class Quote < Pluginf
 		#p save
 		#p "echo '#{object}:#{description}' >> /run/media/alice/HORSECAWK/.dict"
 		#system("echo '#{object}:#{description}' >> ./res/.quotes")
-		File.open("./res/.quotes", 'a') { |fw| fw.puts "#{object}:#{description}" }
+		File.open("./res/.quotes", mode: 'a') { |fw| fw.puts "#{object}:#{description}" }
 		
 		return "added"
 	end
