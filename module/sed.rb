@@ -76,7 +76,7 @@ class PLUGIN < Pluginf
 				message_set = message_s.split(" ")
 				message_set.delete_at(0)
 				message_s = ""
-				message_set.each { |a| message_s.concat("#{a} ")
+				message_set.each { |a| message_s.concat("#{a} ") }
 				message_s = message_s[0..-2]
 			else
 				@r = "#{nick}: <#{nick_s}> "
