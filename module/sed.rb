@@ -71,7 +71,7 @@ class PLUGIN < Pluginf
 			chan_s = message_reg_s[:params].to_s
 			message_s = message_reg_s[:trail].to_s[0..-2]
 			
-			if message_s.include? "ACTION"
+			if message_s.match(/^ACTION/)
 				@r = "* #{nick_s} "
 				message_s = message_s[7..-1]
 			else
