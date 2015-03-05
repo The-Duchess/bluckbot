@@ -73,7 +73,11 @@ class PLUGIN < Pluginf
 			
 			if message_s.match(/^\\u0001ACTION /)
 				@r = "* #{nick_s} "
-				message_s = message_s[7..-1]
+				message_set = message_s.split(" ")
+				message_set.delete_at(0)
+				message_s = ""
+				message_set.each { |a| message_s.concat("#{a} ")
+				message_s = message_s[0..-2]
 			else
 				@r = "#{nick}: <#{nick_s}> "
 			end
