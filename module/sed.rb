@@ -70,7 +70,14 @@ class PLUGIN < Pluginf
 			commands = message_reg_s[:command].to_s
 			chan_s = message_reg_s[:params].to_s
 			message_s = message_reg_s[:trail].to_s[0..-2]
-
+			
+			if message_s.include? ":ACTION"
+				@r = "* #{nick_s} "
+				message_s = message_s[7..-1]
+			else
+				@r = "#{nick}: <#{nick_s}> "
+			end
+			
 			if message_s.match(sed_a) and chan == chan_s then 
 				included = true
 				string_a = message_s.to_s
@@ -80,8 +87,6 @@ class PLUGIN < Pluginf
 				next
 			end
 		end
-
-		@r = "#{nick_a}: "
 
 		if included then
 		#perform sed search replace on a
