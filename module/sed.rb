@@ -1,9 +1,10 @@
 #!/bin/env ruby
-# template as defined by the required file
+# sed.rb
 # author: apels <Alice Duchess>
-# module as defined by .plugin.rb
-# modules have access to $plugins to be loaded as well as $logs
-# $logs stores unparsed message lines in an array of length 100
+# module to handle sed style search replace
+# only accepts / as the delimiter for sed even though any character is normally accepted
+# the code to allow any character is commented out
+
 $LOAD_PATH << './module'
 require '.pluginf.rb'
 
@@ -96,12 +97,12 @@ class PLUGIN < Pluginf
 		#perform sed search replace on a
 			#system("echo \"#{string_a}\" > temp")
 			File.open("./temp", 'w') { |fw| fw.puts "#{string_a}" }
-			#TO DO:
-			#fixing this potential security issue of directly running a command
-			@r_s = `sed -r -e \"#{command_s}\" ./temp`
+			File.open("./temp_s", 'w') { |fw| fw.puts "#{command_s}" }
+			@r_s = `sed -r -f ./temp_s < ./temp`
 			@r.concat(@r_s.to_s)
 			#@r.concat(string_a.sub(sed_a, sed_b)) #this works as well but does not offer some options
 			system("rm -f temp")
+			system("rm -f temp_s")
 		else
 			@r = ""
 		end
@@ -113,7 +114,7 @@ end
 reg_p = /(^s\/(.*)\/(.*)\/(\w)?)/
 #reg_p = /(^s(.)(.*)\2(.*)\2(\w)?)/ #allows for any character for the delimiter in sed search replace
 na = "sed"
-de = "sed style search replace s/<input text and rules>/<output text and rules>/"
+de = "sed style search replace s/<input text and rules>/<output text and rules>/ note: multiple commands using ; to seperate is not supported and weird errors may occur"
 #plugin = Class_name.new(regex, name, help)
 #passed back to the plugins_s array
 plugin = PLUGIN.new(reg_p, na, de)
