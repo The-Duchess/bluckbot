@@ -63,6 +63,15 @@ class Ircbot
     	@channel_s.push("##{channel}")
     	@ignore_s = []
     	
+    	$admin_s = []
+
+    	File.open("./res/.admins", 'r') do |fr|
+    		while line = fr.gets
+    			line.chomp!
+    			$admin_s.push(line.to_s)
+    		end
+    	end
+
     end
 
 	def say(msg)
@@ -164,15 +173,7 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`msg /) and nick == chan
-				@admins = []
-    				File.open("./res/.admins") do |fr|
-    					while line = fr.gets
-    						line.chomp!
-    						@admins.push(line.to_s)
-    					end
-    				end
-    				
-    				if @admins.include? nick.to_s
+    			if $admin_s.include? nick.to_s
 					arg = message[0..-2].split(' ')
 					message_t = ""
 					2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ")}
@@ -185,15 +186,7 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`k /)
-				@admins = []
-    				File.open("./res/.admins") do |fr|
-    					while line = fr.gets
-    						line.chomp!
-    						@admins.push(line.to_s)
-    					end
-    				end
-    				
-    				if @admins.include? nick.to_s
+    			if $admin_s.include? nick.to_s
 					reason = ""
 					tokens = message[0..-2].split(' ')
 					user = tokens[1].to_s
@@ -203,7 +196,7 @@ class Ircbot
 				else
 					say_to_chan("#{nick}: is not in the admin file", chan)
     					say_to_chan("#{nick}: please contact the bot owner for questions")
-    				end	
+    			end	
 			end
 
 			if message[0..-2].match(/^`ignore /)
@@ -247,15 +240,7 @@ class Ircbot
 			end
 
 			if message[0..- 2].match(/^`quit/)
-				@admins = []
-    				File.open("./res/.admins") do |fr|
-    					while line = fr.gets
-    						line.chomp!
-    						@admins.push(line.to_s)
-    					end
-    				end
-    				
-    				if @admins.include? nick.to_s
+    			if $admin_s.include? nick.to_s
 					say_to_chan("sorry for the disturbance sempai", chan)
 					quit
 					break
@@ -276,23 +261,15 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`reload /)
-    				@admins = []
-    				File.open("./res/.admins") do |fr|
-    					while line = fr.gets
-    						line.chomp!
-    						@admins.push(line.to_s)
-    					end
-    				end
-    				
-    				if @admins.include? nick.to_s
+    			if $admin_s.include? nick.to_s
     					@respond = parse(nick, chan, "`unload #{message[8..-1]}")
 					say_to_chan(@respond, chan)
 					@respond = parse(nick, chan, "`load #{message[8..-2]}.rb ")
 					say_to_chan(@respond, chan)
-    				else
+    			else
     					say_to_chan("#{nick}: is not in the admin file", chan)
     					say_to_chan("#{nick}: please contact the bot owner for questions")
-    				end
+    			end
 
 			end
 
