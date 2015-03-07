@@ -40,7 +40,7 @@ class Karm < Pluginf
 
 	#adds a noun to the hash with the value value
 	def add noun value
-		noun_a = noun.delete! '{}'
+		noun_a = noun.delete! '\{\}'
 		@nouns_s.push(noun_a.to_s)
 
 		if @nouns_s.include? noun_a then return false end
@@ -52,7 +52,7 @@ class Karm < Pluginf
 
 	#increments the value for the key noun
 	def increment noun
-		noun_a = noun.delete! '{}'
+		noun_a = noun.delete! '\{\}'
 		if @nouns_s.include? noun_a then
 			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] + 1
 
@@ -66,7 +66,7 @@ class Karm < Pluginf
 
 	#decrements the value for the key noun
 	def decrement noun
-		noun_a = noun.delete! '{}'
+		noun_a = noun.delete! '\{\}'
 		if @nouns_s.include? noun_a then
 			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] - 1
 
@@ -93,7 +93,7 @@ class Karm < Pluginf
 	def update
 		File.open("./res/.karmaf", 'w') do |fw|
 			@nouns_s.each do |a|
-				fw.write "#{a}{#{@nouns.fetch(a)}}"
+				fw.write "#{a}\{#{@nouns.fetch(a)}\}"
 			end
 		end
 	end
@@ -103,7 +103,7 @@ class Karm < Pluginf
 		File.open("./res/.karmaf", 'r') do |fr|
 			while line = fr.gets
 				line.chomp!
-				line_toks = line.split("{")
+				line_toks = line.split("\{")
 				add line_toks[0].to_s line_toks[1].to_s[0..-2].to_i
 			end
 		end
@@ -119,6 +119,8 @@ class Karm < Pluginf
 				@r = "object not found"
 			else
 				@r = "#{message[7..-1]} has a karma of #{@r}"
+			end
+
 		elsif message.match(/^[^\s]+(\+\++|--+)/)
 			@temp_n = message[0..-3]
 			@incdec = message[-3..-1]
