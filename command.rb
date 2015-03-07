@@ -6,15 +6,7 @@ $plugins_s = Array.new
 
 #allows some functions of loading or unloading modules or listing files to be restricted
 def check_admin(nick)
-    	@admins = []
-    	File.open("./res/.admins") do |fr|
-    		while line = fr.gets
-    			line.chomp!
-    			@admins.push(line.to_s)
-    		end
-    	end
-    	
-    	if @admins.include? nick.to_s
+    	if $admin_s.include? nick.to_s
     		return true
     	else
     		return false
