@@ -30,7 +30,7 @@ class Karm < Pluginf
 
 	#checks if the noun is in the hash
 	def check_hash noun
-		noun_a = noun.delete! '{}'
+		noun_a = noun.delete! '\{\}'
 		if @nouns_s.include? noun_a then
 			return true
 		else
