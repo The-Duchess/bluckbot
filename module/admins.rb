@@ -60,7 +60,7 @@ class PLUGIN < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 		#parse
-		if !($admin_s.include? nick)
+		if not $admin_s.include? nick
 			return "#{nick} does not have access to this tool\nplease talk to an admin to be added to the admin list"
 		end
 
