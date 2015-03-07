@@ -30,7 +30,7 @@ class Karm < Pluginf
 
 	#checks if the noun is in the hash
 	def check_hash noun
-		noun_a = noun.delete! '\{\}'
+		noun_a = noun
 		if @nouns_s.include? noun_a then
 			return true
 		else
@@ -40,7 +40,7 @@ class Karm < Pluginf
 
 	#adds a noun to the hash with the value value
 	def add noun value
-		noun_a = noun.delete! '\{\}'
+		noun_a = noun
 		@nouns_s.push(noun_a.to_s)
 
 		if @nouns_s.include? noun_a then return false end
@@ -52,7 +52,7 @@ class Karm < Pluginf
 
 	#increments the value for the key noun
 	def increment noun
-		noun_a = noun.delete! '\{\}'
+		noun_a = noun
 		if @nouns_s.include? noun_a then
 			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] + 1
 
@@ -66,7 +66,7 @@ class Karm < Pluginf
 
 	#decrements the value for the key noun
 	def decrement noun
-		noun_a = noun.delete! '\{\}'
+		noun_a = noun
 		if @nouns_s.include? noun_a then
 			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] - 1
 
@@ -103,7 +103,7 @@ class Karm < Pluginf
 		File.open("./res/.karmaf", 'r') do |fr|
 			while line = fr.gets
 				line.chomp!
-				line_toks = line.split("\{")
+				line_toks = line.split("{")
 				add line_toks[0].to_s line_toks[1].to_s[0..-2].to_i
 			end
 		end
