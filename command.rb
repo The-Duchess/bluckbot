@@ -1,7 +1,5 @@
 #!/bin/env ruby
 
-
-
 $plugins_s = Array.new
 
 #allows some functions of loading or unloading modules or listing files to be restricted
