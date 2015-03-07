@@ -29,7 +29,7 @@ class Karm < Pluginf
 
 
 	#checks if the noun is in the hash
-	def check_hash noun
+	def check_hash(noun)
 		noun_a = noun
 		if @nouns_s.include? noun_a then
 			return true
@@ -39,7 +39,7 @@ class Karm < Pluginf
 	end
 
 	#adds a noun to the hash with the value value
-	def add noun value
+	def add(noun, value)
 		noun_a = noun
 		@nouns_s.push(noun_a.to_s)
 
@@ -51,7 +51,7 @@ class Karm < Pluginf
 	end
 
 	#increments the value for the key noun
-	def increment noun
+	def increment(noun)
 		noun_a = noun
 		if @nouns_s.include? noun_a then
 			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] + 1
@@ -65,7 +65,7 @@ class Karm < Pluginf
 	end
 
 	#decrements the value for the key noun
-	def decrement noun
+	def decrement(noun)
 		noun_a = noun
 		if @nouns_s.include? noun_a then
 			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] - 1
@@ -79,7 +79,7 @@ class Karm < Pluginf
 	end
 
 	#gets the value for the key noun
-	def get noun
+	def get(noun)
 		if @nouns_s.include? noun_a then
 			return @nouns.fetch("#{noun_a}").to_i
 		else
@@ -114,7 +114,7 @@ class Karm < Pluginf
 		@r = ""
 
 		if message.match(/^`karma /)
-			@r = get message[7..-1]
+			@r = get(message[7..-1])
 			if @r == nil
 				@r = "object not found"
 			else
@@ -126,16 +126,16 @@ class Karm < Pluginf
 			@incdec = message[-3..-1]
 
 			if @incdec == "++"
-				if check_hash @temp_n
-					increment @temp_n
+				if check_hash(@temp_n)
+					increment(@temp_n)
 				else
-					add @temp_n 1
+					add(@temp_n, 1)
 				end
 			elsif @incdec == "--"
-				if check_hash @temp_n
-					decrement @temp_n
+				if check_hash(@temp_n)
+					decrement(@temp_n)
 				else
-					add @temp_n -1
+					add(@temp_n, -1)
 				end
 			else
 				return
