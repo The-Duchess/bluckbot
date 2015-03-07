@@ -181,6 +181,11 @@ class Quote < Pluginf
 		@help = help
 		@keys = Array.new
 		@dict = Hash.new(0)
+		
+		if not File.exist?("./res/.quotes") then
+			`touch ./res/.quotes` #if the karma file does not exist create it
+		end
+		
 		load
 		#ObjectSpace.define_finalizer(self, Dict.method(:save))
 	end

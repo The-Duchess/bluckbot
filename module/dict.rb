@@ -172,6 +172,11 @@ class Dict < Pluginf
 		@help = help
 		@keys = Array.new
 		@dict = Hash.new(0)
+
+		if not File.exist?("./res/.dict") then
+			`touch ./res/.dict` #if the karma file does not exist create it
+		end
+
 		load
 		#ObjectSpace.define_finalizer(self, Dict.method(:save))
 	end

@@ -15,17 +15,70 @@ class Karm < Pluginf
 		@regexp = Regexp.new(regex)
 		@name = name.to_s
 		@help = help
+		# set of nouns that are keys to an integer value
+		@nouns = Hash.new
+
+		if not File.exist?("./res/.karmaf") then
+			`touch ./res/.karmaf` #if the karma file does not exist create it
+		end
+		
+		load
 	end
 
+
+	#checks if the noun is in the hash
+	def check_hash noun
+
+	end
+
+	#adds a noun to the hash with the value 0
+	def add noun
+
+	end
+
+	#increments the value for the key noun
+	def increment noun
+
+	end
+
+	#decrements the value for the key noun
+	def decrement noun
+
+	end
+
+	#gets the value for the key noun
+	def get noun
+
+	end
+
+	#run on any command besides `karma to update the file
+	def update
+
+	end
+
+	#run on initialization to load the karma file
+	def load
+
+	end
 
 	#your definition for script
 	def script(message, nick, chan)
 		@r = ""
 
 		if message.match(/^`karma /)
-			#print karms
 			@r = "checking karma"
 		elsif message.match(/^[^\s]+(\+\++|--+)/)
+			@temp_n = message[0..-3]
+			@incdec = message[-3..-1]
+
+			if @incdec == "++"
+
+			elsif @incdec == "--"
+
+			else
+
+			end
+				
 			@r = "changing karma for #{message[0..-3]}"
 		end
 			

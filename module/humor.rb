@@ -17,6 +17,11 @@ class Joke < Pluginf
 		@help = help
 		@jokes = Array.new
 		@num_j = 0
+
+		if not File.exist?("./res/.jokes") then
+			`touch ./res/.jokes` #if the karma file does not exist create it
+		end
+
 		load_j
 	end
 
