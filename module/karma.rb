@@ -133,7 +133,7 @@ class Karm < Pluginf
 					add(@temp_n, 1)
 				end
 
-				@r = ""
+				@r = "#{temp_n} incremented"
 			elsif @incdec == "--"
 				if check_hash(@temp_n)
 					decrement(@temp_n)
@@ -141,9 +141,9 @@ class Karm < Pluginf
 					add(@temp_n, -1)
 				end
 
-				@r = ""
+				@r = "#{@temp_n} decremented"
 			else
-				return
+				return @r
 			end
 		end
 			
