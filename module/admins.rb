@@ -71,6 +71,7 @@ class Admin < Pluginf
 		@remove_s = "remove"
 		@save_s = "save"
 		@reload_s = "reload"
+		@list_s = "list"
 
 		if tokens[1].to_s == @add_s then
 			@r = add(tokens[2].to_s)
@@ -80,6 +81,9 @@ class Admin < Pluginf
 			@r = save
 		elsif tokens[1].to_s == @reload_s
 			@r = load
+		elsif tokens[1].to_s == @list_s
+			@r = "PRIVMSG #{nick} :"
+			$admin_s.each { |a| @r.concat(a.to_s) }
 		else
 			@r = "#{nick}: invalid use"
 		end
@@ -90,7 +94,7 @@ end
 
 reg_p = /^`admin / #regex to call the module
 na = "admins" #name for plugin #same as file name without .rb
-de = "`admin [add <nick> | remove <nick> | save  | reload ] to allow admins to add or remove other admins and update the list" #description
+de = "`admin [add <nick> | remove <nick> | save  | reload | list ] to allow admins to add or remove other admins and update the list" #description
 
 #plugin = Class_name.new(regex, name, help)
 #passed back to the plugins_s array
