@@ -17,48 +17,96 @@ class Karm < Pluginf
 		@help = help
 		# set of nouns that are keys to an integer value
 		@nouns = Hash.new
+		# list of the current nouns
+		@nouns_s = Array.new
 
 		if not File.exist?("./res/.karmaf") then
 			`touch ./res/.karmaf` #if the karma file does not exist create it
 		end
-		
+
 		load
 	end
 
 
 	#checks if the noun is in the hash
 	def check_hash noun
-
+		noun_a = noun.delete! '{}'
+		if @nouns_s.include? noun_a then
+			return true
+		else
+			return false
+		end
 	end
 
-	#adds a noun to the hash with the value 0
-	def add noun
+	#adds a noun to the hash with the value value
+	def add noun value
+		noun_a = noun.delete! '{}'
+		@nouns_s.push(noun_a.to_s)
 
+		if @nouns_s.include? noun_a then return false end
+
+		@nouns.store("#{noun_a}", value.to_i)
+
+		return true
 	end
 
 	#increments the value for the key noun
 	def increment noun
+		noun_a = noun.delete! '{}'
+		if @nouns_s.include? noun_a then
+			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] + 1
 
+			return true
+		else
+			return false
+		end
+
+		return true
 	end
 
 	#decrements the value for the key noun
 	def decrement noun
+		noun_a = noun.delete! '{}'
+		if @nouns_s.include? noun_a then
+			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] - 1
 
+			return true
+		else
+			return false
+		end
+
+		return true
 	end
 
 	#gets the value for the key noun
 	def get noun
+		if @nouns_s.include? noun_a then
+			return @nouns.fetch("#{noun_a}").to_i
+		else
+			return nil
+		end
 
+		return nil
 	end
 
-	#run on any command besides `karma to update the file
+	# writes karma keys and value to update the file
 	def update
-
+		File.open("./res/.karmaf", 'w') do |fw|
+			@nouns_s.each do |a|
+				fw.write "#{a}{#{@nouns.fetch(a)}}"
+			end
+		end
 	end
 
 	#run on initialization to load the karma file
 	def load
-
+		File.open("./res/.karmaf", 'r') do |fr|
+			while line = fr.gets
+				line.chomp!
+				line_toks = line.split("{")
+				add line_toks[0].to_s line_toks[1].to_s[0..-2].to_i
+			end
+		end
 	end
 
 	#your definition for script
@@ -66,20 +114,30 @@ class Karm < Pluginf
 		@r = ""
 
 		if message.match(/^`karma /)
-			@r = "checking karma"
+			@r = get message[7..-1]
+			if @r == nil
+				@r = "object not found"
+			else
+				@r = "#{message[7..-1]} has a karma of #{@r}"
 		elsif message.match(/^[^\s]+(\+\++|--+)/)
 			@temp_n = message[0..-3]
 			@incdec = message[-3..-1]
 
 			if @incdec == "++"
-
+				if check_hash @temp_n
+					increment @temp_n
+				else
+					add @temp_n 1
+				end
 			elsif @incdec == "--"
-
+				if check_hash @temp_n
+					decrement @temp_n
+				else
+					add @temp_n -1
+				end
 			else
-
+				return
 			end
-				
-			@r = "changing karma for #{message[0..-3]}"
 		end
 			
 		return @r
