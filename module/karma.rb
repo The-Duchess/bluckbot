@@ -80,8 +80,8 @@ class Karm < Pluginf
 
 	#gets the value for the key noun
 	def get(noun)
-		if @nouns_s.include? noun_a then
-			return @nouns.fetch("#{noun_a}").to_i
+		if @nouns_s.include? noun then
+			return @nouns.fetch("#{noun}").to_i
 		else
 			return nil
 		end
