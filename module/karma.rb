@@ -39,7 +39,7 @@ prefixes = [
 ]
 
 reg_p = Regexp.union(prefixes) #regex to call the module
-na = "" #name for plugin #same as file name without .rb
+na = "karma" #name for plugin #same as file name without .rb
 de = "recognizes noun++ and noun-- and `karma noun will give the karma for that noun" #description
 
 #plugin = Class_name.new(regex, name, help)
