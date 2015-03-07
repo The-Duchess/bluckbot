@@ -124,12 +124,7 @@ class Karm < Pluginf
 
 		elsif message.match(/^[^\s]+(\+\++|--+)/)
 			@temp_n = message[0..-3]
-			@incdec = message[-3..-1]
-
-			p "temp_nick"
-			p @temp_n
-			p "incdec"
-			p @incdec
+			@incdec = message[-2..-1]
 
 			if @incdec == "++"
 				if check_hash(@temp_n)
@@ -138,7 +133,7 @@ class Karm < Pluginf
 					add(@temp_n, 1)
 				end
 
-				@r = "#{temp_n} incremented"
+				#@r = "#{temp_n} incremented"
 			elsif @incdec == "--"
 				if check_hash(@temp_n)
 					decrement(@temp_n)
@@ -146,7 +141,7 @@ class Karm < Pluginf
 					add(@temp_n, -1)
 				end
 
-				@r = "#{@temp_n} decremented"
+				#@r = "#{@temp_n} decremented"
 			else
 				return @r
 			end
