@@ -73,14 +73,14 @@ class PLUGIN < Pluginf
 			message_s = message_reg_s[:trail].to_s[0..-2]
 			
 			if message_s.match(/^ACTION /)
-				@r = "* #{nick_s} "
+				@r = "» #{nick_s} "
 				message_set = message_s.split(" ")
 				message_set.delete_at(0)
 				message_s = ""
 				message_set.each { |a| message_s.concat("#{a} ") }
 				message_s = message_s[0..-2]
 			else
-				@r = "#{nick}: <#{nick_s}> "
+				@r = "#{nick}: 「#{nick_s}」 "
 			end
 			
 			if message_s.match(sed_a) and chan == chan_s and nick_s != "bluckbot" then 
