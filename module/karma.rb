@@ -54,7 +54,8 @@ class Karm < Pluginf
 	def increment(noun)
 		noun_a = noun
 		if @nouns_s.include? noun_a then
-			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] + 1
+			temp_nv = @nouns["#{noun_a}"].to_i
+			@nouns["#{noun_a}"] = temp_nv + 1
 
 			return true
 		else
@@ -68,7 +69,8 @@ class Karm < Pluginf
 	def decrement(noun)
 		noun_a = noun
 		if @nouns_s.include? noun_a then
-			@nouns["#{noun_a}"] = @nouns["#{noun_a}"] - 1
+			temp_nv = @nouns["#{noun_a}"].to_i
+			@nouns["#{noun_a}"] = temp_nv - 1
 
 			return true
 		else
