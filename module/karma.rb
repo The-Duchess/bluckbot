@@ -111,11 +111,12 @@ class Karm < Pluginf
 
 	#your definition for script
 	def script(message, nick, chan)
-		@r = String.new
+		@r = ""
 
 		if message.match(/^`karma /)
-			@r = get(message[7..-1])
-			if @r == nil
+			@r_s = get(message[7..-1])
+
+			if @r_s == nil
 				@r = "object not found"
 			else
 				@r = "#{message[7..-1]} has a karma of #{@r}"
