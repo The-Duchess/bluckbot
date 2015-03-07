@@ -83,7 +83,7 @@ class Admin < Pluginf
 			@r = load
 		elsif tokens[1].to_s == @list_s
 			@r = "PRIVMSG #{nick} :"
-			$admin_s.each { |a| @r.concat(a.to_s) }
+			$admin_s.each { |a| @r.concat("#{a.to_s} ") }
 		else
 			@r = "#{nick}: invalid use"
 		end
