@@ -126,6 +126,9 @@ class Karm < Pluginf
 			@temp_n = message[0..-3]
 			@incdec = message[-3..-1]
 
+			p @temp_n
+			p @incdec
+			
 			if @incdec == "++"
 				if check_hash(@temp_n)
 					increment(@temp_n)
