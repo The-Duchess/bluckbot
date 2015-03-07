@@ -111,7 +111,7 @@ class Karm < Pluginf
 
 	#your definition for script
 	def script(message, nick, chan)
-		@r = ""
+		@r = String.new
 
 		if message.match(/^`karma /)
 			@r = get(message[7..-1])
@@ -131,12 +131,16 @@ class Karm < Pluginf
 				else
 					add(@temp_n, 1)
 				end
+
+				@r = ""
 			elsif @incdec == "--"
 				if check_hash(@temp_n)
 					decrement(@temp_n)
 				else
 					add(@temp_n, -1)
 				end
+
+				@r = ""
 			else
 				return
 			end
