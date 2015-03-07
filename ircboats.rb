@@ -240,7 +240,7 @@ class Ircbot
 			end
 
 			if message[0..- 2].match(/^`quit/)
-    			if $admin_s.include? nick.to_s
+    				if $admin_s.include? nick.to_s
 					say_to_chan("sorry for the disturbance sempai", chan)
 					quit
 					break
