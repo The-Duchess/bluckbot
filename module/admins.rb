@@ -9,7 +9,7 @@
 $LOAD_PATH << './module'
 require '.pluginf.rb'
 
-class PLUGIN < Pluginf
+class Admin < Pluginf
 	#any functions you may need
 	
 	#reloads the file
@@ -94,5 +94,5 @@ de = "`admin [add <nick> | remove <nick> | save  | reload ] to allow admins to a
 
 #plugin = Class_name.new(regex, name, help)
 #passed back to the plugins_s array
-plugin = PLUGIN.new(reg_p, na, de)
+plugin = Admin.new(reg_p, na, de)
 $plugins_s.push(plugin)
