@@ -125,10 +125,11 @@ class Karm < Pluginf
 			end
 		elsif message.match(/^`karma save$/)
 			update
-			
-		elsif message.match(/^[^\s]+(\+\++|--+)/)
-			@temp_n = message[0..-3]
-			@incdec = message[-2..-1]
+
+		elsif message.match(/[^\s]+(\+\++|--+)/)
+			@temp_ns = message.match(/[^\s]+(\+\++|--+)/)
+			@temp_n = @temp_ns[0..-3]
+			@incdec = @temp_ns[-2..-1]
 
 			if @incdec == "++"
 				if check_hash(@temp_n)
@@ -156,7 +157,7 @@ class Karm < Pluginf
 end
 
 prefixes = [
-/^[^\s]+(\+\++|--+)/,
+/[^\s]+(\+\++|--+)/,
 /^`karma /
 ]
 
