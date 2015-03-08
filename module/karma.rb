@@ -135,6 +135,10 @@ class Karm < Pluginf
 			@temp_n = @temp_ns.to_s[0..-3]
 			@incdec = @temp_ns.to_s[-2..-1]
 
+			if @temp_n == nick
+				return "you cannot change your karma"
+			end
+
 			if @incdec == "++"
 				if check_hash(@temp_n)
 					increment(@temp_n)

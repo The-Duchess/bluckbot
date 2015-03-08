@@ -22,7 +22,7 @@ def parse(nick, chan, message)
 	     return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
 	   end
     	
-    	if message.match(/^`load /) and message.length > 5 then
+        if message.match(/^`load /) and message.length > 5 then
     		$LOAD_PATH << './module'
     		ls = message.to_s[6..-1]
     		#checks if the module is already loaded
