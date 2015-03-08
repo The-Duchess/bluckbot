@@ -108,8 +108,8 @@ class Karm < Pluginf
 		File.open("./res/.karmaf", 'r') do |fr|
 			while line = fr.gets
 				line.chomp!
-				line_toks = line.split("{")
-				add line_toks[0].to_s line_toks[1].to_s[0..-2].to_i
+				line_toks = line.split("\{")
+				add(line_toks[0].to_s, line_toks[1].to_s[0..-2].to_i)
 			end
 		end
 	end
