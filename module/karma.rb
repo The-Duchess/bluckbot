@@ -120,7 +120,6 @@ class Karm < Pluginf
 
 		if message.match(/^`karma /)
 
-			#@r_s = get(message[7..-1])
 			@tokens = message.split(' ')
 			@r_s = get(tokens[1].to_s)
 
