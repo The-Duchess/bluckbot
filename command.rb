@@ -107,9 +107,9 @@ def parse(nick, chan, message)
     if message.match(/^`unload /)
     	
     	#currently disabled to preven the bot getting kicked
-    	#if not check_admin(nick)
-	#	return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
-	#end
+        #if not check_admin(nick)
+	    #return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	    #end
     	
     	@ii = 0
     	@r = ""
@@ -118,6 +118,7 @@ def parse(nick, chan, message)
     		#p a.name.to_s
     		if a.name.to_s.downcase == message.to_s.downcase[8..-1]
     			@r = "plugin #{a.name.to_s} removed"
+                $plugins_s[@ii].cleanup
     			$plugins_s.delete_at(@ii)
     			return @r
     		else

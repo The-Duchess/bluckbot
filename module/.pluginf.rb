@@ -11,8 +11,12 @@ class Pluginf
 		@help = help
 	end
 
-	def script(message, nick, chan)
+	def cleanup
+		#used if you wish to save some information on exit
+	end
 
+	def script(message, nick, chan)
+		
 	end
 
 	def regex

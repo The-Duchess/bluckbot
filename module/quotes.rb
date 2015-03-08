@@ -13,7 +13,7 @@ require '.pluginf.rb'
 
 class Quote < Pluginf
 
-	def finalize
+	def cleanup
 		p save
 	end
 	

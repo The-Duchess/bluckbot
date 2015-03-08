@@ -13,7 +13,7 @@ require '.pluginf.rb'
 
 class Dict < Pluginf
 
-	def finalize
+	def cleanup
 		p save
 	end
 	

@@ -27,7 +27,7 @@ class Karm < Pluginf
 		load
 	end
 
-	def finalize
+	def cleanup
 		update
 	end
 
@@ -119,11 +119,6 @@ class Karm < Pluginf
 		@r = ""
 
 		if message.match(/^`karma /)
-
-			if message.match(/^`karma save$/)
-				update
-				return "saved"
-			end
 
 			@r_s = get(message[7..-1])
 
