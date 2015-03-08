@@ -239,10 +239,10 @@ class Ircbot
 				next
 			end
 
-			if message[0..- 2].match(/^`quit/)
+			if message[0..- 2].match(/^`plsgo$/)
     				if $admin_s.include? nick.to_s
-					say_to_chan("sorry for the disturbance sempai", chan)
-					quit
+						say_to_chan("sorry for the disturbance sempai", chan)
+						quit
 					break
 				else
 					say_to_chan("#{nick}: is not in the admin file", chan)
