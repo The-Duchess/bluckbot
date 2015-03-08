@@ -120,7 +120,9 @@ class Karm < Pluginf
 
 		if message.match(/^`karma /)
 
-			@r_s = get(message[7..-1])
+			#@r_s = get(message[7..-1])
+			@tokens = message.split(' ')
+			@r_s = get(tokens[1].to_s)
 
 			if @r_s == nil
 				@r = "object not found"
@@ -140,7 +142,6 @@ class Karm < Pluginf
 					add(@temp_n, 1)
 				end
 
-				#@r = "#{temp_n} incremented"
 			elsif @incdec == "--"
 				if check_hash(@temp_n)
 					decrement(@temp_n)
@@ -148,7 +149,6 @@ class Karm < Pluginf
 					add(@temp_n, -1)
 				end
 
-				#@r = "#{@temp_n} decremented"
 			else
 				return @r
 			end

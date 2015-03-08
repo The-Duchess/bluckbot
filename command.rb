@@ -16,11 +16,11 @@ def parse(nick, chan, message)
     message = message[0..-2].to_s
     p message
 
-    if message.match(/^`load/)
+    if message.match(/^`load /)
     	
-	if not check_admin(nick)
-		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
-	end
+	   if not check_admin(nick)
+	     return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	   end
     	
     	if message.match(/^`load /) and message.length > 5 then
     		$LOAD_PATH << './module'
@@ -48,9 +48,9 @@ def parse(nick, chan, message)
 
     if message.match(/^`ls$/)
     	
-    	if not check_admin(nick)
-		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
-	end
+        if not check_admin(nick)
+		  return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	    end
     	
     	@r = "PRIVMSG #{nick} :"
     	@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1]}
@@ -59,7 +59,7 @@ def parse(nick, chan, message)
     end
 
 
-    if message.match(/^`list/)
+    if message.match(/^`list$/)
 
     	@r = ""
 
@@ -74,7 +74,7 @@ def parse(nick, chan, message)
     	return @r[0..-1]
     end
 
-    if message.match(/^`help modules/)
+    if message.match(/^`help modules$/)
     	@r = ""
     	$plugins_s.each do |a|
     		#p a.class.to_s
@@ -134,8 +134,8 @@ def parse(nick, chan, message)
     if message.match(/^`mass load$/)
     	
     	if not check_admin(nick)
-		return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
-	end
+		  return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	   end
     	
     	temp_r = []
     	File.open("./res/.modlist", 'r') do |fr|
