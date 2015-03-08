@@ -255,7 +255,7 @@ class Ircbot
 					p parse(nick, chan, "`load use.rb ")
 					p parse(nick, chan, "`load info.rb ")
 					response = "`info for info. `usage for usage. `help $MODULENAME for help on the module"
-					say "NOTICE #{chan} :#{response}"
+					say "NOTICE #{nick} :#{response}"
 					next
 				end
 			end

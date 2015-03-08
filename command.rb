@@ -61,7 +61,7 @@ def parse(nick, chan, message)
 
     if message.match(/^`list$/)
 
-    	@r = ""
+    	@r = "NOTICE #{nick} :"
 
     	$plugins_s.each do |a|
     		#p a.class.to_s
@@ -71,7 +71,7 @@ def parse(nick, chan, message)
     		@r.concat("#{a.name} ")
     	end
 
-    	return @r[0..-1]
+    	return @r[0..-2]
     end
 
     #if message.match(/^`help modules$/)
@@ -94,7 +94,7 @@ def parse(nick, chan, message)
             #p message.to_s[6..-1]
             #p a.name.to_s
             if a.name.to_s.downcase == message.to_s.downcase[6..-1]
-                @r = "NOTICE #{chan} :#{a.name} description: #{a.help}"
+                @r = "NOTICE #{nick} :#{a.name} description: #{a.help}"
                 return @r
             end
 
