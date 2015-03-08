@@ -19,7 +19,7 @@ def parse(nick, chan, message)
     if message.match(/^`load /)
     	
 	   if not check_admin(nick)
-	     return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+	     return "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
 	   end
     	
         if message.match(/^`load /) and message.length > 5 then
@@ -49,7 +49,7 @@ def parse(nick, chan, message)
     if message.match(/^`ls$/)
     	
         if not check_admin(nick)
-		  return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+		  return "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
 	    end
     	
     	@r = "PRIVMSG #{nick} :"
@@ -134,7 +134,7 @@ def parse(nick, chan, message)
     if message.match(/^`mass load$/)
     	
     	if not check_admin(nick)
-		  return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
+		  return "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
 	   end
     	
     	temp_r = []

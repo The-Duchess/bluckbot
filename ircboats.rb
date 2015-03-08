@@ -165,7 +165,7 @@ class Ircbot
 				#list = ""
 				@channel_s.each do |a|
 					p a
-					say_to_chan(a.split(' ')[0].to_s, chan)
+					say "NOTICE #{nick} :#{a.split(' ')[0].to_s}"
 				end
 
 				next
@@ -180,8 +180,8 @@ class Ircbot
 					say_to_chan(message_t[0..-2], arg[1].to_s)
 					next
 				else
-					say_to_chan("#{nick}: is not in the admin file", chan)
-    					say_to_chan("#{nick}: please contact the bot owner for questions")
+					say "NOTICE #{nick} :you are not in the admin file"
+					say "NOTICE #{nick} :please contact the bot owner for questions"
     				end
 			end
 
@@ -194,8 +194,8 @@ class Ircbot
 
 					say "KICK #{chan} #{user} \"#{reason}\""
 				else
-					say_to_chan("#{nick}: is not in the admin file", chan)
-    					say_to_chan("#{nick}: please contact the bot owner for questions")
+					say "NOTICE #{nick} :you are not in the admin file"
+					say "NOTICE #{nick} :please contact the bot owner for questions"
     			end	
 			end
 
@@ -243,10 +243,10 @@ class Ircbot
     				if $admin_s.include? nick.to_s
 						say_to_chan("sorry for the disturbance sempai", chan)
 						quit
-					break
-				else
-					say_to_chan("#{nick}: is not in the admin file", chan)
-    				say_to_chan("#{nick}: please contact the bot owner for questions", chan)
+						break
+					else
+						say "NOTICE #{nick} :you are not in the admin file"
+						say "NOTICE #{nick} :please contact the bot owner for questions"
     				end
 			end
 
@@ -267,8 +267,8 @@ class Ircbot
 					@respond = parse(nick, chan, "`load #{message[8..-2]}.rb ")
 					say_to_chan(@respond, chan)
     			else
-    					say_to_chan("#{nick}: is not in the admin file", chan)
-    					say_to_chan("#{nick}: please contact the bot owner for questions")
+					say "NOTICE #{nick} :you are not in the admin file"
+					say "NOTICE #{nick} :please contact the bot owner for questions"
     			end
 
 			end
