@@ -255,7 +255,7 @@ class Ircbot
 					p parse(nick, chan, "`load use.rb ")
 					p parse(nick, chan, "`load info.rb ")
 					response = "`info for info. `usage for usage. `help $MODULENAME for help on the module"
-					say "NOTICE #{nick} :#{response}"
+					say "NOTICE #{chan} :#{response}"
 					next
 				end
 			end
@@ -281,7 +281,14 @@ class Ircbot
 				#the bot to run special commands through modules
 				#say "PRIVMSG #{chan_name} :#{msg}"
 				#format the message to return as PRIVMSG #channel | nick :message text you want to send to a channel or someone
-				if response.match(/^PRIVMSG /) or response.match(/^NOTICE /) # or any other i feel like adding
+				prefix = [
+							/^PRIVMSG /
+							/^NOTICE /
+				]
+
+				reg_s = Regexp.union(prefix)
+
+				if response.match(reg_s) # or any other i feel like adding
 					if response.include? "\n"
 						@res_new = response.split("\n")
 						tokens = @res_new[0].split(' ')
