@@ -41,9 +41,9 @@ class Karm < Pluginf
 	#adds a noun to the hash with the value value
 	def add(noun, value)
 		noun_a = noun
-		@nouns_s.push(noun_a.to_s)
-
 		if @nouns_s.include? noun_a then return false end
+		
+		@nouns_s.push(noun_a.to_s)
 
 		@nouns.store("#{noun_a}", value.to_i)
 
