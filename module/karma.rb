@@ -123,7 +123,9 @@ class Karm < Pluginf
 			else
 				@r = "#{message[7..-1]} has a karma of #{@r_s}"
 			end
-
+		elsif message.match(/^`karma save$/)
+			update
+			
 		elsif message.match(/^[^\s]+(\+\++|--+)/)
 			@temp_n = message[0..-3]
 			@incdec = message[-2..-1]

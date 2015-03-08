@@ -246,7 +246,7 @@ class Ircbot
 					break
 				else
 					say_to_chan("#{nick}: is not in the admin file", chan)
-    					say_to_chan("#{nick}: please contact the bot owner for questions")
+    				say_to_chan("#{nick}: please contact the bot owner for questions", chan)
     				end
 			end
 
