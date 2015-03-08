@@ -8,13 +8,13 @@
 # example for network with a PASS ruby-2.1 ircboats.rb somenet 6697 channelname false PASS passphrase
 ####################################################################################################################
 # commands
-# /msg bluckbot `quit : tells the bot to quit
+# `plsgo : tells the bot to quit
 # `ignore $NICK : tells the bot to ignore a nick
 # `save | `load chans : saves and loads channels from currently active and previously saved
 # /msg bluckbot `list channels : lists channels, must be a pm from the owner
 # `msg $NICK message : sends a message to $NICK
 # `part : parts the active channel
-# /msg bluckbot `join $#CHANNEL : joins a channel
+# `join $#CHANNEL : joins a channel
 # `k $NICK reason: only accessible to the owner and kicks a user from the channel
 # `help : prints help
 # `load $MODULE : loads a module
