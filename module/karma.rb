@@ -116,6 +116,12 @@ class Karm < Pluginf
 		@r = ""
 
 		if message.match(/^`karma /)
+			
+			if message.match(/^`karma save$/)
+				update
+				return "saved"
+			end
+
 			@r_s = get(message[7..-1])
 
 			if @r_s == nil
@@ -123,8 +129,6 @@ class Karm < Pluginf
 			else
 				@r = "#{message[7..-1]} has a karma of #{@r_s}"
 			end
-		elsif message.match(/^`karma save$/)
-			update
 
 		elsif message.match(/[^\s]+(\+\++|--+)/)
 			@temp_ns = message.match(/[^\s]+(\+\++|--+)/)
