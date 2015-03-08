@@ -121,7 +121,7 @@ class Karm < Pluginf
 			if @r_s == nil
 				@r = "object not found"
 			else
-				@r = "#{message[7..-1]} has a karma of #{@r}"
+				@r = "#{message[7..-1]} has a karma of #{@r_s}"
 			end
 
 		elsif message.match(/^[^\s]+(\+\++|--+)/)
