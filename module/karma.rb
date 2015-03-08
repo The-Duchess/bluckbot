@@ -27,6 +27,9 @@ class Karm < Pluginf
 		load
 	end
 
+	def finalize
+		update
+	end
 
 	#checks if the noun is in the hash
 	def check_hash(noun)
@@ -116,7 +119,7 @@ class Karm < Pluginf
 		@r = ""
 
 		if message.match(/^`karma /)
-			
+
 			if message.match(/^`karma save$/)
 				update
 				return "saved"
