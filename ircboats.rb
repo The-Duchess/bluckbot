@@ -282,7 +282,7 @@ class Ircbot
 				#say "PRIVMSG #{chan_name} :#{msg}"
 				#format the message to return as PRIVMSG #channel | nick :message text you want to send to a channel or someone
 				prefix = [
-							/^PRIVMSG /
+							/^PRIVMSG /,
 							/^NOTICE /
 				]
 
