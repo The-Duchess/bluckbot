@@ -128,8 +128,8 @@ class Karm < Pluginf
 
 		elsif message.match(/[^\s]+(\+\++|--+)/)
 			@temp_ns = message.match(/[^\s]+(\+\++|--+)/)
-			@temp_n = @temp_ns[0..-3]
-			@incdec = @temp_ns[-2..-1]
+			@temp_n = @temp_ns.to_s[0..-3]
+			@incdec = @temp_ns.to_s[-2..-1]
 
 			if @incdec == "++"
 				if check_hash(@temp_n)
