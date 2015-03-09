@@ -43,7 +43,6 @@ class Joke < Pluginf
 
 	def add(joke)
 		@jokes.push(joke.to_s)
-		#File.open("./res/.jokes", mode: 'a') { |fw| fw.puts "#{joke}" }
 		File.write("./res/.jokes", "#{joke}", File.size("./res/.jokes"), mode: 'a')
 		@num_j += 1
 	end
@@ -81,7 +80,6 @@ class Joke < Pluginf
 			end
 			return temp
 		else
-			#@jokes.shuffle!
 			r = rand(@jokes.length.to_i)
 			begin
 				return "「\x0311#{(r.to_i + 1)}\x03/\x0310#{@num_j}\x03」 #{@jokes[r].to_s}"
