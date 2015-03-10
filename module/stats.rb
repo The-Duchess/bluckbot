@@ -39,13 +39,13 @@ class System < Pluginf
 		#OS
 		#13 - 15
 		tokens = `inxi -S`.split(' ')
-		os = "#{tokens[12].to_s.chomp!} #{tokens[13].to_s.chomp!} #{tokens[14].to_s.chomp!}"
+		os = "#{tokens[12]} #{tokens[13]} #{tokens[14]}"
 		#Kernel
 		#token[5 and 6]
-		kernel = "#{tokens[4].to_s.chomp!} #{tokens[5].to_s.chomp!}"
+		kernel = "#{tokens[4]} #{tokens[5]}"
 		#processor
 		tokens_p = `inxi -C`.split(' ')
-		processor = "#{tokens_p[1].to_s.chomp!} #{tokens_p[2].to_s.chomp!} #{tokens_p[3].to_s.chomp!} #{tokens_p[4].to_s.chomp!} @ #{tokens_p[13].to_s.chomp!}#{tokens_p[14].to_s.chomp!} : #{tokens_p[9].to_s.chomp!}#{tokens_p[10].to_s.chomp!} cache"
+		processor = "#{tokens_p[1]} #{tokens_p[2]} #{tokens_p[3]} #{tokens_p[4]} @ #{tokens_p[13]}#{tokens_p[14]} : #{tokens_p[9]}#{tokens_p[10]} cache"
 		
 		return "\x0303#{host}\x03 : #{os} : #{kernel}\n#{processor}"
 
@@ -58,7 +58,8 @@ class System < Pluginf
 		if token_i[1] == "status"
 			return status
 		elsif token_i[1] == "info"
-			return info
+			#return info
+			return "not finished"
 		else
 			return "invalid input"
 		end
