@@ -13,20 +13,20 @@ class System < Pluginf
 	
 	def status
 		#hostname
-		host = `hostname`
+		host = `hostname`.to_s.chomp!
 		#uptime
-		uptime = `uptime -p`
+		uptime = `uptime -p`.to_s.chomp!
 		#processes
-		processes = `ps -ef | wc -l`
+		processes = `ps -ef | wc -l`.to_s.chomp!
 		#memory
-		percent_mem = `free | awk 'FNR == 3 {print $3/($3+$4)*100}'`
+		percent_mem = `free | awk 'FNR == 3 {print $3/($3+$4)*100}'`.to_s.chomp!
 		tokens = `free -m | grep -i "Mem:"`.split(' ')
-		total_mem = tokens[1]
-		used_mem = tokens[2]
+		total_mem = tokens[1].to_s.chomp!
+		used_mem = tokens[2].to_s.chomp!
 		#load
 		cpu_use = `top -bn1 | grep "Cpu(s)" | \
            sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | \
-           awk '{print 100 - $1"%"}'`
+           awk '{print 100 - $1"%"}'`.to_s.chomp!
 
         #Server Aika up 18d 01h 32m 43s, 675 TCP connections, 146 processes, 17.1GB/64GB RAM in use.
         return "Server \x0303#{host}\x03 #{uptime}, \x0303#{processes}\x03 Processes, \x0303#{percent_mem}\x03% | \x0304#{used_mem}\x03 of \x0303#{total_mem}\x03 MB of Memory Used, CPU utilization: \x0303#{cpu_use}\x03%"
