@@ -24,12 +24,10 @@ class System < Pluginf
 		total_mem = tokens[1]
 		used_mem = tokens[2]
 		#load
-		cpu_use = `top -bn1 | grep "Cpu(s)" | \
-           sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | \
-           awk '{print 100 - $1"%"}'`.to_s.chomp!
+		cpu_use = `mpstat | awk '$3 ~ /CPU/ { for(i=1;i<=NF;i++) { if ($i ~ /%idle/) field=i } } $3 ~ /all/ { print 100 - $field }'`.to_s.chomp!
 
         #Server Aika up 18d 01h 32m 43s, 675 TCP connections, 146 processes, 17.1GB/64GB RAM in use.
-        return "Server \x0303#{host}\x03 #{uptime}, \x0303#{processes}\x03 Processes, \x0303#{percent_mem}\x03% | \x0304#{used_mem}\x03 of \x0303#{total_mem}\x03 MB of Memory Used"
+        return "Server \x0303#{host}\x03 #{uptime}, \x0303#{processes}\x03 Processes, \x0303#{percent_mem}\x03% | \x0304#{used_mem}\x03 of \x0303#{total_mem}\x03 MB of Memory Used, CPU utilization: \x0303#{cpu_use}\x03"
 	end
 
 	def info
