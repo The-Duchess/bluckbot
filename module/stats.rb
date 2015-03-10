@@ -47,13 +47,14 @@ class System < Pluginf
 		tokens_p = `inxi -C`.split(' ')
 		processor = "#{tokens_p[1]} #{tokens_p[2]} #{tokens_p[3]} #{tokens_p[4]} @ #{tokens_p[13]}#{tokens_p[14]} : #{tokens_p[9]}#{tokens_p[10]} cache"
 		
-		return "\x0303#{hostname}\x03 : #{os} : #{kernel}\n#{processor}"
+		return "\x0303#{host}\x03 : #{os} : #{kernel}\n#{processor}"
 
 	end
 
 	#your definition for script
 	def script(message, nick, chan)
 		token_i = message.split(' ')
+
 		if token_i[1] == "status"
 			return status
 		elsif token_i[1] == "info"
