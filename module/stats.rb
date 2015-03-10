@@ -21,8 +21,8 @@ class System < Pluginf
 		#memory
 		percent_mem = `free | awk 'FNR == 3 {print $3/($3+$4)*100}'`.to_s.chomp!
 		tokens = `free -m | grep -i "Mem:"`.split(' ')
-		total_mem = tokens[1].to_s.chomp!
-		used_mem = tokens[2].to_s.chomp!
+		total_mem = tokens[1]
+		used_mem = tokens[2]
 		#load
 		cpu_use = `top -bn1 | grep "Cpu(s)" | \
            sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | \
