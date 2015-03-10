@@ -29,7 +29,7 @@ class System < Pluginf
            awk '{print 100 - $1"%"}'`
 
         #Server Aika up 18d 01h 32m 43s, 675 TCP connections, 146 processes, 17.1GB/64GB RAM in use.
-        return "Server \x0303#{host}\x03 #{uptime}, \x0303#{processes}\x03 Processes, \x0303#{percent_mem}\x03% | \x0304#{used_mem}\x03 of \x0303#{total_mem}\x03 MB of Memory Used, CPU utilization: \x0303#{cpu_use}\x03%"
+        return "Server\x0303 #{host}\x03 #{uptime},\x0303 #{processes}\x03 Processes,\x0303 #{percent_mem}\x03 percent |\x0304 #{used_mem}\x03 of\x0303 #{total_mem}\x03 MB of Memory Used, CPU utilization:\x0303 #{cpu_use}\x03 percent"
 	end
 
 	def info
@@ -47,7 +47,7 @@ class System < Pluginf
 		tokens_p = `inxi -C`.split(' ')
 		processor = "#{tokens_p[1]} #{tokens_p[2]} #{tokens_p[3]} #{tokens_p[4]} @ #{tokens_p[13]}#{tokens_p[14]} : #{tokens_p[9]}#{tokens_p[10]} cache"
 		
-		return "\x0303#{host}\x03 : #{os} : #{kernel}\n#{processor}"
+		return "\x0303 #{host}\x03 : #{os} : #{kernel}\n#{processor}"
 
 	end
 
@@ -66,7 +66,7 @@ class System < Pluginf
 	end
 end
 
-reg_p = // #regex to call the module
+reg_p = /`sys / #regex to call the module
 na = "stats" #name for plugin #same as file name without .rb
 de = "`sys [status] | [info]" #description
 
