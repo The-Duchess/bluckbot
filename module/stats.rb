@@ -15,7 +15,7 @@ class System < Pluginf
 		#hostname
 		host = `hostname`.to_s.chomp!
 		#uptime
-		uptime = `uptime -p`.to_s.chomp!
+		uptime = `uptime -p`.to_s.chomp![3..-1]
 		#processes
 		processes = `ps -ef | wc -l`.to_s.chomp!
 		#memory
@@ -27,7 +27,7 @@ class System < Pluginf
 		cpu_use = `mpstat | awk '$3 ~ /CPU/ { for(i=1;i<=NF;i++) { if ($i ~ /%idle/) field=i } } $3 ~ /all/ { print 100 - $field }'`.to_s.chomp!
 
         #Server Aika up 18d 01h 32m 43s, 675 TCP connections, 146 processes, 17.1GB/64GB RAM in use.
-        return "Server \x0303#{host}\x03 #{uptime}, \x0303#{processes}\x03 Processes, \x0303#{percent_mem}\x03% of \x0303#{total_mem}\x03 MB of Memory Used, CPU utilization: \x0303#{cpu_use}\x03%"
+        return "Server \x0303#{host}\x03 up \x0303#{uptime}\x03, \x0303#{processes}\x03 Processes, \x0303#{percent_mem}\x03% of \x0303#{total_mem}\x03 MB of Memory Used, CPU utilization: \x0303#{cpu_use}\x03%"
 	end
 
 	def info
