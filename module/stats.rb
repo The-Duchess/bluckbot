@@ -29,23 +29,23 @@ class System < Pluginf
            awk '{print 100 - $1"%"}'`.to_s.chomp!
 
         #Server Aika up 18d 01h 32m 43s, 675 TCP connections, 146 processes, 17.1GB/64GB RAM in use.
-        return "Server \x0303#{host}\x03 #{uptime}, \x0303#{processes}\x03 Processes, \x0303#{percent_mem}\x03% | \x0304#{used_mem}\x03 of \x0303#{total_mem}\x03 MB of Memory Used, CPU utilization: \x0303#{cpu_use}\x03%"
+        return "Server \x0303#{host}\x03 #{uptime}, \x0303#{processes}\x03 Processes, \x0303#{percent_mem}\x03% | \x0304#{used_mem}\x03 of \x0303#{total_mem}\x03 MB of Memory Used, CPU utilization: \x0303#{cpu_use}\x03"
 	end
 
 	def info
 		#hostname
-		host = `hostname`
+		host = `hostname`.to_s.chomp!
 
 		#OS
 		#13 - 15
 		tokens = `inxi -S`.split(' ')
-		os = "#{tokens[12]} #{tokens[13]} #{tokens[14]}"
+		os = "#{tokens[12].to_s.chomp!} #{tokens[13].to_s.chomp!} #{tokens[14].to_s.chomp!}"
 		#Kernel
 		#token[5 and 6]
-		kernel = "#{tokens[4]} #{tokens[5]}"
+		kernel = "#{tokens[4].to_s.chomp!} #{tokens[5].to_s.chomp!}"
 		#processor
 		tokens_p = `inxi -C`.split(' ')
-		processor = "#{tokens_p[1]} #{tokens_p[2]} #{tokens_p[3]} #{tokens_p[4]} @ #{tokens_p[13]}#{tokens_p[14]} : #{tokens_p[9]}#{tokens_p[10]} cache"
+		processor = "#{tokens_p[1].to_s.chomp!} #{tokens_p[2].to_s.chomp!} #{tokens_p[3].to_s.chomp!} #{tokens_p[4].to_s.chomp!} @ #{tokens_p[13].to_s.chomp!}#{tokens_p[14].to_s.chomp!} : #{tokens_p[9].to_s.chomp!}#{tokens_p[10].to_s.chomp!} cache"
 		
 		return "\x0303#{host}\x03 : #{os} : #{kernel}\n#{processor}"
 
