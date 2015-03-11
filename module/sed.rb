@@ -99,7 +99,11 @@ class PLUGIN < Pluginf
 			File.open("./temp", 'w') { |fw| fw.puts "#{string_a}" }
 			File.open("./temp_s", 'w') { |fw| fw.puts "#{command_s}" }
 			@r_s = `sed -r -f ./temp_s < ./temp`
-			@r.concat(@r_s.to_s)
+			if @r_s.length > 0 then
+				@r.concat(@r_s.to_s)
+			else
+				@r = ""
+			end
 			#@r.concat(string_a.sub(sed_a, sed_b)) #this works as well but does not offer some options
 			system("rm -f temp")
 			system("rm -f temp_s")
