@@ -2,9 +2,26 @@
 # template as defined by the required file
 # author: apels <Alice Duchess>
 # module as defined by .plugin.rb
-# modules have access to $plugins to be loaded as well as $logs
-# $logs stores unparsed message lines in an array of length 100
-
+#
+#################################################################################################################
+# cah.rb is a Cards Against Humanity plugin for bluckbot 
+# cah commands:
+# 	user commands:
+# 		`join : joins an active game
+# 		`leave : leaves an active game
+# 		`play <card number> : plays a card if you are not the card czar
+# 		`select <option number> : chooses a card if you are the card czar
+# 		`list : have the bot list your hand in a notice
+# 	owner commands:
+# 		`start : starts a game
+# 		`stop : stops a game
+# 		`game : gives information on the current game
+#
+# cah config:
+# cah.rb has a config file in the resource "./res" folder of the irc bot that tells it the name of the channel
+# it will be limited to.
+#
+#################################################################################################################
 
 $LOAD_PATH << './module'
 require '.pluginf.rb'
