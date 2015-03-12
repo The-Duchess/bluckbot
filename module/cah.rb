@@ -5,7 +5,7 @@
 #
 #################################################################################################################
 # cah.rb is a Cards Against Humanity plugin for bluckbot 
-# cardbot commands:
+# cah commands:
 # 	user commands:
 # 		`join : joins an active game
 # 		`leave : leaves an active game
@@ -16,6 +16,10 @@
 # 		`start : starts a game
 # 		`stop : stops a game
 # 		`game : gives information on the current game
+#
+# cah config:
+# cah.rb has a config file in the resource "./res" folder of the irc bot that tells it the name of the channel
+# it will be limited to.
 #
 #################################################################################################################
 
