@@ -105,6 +105,8 @@ def parse(nick, chan, message)
     		#p a.name.to_s
     		if a.name.to_s.downcase == message.to_s.downcase[8..-1]
     			@r = "plugin #{a.name.to_s} removed"
+                p "class"
+                p a.class.to_s
                 $plugins_s[@ii].cleanup
     			$plugins_s.delete_at(@ii)
     			return @r
