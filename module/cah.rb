@@ -179,7 +179,7 @@ class Cards < Pluginf
 		@help = help
 		@chan_list = []
 		#@chan_list.push("any")
-		@chan_list.push(chan.to_s)
+		#@chan_list.push(chan.to_s)
 
 		@prefixes_user = [
     						/^`join$/,
@@ -192,8 +192,6 @@ class Cards < Pluginf
     	@prefixes_admin = [
     						/^`start$/,
     						/^`stop$/,
-    						/^`out$/,
-    						/^`reload$/
     	]
 
     	@reg_user = Regexp.union(@prefixes_user)
@@ -214,6 +212,13 @@ class Cards < Pluginf
 
     	if !(File.exist? "./res/.cah_conf") then `touch "./res/.cah_conf"`
 
+    	File.open("./res/.cah_conf", 'r') do |fr|
+    		while line = fr.gets
+    			line.chomp!
+    			@chan_list.push(line)
+    		end
+    	end
+
 	end
 
 	def notice_chan msg_t
@@ -224,9 +229,51 @@ class Cards < Pluginf
 		return "NOTICE #{nick} : #{msg_t}"
 	end
 
+	# plays cards for current nick
+	def play_cards(cards, nick)
+
+	end
+
+	# current nick picks winner
+	def pick_winner(winner, nick)
+
+	end
+
+	# joins the current nick
+	def join(nick)
+
+	end
+
+	# leaves the current nick
+	def leave(nick)
+
+	end
+
+	# returns list of cards for current nick
+	def list(nick)
+
+	end
+
+	# starts the game
+	def start
+
+	end
+
+	# stops the game
+	def stop
+
+	end
+
+	# determines what to do
+	def parse
+
+	end
+
 	#your definition for script
 	def script(message, nick, chan)
+		@r = ""
 
+		return @r
 	end
 end
 
@@ -238,16 +285,13 @@ prefixes_both = [
     			/^`list$/,
     			/^`start$/,
     			/^`stop$/,
-    			/^`out$/,
-    			/^`reload$/
     			]
 
 reg_p = Regexp.union(prefixes_both) #regex to call the module
 na = "cah" #name for plugin #same as file name without .rb
 de = "irc plugin to play cah" #description
-chan = "" #channel this plugin listens in
 
 #plugin = Class_name.new(regex, name, help)
 #passed back to the plugins_s array
-plugin = Cards.new(reg_p, na, de, chan)
+plugin = Cards.new(reg_p, na, de)
 $plugins_s.push(plugin)
