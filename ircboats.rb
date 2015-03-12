@@ -241,9 +241,9 @@ class Ircbot
 
 			if message[0..- 2].match(/^`plsgo$/)
     				if $admin_s.include? nick.to_s
-    						$plugins_s.each do |a|
-    							p parse(nick, chan, "`unload #{a.name} ")
-    						end
+    					$plugins_s.each do |a|
+    						#p parse(nick, chan, "`unload #{a.name} ")
+    					end
 						say_to_chan("sorry for the disturbance sempai", chan)
 						quit
 						break

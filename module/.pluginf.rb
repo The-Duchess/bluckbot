@@ -28,6 +28,7 @@ class Pluginf
 
 	def cleanup
 		#used if you wish to save some information on exit
+		return
 	end
 
 	def script(message, nick, chan)
