@@ -165,7 +165,7 @@ def parse(nick, chan, message)
     end
 
 	if $plugins_s.length > 0 then
-		$plugins_s.each { |a| if message.match(a.regex) then return a.script(message, nick, chan) end }
+		$plugins_s.each { |a| if (message.match(a.regex)) and (a.chans.include? chan or a.chans.include? "any") then return a.script(message, nick, chan) end }
 	end
 
 	return ""

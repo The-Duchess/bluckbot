@@ -121,12 +121,12 @@ class Karm < Pluginf
 		if message.match(/^`karma /)
 
 			@tokens = message.split(' ')
-			@r_s = get(tokens[1].to_s)
+			@r_s = get(@tokens[1].to_s)
 
 			if @r_s == nil
 				@r = "object not found"
 			else
-				@r = "#{tokens[0]} has a karma of #{@r_s}"
+				@r = "#{@tokens[0]} has a karma of #{@r_s}"
 			end
 
 		elsif message.match(/[^\s]+(\+\++|--+)/)
