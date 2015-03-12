@@ -240,7 +240,7 @@ class Ircbot
 			end
 
 			if message[0..- 2].match(/^`plsgo$/)
-    				#if $admin_s.include? nick.to_s
+    				if $admin_s.include? nick.to_s
     				#	$plugins_s.each do |a|
     				#		p parse(nick, chan, "`unload #{a.name} ")
     				#	end
