@@ -17,6 +17,8 @@ class Joke < Pluginf
 		@help = help
 		@jokes = Array.new
 		@num_j = 0
+		@chan_list = []
+		@chan_list.push("any")
 
 		if not File.exist?("./res/.jokes") then
 			`touch ./res/.jokes` #if the karma file does not exist create it

@@ -172,6 +172,8 @@ class Dict < Pluginf
 		@help = help
 		@keys = Array.new
 		@dict = Hash.new(0)
+		@chan_list = []
+		@chan_list.push("any")
 
 		if not File.exist?("./res/.dict") then
 			`touch ./res/.dict` #if the karma file does not exist create it

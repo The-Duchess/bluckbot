@@ -181,6 +181,8 @@ class Quote < Pluginf
 		@help = help
 		@keys = Array.new
 		@dict = Hash.new(0)
+		@chan_list = []
+		@chan_list.push("any")
 		
 		if not File.exist?("./res/.quotes") then
 			`touch ./res/.quotes` #if the karma file does not exist create it

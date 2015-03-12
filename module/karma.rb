@@ -19,6 +19,8 @@ class Karm < Pluginf
 		@nouns = Hash.new
 		# list of the current nouns
 		@nouns_s = Array.new
+		@chan_list = []
+		@chan_list.push("any")
 
 		if not File.exist?("./res/.karmaf") then
 			`touch ./res/.karmaf` #if the karma file does not exist create it
