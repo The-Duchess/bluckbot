@@ -187,12 +187,13 @@ class Cards < Pluginf
     						/^`play \d\d?$/,
     						/^`select \d\d?$/,
     						/^`list$/
-    	]
+    				    ]
 
-    	@prefixes_admin = [
-    						/^`start$/,
+    		@prefixes_admin = [
+    						/^`start$/, 
     						/^`stop$/,
-    	]
+    						/^`game/
+    				       ]
 
     	@reg_user = Regexp.union(@prefixes_user)
     	@reg_admin = Regexp.union(@prefixes_admin)
@@ -231,17 +232,21 @@ class Cards < Pluginf
 
 	# plays cards for current nick
 	def play_cards(cards, nick)
-
+		# add key for nick to hash
+		# add cards.each -> hash[:nick]
 	end
 
 	# current nick picks winner
 	def pick_winner(winner, nick)
-
+		# increment points to nick in players
 	end
 
 	# joins the current nick
 	def join(nick)
-
+		temp_player = Player.new(nick)
+		@players.push(temp_player)
+		10.times { draw_white(nick) }
+		return "#{nick} has joined"
 	end
 
 	# leaves the current nick
@@ -249,30 +254,179 @@ class Cards < Pluginf
 
 	end
 
+	# hands a white card from the deck to current nick
+	def draw_white(nick)
+		i_t = 0
+		@players.each { |a| if a.get_nick == nick then break end; i_t = i_t + 1 }
+		@players[i_t].draw_card(@whitedeck.draw)
+	end
+
+	# cleans up the table from the current round
+	def clean_up_round
+		# discard all white cards
+		# @played_cards_c[:@played_cards_p.each] -> white discard
+		# discard black card
+		@played_cards_p.each do |b|
+			i_t = @played_cards_w[:b].length - 1
+			0.upto(i_t) do |c|
+				@whitedeck.discard(@played_cards_w[:b][c])
+			end
+		end
+
+		@played_cards_w = {}
+
+		@blackdeck.discard(@played_card_b)
+		@played_card_b = nil
+	end
+
+	# draws a black card
+	def draw_black
+		# draw a black card
+		@played_card_b = @blackdeck.draw
+	end
+
+	# sets game state
+	def set_state(state)
+		@game_state = state
+	end
+
+	# not implemented but lists the players to the channel
+	def list_players
+
+	end
+
+	# returns game state information
+	def game_state
+
+	end
+
 	# returns list of cards for current nick
 	def list(nick)
-
+		temp_p = nil
+		i_t = 1
+		r_t = "you cards:\n"
+		@players.each { |a| if a.get_nick == nick then temp_p = a.get_hand; break end }
+		temp_p.each { |a| r_t.concat("#{i_t}: #{a.get_text}\n"); i_t = i_t + 1 }
+		return r_t
 	end
 
 	# starts the game
+	# sets game state and initializes the game
 	def start
-
+		set_state("in_round")
+		draw_black
+		return "game started"
 	end
 
 	# stops the game
+	# sets the game state to not_started and cleans up in play cards and player's hands
 	def stop
+		# set the game state
+		set_state("not_started")
+		# clean up the round
+		clean_up_round
+		# clean up players
+		@players.each do |a|
+			i_t = a.get_hand.length.to_i
+			1.upto(i_t) do |b|
+				@whitedeck.discard(a.play_card(b))
+			end
+		end
 
+		i_t = @players.length - 1
+		0.upto(i_t) { |b| @players.delete_at(b) }
+		@players = []
 	end
 
-	# determines what to do
-	def parse
+	##########################################################################################################
+	# play
+	# steps:
+	# 	1 - build player list from players who joined
+	# 	2 - players draw hands in order
+	# 	3 - determine card czar and rotate through the list until end and then back to beginning
+	# 	4 - card czar reads card (card is sent as notice to channel)
+	# 	5 - players play cards if they are not the card czar
+	# 	6 - if num_players have played then card czar may pick
+	# 	7 - player score is incremented
+	# 	8 - rotate card czar and repeat from step 4
+	##########################################################################################################
 
+	#########################################################################################################
+	# in_round | choose_card | not_started | waiting
+	# players that join in_round will be dealt a hand and assigned to the player list after
+	# state changes to choose_card
+	##########################################################################################################
+	#@game_state = "not_started"
+
+	##########################################################################################################
+	# Game State Variables
+	# @game_state = "not_started" #game state
+	# @num_players = 0 #number of current players
+    	# @num_cards = 0 #number of current played cards
+    	# @players = [] #list of players
+    	# @current_czar = nil #current card czar
+    	# @played_cards_w = {} #hash of players -> array of white cards
+    	# @played_cards_p = [] #list of players who played a card that matches by index to the card played
+    	# @played_card_b = nil #current black card
+    	# @displayed = false
+    	##########################################################################################################
+
+    	# handles admin commands
+    	def admin_parse(message, nick, chan,  state)
+
+		if @game_state == "in_round"
+
+		elsif @game_state == "choose_card"
+
+		elsif @game_state == "not_started"
+
+		elsif @game_state == "waiting"
+
+		else
+			p we have a major problem
+			return "NOTICE #{chan} :game state error"
+			# we have a major problem
+		end
+
+    	end
+
+    	# handles user commands
+    	def user_parse(message, nick, chan,  state)
+
+		if @game_state == "in_round"
+
+		elsif @game_state == "choose_card"
+
+		elsif @game_state == "not_started"
+
+		elsif @game_state == "waiting"
+
+		else
+			p we have a major problem
+			return "NOTICE #{chan} :game state error"
+			# we have a major problem
+		end
+
+    	end
+
+	# determines what to do
+	def parse(message, nick, chan)
+
+		if $admins.include? nick and message.match(@reg_admin)
+			# handle admin commands
+			return admin_parse(message, nick, chan,  @game_state)
+		elsif message.match(@reg_user)
+			# handle non-admin commands
+			return user_parse(message, nick, chan,  @game_state)
+		else
+			return "NOTICE #{chan} :command error"
+		end
 	end
 
 	#your definition for script
 	def script(message, nick, chan)
 		@r = ""
-
+		@r.concat(parse(message, nick, chan))
 		return @r
 	end
 end
@@ -285,6 +439,7 @@ prefixes_both = [
     			/^`list$/,
     			/^`start$/,
     			/^`stop$/,
+    			/^`game/
     			]
 
 reg_p = Regexp.union(prefixes_both) #regex to call the module

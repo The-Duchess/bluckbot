@@ -49,28 +49,28 @@ class Ircbot
 				end
 			end
 		end
-    	say "NICK bluckbot"
-    	say "USER k 0 * test"
-    	say "JOIN ##{@channel}"
-    	$logs = Array.new
-    	if logging.to_s == "true"
-    		@logging = true
-    	else
-    		@logging = false
-    	end
+	    	say "NICK bluckbot"
+	    	say "USER k 0 * test"
+	    	say "JOIN ##{@channel}"
+	    	$logs = Array.new
+	    	if logging.to_s == "true"
+	    		@logging = true
+	    	else
+	    		@logging = false
+	    	end
 
-    	@channel_s = []
-    	@channel_s.push("##{channel}")
-    	@ignore_s = []
-    	
-    	$admin_s = []
+	    	@channel_s = []
+	    	@channel_s.push("##{channel}")
+	    	@ignore_s = []
+	    	
+	    	$admin_s = []
 
-    	File.open("./res/.admins", 'r') do |fr|
-    		while line = fr.gets
-    			line.chomp!
-    			$admin_s.push(line.to_s)
-    		end
-    	end
+	    	File.open("./res/.admins", 'r') do |fr|
+	    		while line = fr.gets
+	    			line.chomp!
+	    			$admin_s.push(line.to_s)
+	    		end
+	    	end
 
     end
 

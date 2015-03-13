@@ -74,19 +74,6 @@ def parse(nick, chan, message)
     	return @r[0..-2]
     end
 
-    #if message.match(/^`help modules$/)
-    #	@r = ""
-    #	$plugins_s.each do |a|
-    		#p a.class.to_s
-    		#p a.regex.to_s
-    		#p a.name.to_s
-    		#p a.help.to_s
-    #		@r.concat("#{a.name} description: #{a.help}\n")
-    #	end
-    	#p @r
-    #	return @r
-    #end
-
     if message.match(/^`help /)
         @ii = 0
         @r = ""
