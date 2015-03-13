@@ -314,14 +314,16 @@ class Cards < Pluginf
 		@game_state = state
 	end
 
-	# not implemented but lists the players to the channel
+	# gets a list of active players and their score delimited by a ;
 	def list_players
-
+		@temp_r = ""
+		@players.each { |a| @temp_r.concat("#{a.get_nick} has: #{a.get_score} points;")}
 	end
 
-	# returns game state information
+	# returns game state information # game state is not private so why the fuck is this here
+	# well bob because HURR DURR muh infrastructure, also because autism
 	def game_state
-
+		return @game_state
 	end
 
 	# returns list of cards for current nick
@@ -401,11 +403,13 @@ class Cards < Pluginf
    		if message =~ @prefixes_admin[0] and @game_state == "not_started" # `start : starts a game
    			# set game state
    			set_state("waiting")
+   			return notice_chan(chan, "game started")
    		elsif message =~ @prefixes_admin[1] and @game_state != "not_started" # `stop : stops a game
    			# stop
    			# set game state
    			stop
    			set_state("not_started")
+   			return notice_chan(chan, "game stopped")
    		elsif message =~ @prefixes_admin[2] # `game : gets game state information
    			# notice channel the game information
    			# this should be moved to users and made to notice the user; however for now it will remain an admin ability for testing
@@ -413,8 +417,13 @@ class Cards < Pluginf
    			# get scores
    			# get game state
    			# notice channel
+   			player_list = list_players.split(";")
+   			@r = "GAME\nPLAYERS"
+   			player_list.each { |a| @r.concat("#{a}\n") }
+   			@r.concat("STATE\n#{game_state}")
+   			return notice_chan(chan, @r)
    		else # invalid command
-   			notice_chan(nick, "you cannot send this command right now")
+   			return notice_chan(nick, "you cannot send this command right now")
    		end
 
    	end
@@ -443,7 +452,7 @@ class Cards < Pluginf
    					@num_players = 0
    				end
    			else
-   				notice_chan(nick, "you have played this round; you can leave next round")
+   				return notice_chan(nick, "you have played this round; you can leave next round")
    			end
    		elsif message =~ @prefixes_user[2] and @game_state == "in_round" # `play <card number> : plays a card if you are not the card czar
    			# check player is the card czar and if not then
@@ -462,7 +471,7 @@ class Cards < Pluginf
    			# set state
    			# deal new black card # this prevents from having to have game state change outside of commands
    		else # invalid command
-   			notice_chan(nick, "you cannot send this command right now")
+   			return notice_chan(nick, "you cannot send this command right now")
    		end
    	end
 
