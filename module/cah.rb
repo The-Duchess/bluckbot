@@ -455,14 +455,20 @@ class Cards < Pluginf
    				return notice_chan(nick, "you have played this round; you can leave next round")
    			end
    		elsif message =~ @prefixes_user[2] and @game_state == "in_round" # `play <card number> : plays a card if you are not the card czar
+   			@r = ""
    			# check player is the card czar and if not then
    			# if they are tell them they cannot play
    			# check card rule
    			# make sure there are enough cards played by player nick and no card index is larger than the number of cards they have - 1
    			# if so play cards
+   			# if the player has played notice the channel 
+   			# (add to @r nick has player \n; this will be appended with game state change if all players have played)
    			# else tell the player the cards were not accepted
    			# if number of played cards == num players then set state to choose_card
+   			# also if number of player cards == num players then append @r
+   			# return notice_chan(chan, @r)
    		elsif message =~ @prefixes_user[3] and @game_state == "choose_card" # `select <option number> : chooses a card if you are the card czar
+   			@r = ""
    			# make sure the player is the card czar
    			# if not tell the user they cannot select
    			# select card
@@ -470,6 +476,7 @@ class Cards < Pluginf
    			# clean up round
    			# set state
    			# deal new black card # this prevents from having to have game state change outside of commands
+   			# notice chan the channel appropriate information
    		else # invalid command
    			return notice_chan(nick, "you cannot send this command right now")
    		end
