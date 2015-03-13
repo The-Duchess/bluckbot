@@ -409,6 +409,10 @@ class Cards < Pluginf
    		elsif message =~ @prefixes_admin[2] # `game : gets game state information
    			# notice channel the game information
    			# this should be moved to users and made to notice the user; however for now it will remain an admin ability for testing
+   			# get player list
+   			# get scores
+   			# get game state
+   			# notice channel
    		else # invalid command
    			notice_chan(nick, "you cannot send this command right now")
    		end

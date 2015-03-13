@@ -2,10 +2,13 @@
 # ruby irc bot
 # author apels Alice Duchess
 # usage:
-# ruby-2.1 ircboats.rb server port channel [logging <true> | <false>] [optional: PASS $PASS]
-# example for non ssl ruby-2.1 ircboats.rb irc.rizon.net 6697 channelname false
-# example for ssl     ruby-2.1 ircboats.rb irc.rizon.net 6697 channelname false
-# example for network with a PASS ruby-2.1 ircboats.rb somenet 6697 channelname false PASS passphrase
+# NOTE: bluckbot is tested in ruby 2.1, if your default ruby is not 2.1 then run ruby-2.1 or higher instead
+# also gems will need to be installed to your ruby of 2.1 or higher so that they will be loaded
+# check modules for specific gems
+# ruby ircboats.rb server port channel [logging <true> | <false>] [optional: PASS $PASS]
+# example for non ssl ruby ircboats.rb irc.rizon.net 6697 channelname false
+# example for ssl     ruby ircboats.rb irc.rizon.net 6697 channelname false
+# example for network with a PASS ruby ircboats.rb somenet 6697 channelname false PASS passphrase
 ####################################################################################################################
 # commands
 # `plsgo : tells the bot to quit
