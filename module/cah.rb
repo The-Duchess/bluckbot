@@ -204,13 +204,13 @@ class Cards < Pluginf
     						/^`play \d\d?$/,
     						/^`select \d\d?$/,
     						/^`list$/
-    				    ]
+    				     ]
 
-    		@prefixes_admin = [
+    	@prefixes_admin = [
     						/^`start$/, 
     						/^`stop$/,
     						/^`game/
-    				       ]
+    				      ]
 
     	@reg_user = Regexp.union(@prefixes_user)
     	@reg_admin = Regexp.union(@prefixes_admin)
@@ -256,6 +256,11 @@ class Cards < Pluginf
 	# current nick picks winner
 	def pick_winner(winner, nick)
 		# increment points to nick in players
+		winner_i = winner - 1
+		winner_n = @players[winner_i].get_nick
+		#increment winner
+		@players[winner_i].increment_score
+		return "#{winner_n} won the round"
 	end
 
 	# joins the current nick
@@ -267,6 +272,8 @@ class Cards < Pluginf
 	end
 
 	# leaves the current nick
+	# not sure if this should be managed by a function since it is highly dependend on game state
+	# on what it should do
 	def leave(nick)
 
 	end
@@ -369,7 +376,7 @@ class Cards < Pluginf
 	##########################################################################################################
 
 	#########################################################################################################
-	# in_round | choose_card | not_started
+	# in_round | choose_card | not_started | waiting
 	# players that join in_round will be dealt a hand and assigned to the player list after
 	# state changes to choose_card
 	##########################################################################################################
@@ -379,57 +386,91 @@ class Cards < Pluginf
 	# Game State Variables
 	# @game_state = "not_started" #game state
 	# @num_players = 0 #number of current players
-    	# @num_cards = 0 #number of current played cards
-    	# @players = [] #list of players
-    	# @current_czar = nil #current card czar
-    	# @played_cards_w = {} #hash of players -> array of white cards
-    	# @played_cards_p = [] #list of players who played a card that matches by index to the card played
-    	# @played_card_b = nil #current black card
-    	# @displayed = false
-    	##########################################################################################################
+    # @num_cards = 0 #number of current played cards
+    # @players = [] #list of players
+    # @current_czar = nil #current card czar
+    # @played_cards_w = {} #hash of players -> array of white cards
+    # @played_cards_p = [] #list of players who played a card that matches by index to the card played
+    # @played_card_b = nil #current black card
+    # @displayed = false
+    ##########################################################################################################
 
-    	# handles admin commands
-    	def admin_parse(message, nick, chan,  state)
+    # handles admin commands
+    def admin_parse(message, nick, chan)
 
-    		if message =~ @prefixes_admin[0] and @game_state == "not_started" # `start : starts a game
+   		if message =~ @prefixes_admin[0] and @game_state == "not_started" # `start : starts a game
+   			# set game state
+   			set_state("waiting")
+   		elsif message =~ @prefixes_admin[1] and @game_state != "not_started" # `stop : stops a game
+   			# stop
+   			# set game state
+   			stop
+   			set_state("not_started")
+   		elsif message =~ @prefixes_admin[2] # `game : gets game state information
+   			# notice channel the game information
+   			# this should be moved to users and made to notice the user; however for now it will remain an admin ability for testing
+   		else # invalid command
+   			notice_chan(nick, "you cannot send this command right now")
+   		end
 
-    		elsif message =~ @prefixes_admin[1] and @game_state != "not_started" # `stop : stops a game
+   	end
 
-    		elsif message =~ @prefixes_admin[2] # `game : gets game state information
+   	# handles user commands
+   	def user_parse(message, nick, chan)
 
-    		else # invalid
+   		if message =~ @prefixes_user[4] and @game_state != "not_started" # `list
+   			@r = list(nick)
+   			notice_chan(nick, "your card list:\n#{@r}")
+   		elsif message =~ @prefixes_user[0] and @game_state != "not_started" # `join : joins an active game
+   			join(nick) # only does work for that player
+   			@num_players = @num_players + 1
 
-    		end
-
-    	end
-
-    	# handles user commands
-    	def user_parse(message, nick, chan,  state)
-
-    		if message =~ @prefixes_user[4] and @game_state != "not_started" # `list
-
-    		elsif message =~ @prefixes_user[0] and @game_state != "not_started" # `join : joins an active game
-
-    		elsif message =~ @prefixes_user[1] and @game_state != "not_started" # `leave : leaves an active game
-
-    		elsif message =~ @prefixes_user[2] and @game_state == "in_round" # `play <card number> : plays a card if you are not the card czar
-
-    		elsif message =~ @prefixes_user[3] and @game_state == "choose_card" # `select <option number> : chooses a card if you are the card czar
-
-    		else # invalid command
-
-    		end
-     	end
+   			if @num_players > 2
+   				# draw initial black card # this prevents from having to have game state change outside of comman
+   				@played_card_b = @blackdeck.draw
+   				set_state("in_round")
+   			end
+   		elsif message =~ @prefixes_user[1] and @game_state != "not_started" # `leave : leaves an active game
+   			if not @played_cards_p.include? nick
+   				leave(nick) # only does work for that player
+   				@num_players = @num_players - 1
+   				if @num_players < 3
+   					stop
+   					@num_players = 0
+   				end
+   			else
+   				notice_chan(nick, "you have played this round; you can leave next round")
+   			end
+   		elsif message =~ @prefixes_user[2] and @game_state == "in_round" # `play <card number> : plays a card if you are not the card czar
+   			# check player is the card czar and if not then
+   			# if they are tell them they cannot play
+   			# check card rule
+   			# make sure there are enough cards played by player nick and no card index is larger than the number of cards they have - 1
+   			# if so play cards
+   			# else tell the player the cards were not accepted
+   			# if number of played cards == num players then set state to choose_card
+   		elsif message =~ @prefixes_user[3] and @game_state == "choose_card" # `select <option number> : chooses a card if you are the card czar
+   			# make sure the player is the card czar
+   			# if not tell the user they cannot select
+   			# select card
+   			# increment winner
+   			# clean up round
+   			# set state
+   			# deal new black card # this prevents from having to have game state change outside of commands
+   		else # invalid command
+   			notice_chan(nick, "you cannot send this command right now")
+   		end
+   	end
 
 	# determines what to do
 	def parse(message, nick, chan)
 
 		if $admins.include? nick and message.match(@reg_admin)
 			# handle admin commands
-			return admin_parse(message, nick, chan,  @game_state)
+			return admin_parse(message, nick, chan)
 		elsif message.match(@reg_user)
 			# handle non-admin commands
-			return user_parse(message, nick, chan,  @game_state)
+			return user_parse(message, nick, chan)
 		else
 			return "NOTICE #{chan} :command error"
 		end
