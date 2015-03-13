@@ -239,11 +239,11 @@ class Cards < Pluginf
 
 	end
 
-	def notice_chan msg_t
+	def notice_chan(chan, msg_t)
 		return "NOTICE #{chan} : #{msg_t}"
 	end
 
-	def notice_player msg_t
+	def notice_player(nick, msg_t)
 		return "NOTICE #{nick} : #{msg_t}"
 	end
 
