@@ -435,24 +435,38 @@ class Cards < Pluginf
    			@r = list(nick)
    			notice_chan(nick, "your card list:\n#{@r}")
    		elsif message =~ @prefixes_user[0] and @game_state != "not_started" # `join : joins an active game
+   			@r = ""
    			join(nick) # only does work for that player
+   			@r.concat("#{nick} has joined the game")
    			@num_players = @num_players + 1
 
    			if @num_players > 2
    				# draw initial black card # this prevents from having to have game state change outside of comman
    				@played_card_b = @blackdeck.draw
    				set_state("in_round")
+   				# tell the players what the black card is
+   				@r.concat("\nthree or more players have joined; game starting")
+   				@r.concat("\nblack card is: #{@played_card_b.get_text}")
    			end
+
+   			return notice_chan(chan, @r)
    		elsif message =~ @prefixes_user[1] and @game_state != "not_started" # `leave : leaves an active game
-   			if not @played_cards_p.include? nick
+   			is_playing = false
+   			@players.each { |a| if a.get_nick == nick then is_playing = true end }
+
+   			if not @played_cards_p.include? nick and is_playing == true
+   				@r = ""
    				leave(nick) # only does work for that player
    				@num_players = @num_players - 1
+   				@r.concat("#{nick} has left the game")
    				if @num_players < 3
+   					@r.concat("\ntoo few players, stopping game")
    					stop
    					@num_players = 0
    				end
+   				return notice_chan(chan, @r)
    			else
-   				return notice_chan(nick, "you have played this round; you can leave next round")
+   				return notice_chan(nick, "you have played this round or are not in the game; you can leave next round")
    			end
    		elsif message =~ @prefixes_user[2] and @game_state == "in_round" # `play <card number> : plays a card if you are not the card czar
    			@r = ""
@@ -476,7 +490,7 @@ class Cards < Pluginf
    			# clean up round
    			# set state
    			# deal new black card # this prevents from having to have game state change outside of commands
-   			# notice chan the channel appropriate information
+   			# notice chan the channel appropriate information (including the new black card)
    		else # invalid command
    			return notice_chan(nick, "you cannot send this command right now")
    		end

@@ -13,6 +13,7 @@ class Pluginf
 		@chan_list.push("any")
 	end
 
+	# default function
 	def script(message, nick, chan)
 		
 	end
