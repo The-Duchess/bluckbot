@@ -352,7 +352,7 @@ class Cards < Pluginf
 	##########################################################################################################
 
 	#########################################################################################################
-	# in_round | choose_card | not_started | waiting
+	# in_round | choose_card | not_started
 	# players that join in_round will be dealt a hand and assigned to the player list after
 	# state changes to choose_card
 	##########################################################################################################
@@ -374,40 +374,35 @@ class Cards < Pluginf
     	# handles admin commands
     	def admin_parse(message, nick, chan,  state)
 
-		if @game_state == "in_round"
+    		if message =~ @prefixes_admin[0] and @game_state == "not_started" # `start : starts a game
 
-		elsif @game_state == "choose_card"
+    		elsif message =~ @prefixes_admin[1] and @game_state != "not_started" # `stop : stops a game
 
-		elsif @game_state == "not_started"
+    		elsif message =~ @prefixes_admin[2] # `game : gets game state information
 
-		elsif @game_state == "waiting"
+    		else # invalid
 
-		else
-			p we have a major problem
-			return "NOTICE #{chan} :game state error"
-			# we have a major problem
-		end
+    		end
 
     	end
 
     	# handles user commands
     	def user_parse(message, nick, chan,  state)
 
-		if @game_state == "in_round"
+    		if message =~ @prefixes_user[4] and @game_state != "not_started" # `list
 
-		elsif @game_state == "choose_card"
+    		elsif message =~ @prefixes_user[0] and @game_state != "not_started" # `join : joins an active game
 
-		elsif @game_state == "not_started"
+    		elsif message =~ @prefixes_user[1] and @game_state != "not_started" # `leave : leaves an active game
 
-		elsif @game_state == "waiting"
+    		elsif message =~ @prefixes_user[2] and @game_state == "in_round" # `play <card number> : plays a card if you are not the card czar
 
-		else
-			p we have a major problem
-			return "NOTICE #{chan} :game state error"
-			# we have a major problem
-		end
+    		elsif message =~ @prefixes_user[3] and @game_state == "choose_card" # `select <option number> : chooses a card if you are the card czar
 
-    	end
+    		else # invalid command
+
+    		end
+     	end
 
 	# determines what to do
 	def parse(message, nick, chan)
