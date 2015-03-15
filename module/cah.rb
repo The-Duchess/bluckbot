@@ -199,17 +199,17 @@ class Cards < Pluginf
 		#@chan_list.push(chan.to_s)
 
 		@prefixes_user = [
-    						/^`join$/,
-    						/^`leave$/,
-    						/^`play \d\d?$/,
-    						/^`select \d\d?$/,
-    						/^`list$/
+    						/^\$join$/,
+    						/^\$leave$/,
+    						/^\$play \d\d?$/,
+    						/^\$select \d\d?$/,
+    						/^\$list$/
     				     ]
 
     	@prefixes_admin = [
-    						/^`start$/, 
-    						/^`stop$/,
-    						/^`game/
+    						/^\$start$/, 
+    						/^\$stop$/,
+    						/^\$game/
     				      ]
 
     	@reg_user = Regexp.union(@prefixes_user)
@@ -519,14 +519,14 @@ class Cards < Pluginf
 end
 
 prefixes_both = [
-    			/^`join$/,
-    			/^`leave$/,
-    			/^`play \d\d?$/,
-    			/^`select \d\d?$/,
-    			/^`list$/,
-    			/^`start$/,
-    			/^`stop$/,
-    			/^`game/
+    			/^\$join$/,
+    			/^\$leave$/,
+    			/^\$play \d\d?$/,
+    			/^\$select \d\d?$/,
+    			/^\$list$/,
+    			/^\$start$/,
+    			/^\$stop$/,
+    			/^\$game/
     			]
 
 reg_p = Regexp.union(prefixes_both) #regex to call the module
