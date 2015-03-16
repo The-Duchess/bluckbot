@@ -127,15 +127,18 @@ class Weather < Pluginf
 
 		p "BEFORE READ"
 
+
 		begin
 			@contents = open(url).read
 		rescue => a
+			p a
 			return "#{@ac} is this place actually real?"
 		end
 
 		begin
 			@contents_m = open(url_m).read
 		rescue => a
+			p a
 			return "#{@ac} is this place actually real?"
 		end
 
