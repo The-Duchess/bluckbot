@@ -145,7 +145,7 @@ class Weather < Pluginf
 		cmd = tokens[0] # the command the user is calling [ `w <area code |s nick> | `ws <area code> ]
 		@r = "#{nick}: "
 
-		if cmd == "`w" # getting weather for nick or an area code if tokens[1] != nick
+		if cmd == "`w" or message.length == 2 # getting weather for nick or an area code if tokens[1] != nick
 
 			if (tokens[1] == nick or check_user(tokens[1])) and tokens.length == 2
 				ac_t = get_ac(tokens[1])
@@ -168,7 +168,7 @@ class Weather < Pluginf
 					ac_t = tokens[1]
 				end
 				@r.concat(get_weather(ac_t).to_s)
-			elsif message =~ /^`w$/
+			elsif message.length == 2
 				ac_t = get_ac(nick)
 
 				if not ac_t == "nick not found"
