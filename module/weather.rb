@@ -103,13 +103,13 @@ class Weather < Pluginf
 		begin
 			@contents = open(url).read
 		rescue => a
-			return "is this place actually real?"
+			return "#{@ac} is this place actually real?"
 		end
 
 		begin
 			@contents_m = open(url_m).read
 		rescue => a
-			return "is this place actually real?"
+			return "#{@ac} is this place actually real?"
 		end
 
 		contents = open(url).read
@@ -117,12 +117,12 @@ class Weather < Pluginf
 		parsed_json = JSON.parse(contents)
 		parsed_json_m = JSON.parse(contents_m)
 		if parsed_json['main'].nil?
-			@r_w = "is this place actually real?"
+			@r_w = "#{@ac} is this place actually real?"
 		elsif weather_in_f = (parsed_json['main']['temp']).to_i
 			begin
 				weather_in_c = (parsed_json_m['main']['temp']).to_i
 			rescue NoMethodError => e
-				return "is this place actually real?"
+				return "#{@ac} is this place actually real?"
 			end
 			humidity = parsed_json['main']['humidity']
 			weathercode = weatherc("#{parsed_json['weather'][0]['id']}")
