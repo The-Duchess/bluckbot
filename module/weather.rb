@@ -151,6 +151,7 @@ class Weather < Pluginf
 
 		p "BEFORE PARSE INTO DAYS"
 
+		p content.to_s
 		p  parsed_json['main'].to_s
 
 		if parsed_json['main'].nil?
