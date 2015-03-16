@@ -122,8 +122,8 @@ class Weather < Pluginf
 		days_names = get_day_names
 		temp_colors = ["02", "03", "08", "04"] # colors to change text color for temperature
 		
-		url = "api.openweathermap.org/data/2.5/forecast/daily?q=#{@ac}&mode=json&units=imperial&cnt=7"
-		url_m = "api.openweathermap.org/data/2.5/forecast/daily?q=#{@ac}&mode=json&units=metric&cnt=7"
+		url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=#{@ac}&mode=json&units=imperial&cnt=7"
+		url_m = "http://api.openweathermap.org/data/2.5/forecast/daily?q=#{@ac}&mode=json&units=metric&cnt=7"
 
 		p "BEFORE READ"
 
