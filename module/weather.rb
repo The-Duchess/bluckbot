@@ -146,14 +146,18 @@ class Weather < Pluginf
 		@r = "#{nick}: "
 
 		if cmd == "`w" # getting weather for nick or an area code if tokens[1] != nick
-			if tokens[1] == nick and tokens.length == 2
-				if check_user(nick)
-					ac_t = get_ac(nick)
+
+			if (tokens[1] == nick or check_user(tokens[1])) and tokens.length == 2
+				ac_t = get_ac(tokens[1])
+
+				if not ac_t == "nick not found"
 					@r.concat(get_weather(ac_t).to_s)
-					return @r
 				else
-					return "entry for #{tokens[1]} not found"
+					@r.concat("nick not found")
 				end
+
+				return @r
+
 			elsif tokens[1] != nick and tokens.length == 3
 				ac_t = ""
 				if tokens.length > 2
@@ -167,12 +171,14 @@ class Weather < Pluginf
 			else
 				return "invalid arguments"
 			end
-		elsif cmd == "`ws" # sets the weather information for nick
-			if not tokens.length > 1
+
+		elsif cmd == "`ws" # sets the weather information for nick (e.g. `ws <area code>)
+
+			if not tokens.length >= 2
 				return "invalid arguments"
 			end
 
-			if not check_user(tokens[0])
+			if not check_user(tokens[1])
 				ac_t = ""
 				if tokens.length > 2
 					1.upto(tokens.length - 1) do |i|
@@ -182,7 +188,7 @@ class Weather < Pluginf
 					ac_t = tokens[1]
 				end
 
-				return add_user(tokens[0], ac_t)
+				return add_user(nick, ac_t)
 			else
 				ac_t = ""
 				if tokens.length > 2
@@ -193,8 +199,9 @@ class Weather < Pluginf
 					ac_t = tokens[1]
 				end
 
-				return update_user(tokens[0], ac_t)
+				return update_user(nick, ac_t)
 			end
+
 		else
 			# we have a major problem
 			return "gottverdammt"
