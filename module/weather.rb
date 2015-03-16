@@ -172,10 +172,28 @@ class Weather < Pluginf
 				return "invalid arguments"
 			end
 
-			if not check_user(nick)
-				return add_user(nick, ac_t)
+			if not check_user(tokens[0])
+				ac_t = ""
+				if tokens.length > 2
+					1.upto(tokens.length - 1) do |i|
+						ac_t.concat("#{i}")
+					end
+				else
+					ac_t = tokens[1]
+				end
+
+				return add_user(tokens[0], ac_t)
 			else
-				return update_user(nick)
+				ac_t = ""
+				if tokens.length > 2
+					1.upto(tokens.length - 1) do |i|
+						ac_t.concat("#{i}")
+					end
+				else
+					ac_t = tokens[1]
+				end
+
+				return update_user(tokens[0], ac_t)
 			end
 		else
 			# we have a major problem
