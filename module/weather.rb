@@ -229,8 +229,8 @@ class Weather < Pluginf
 end
 
 prefix_s = [
-		/^`ws /,
-		/^`w /
+		/^`ws/,
+		/^`w/
 	     ]
 
 reg_p = Regexp.union(prefix_s) #regex to call the module
