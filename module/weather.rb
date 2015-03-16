@@ -126,7 +126,7 @@ class Weather < Pluginf
 			end
 			humidity = parsed_json['main']['humidity']
 			weathercode = weatherc("#{parsed_json['weather'][0]['id']}")
-			@r_w.concat("Weather of \x0304#{message[3..-1].to_s}:\x03 #{weathercode} at \x0302#{weather_in_f}°F\x03 or \x0302#{weather_in_c}°C\x03 and winds at \x0311#{parsed_json['wind']['speed']} mph\x03")
+			@r_w.concat("Weather of \x0304#{@ac.to_s}:\x03 #{weathercode} at \x0302#{weather_in_f}°F\x03 or \x0302#{weather_in_c}°C\x03 and winds at \x0311#{parsed_json['wind']['speed']} mph\x03")
 		end
 
 		return @r_w	
@@ -142,7 +142,7 @@ class Weather < Pluginf
 
 	def parse(message, nick, chan)
 		tokens = message.split(' ')
-		cmd = tokens[0] # the command the user is calling [ `w <area code | nick> | `ws <area code> ]
+		cmd = tokens[0] # the command the user is calling [ `w <area code |s nick> | `ws <area code> ]
 		@r = "#{nick}: "
 
 		if cmd == "`w" # getting weather for nick or an area code if tokens[1] != nick
@@ -168,6 +168,16 @@ class Weather < Pluginf
 					ac_t = tokens[1]
 				end
 				@r.concat(get_weather(ac_t).to_s)
+			elsif tokens.length == 1
+				ac_t = get_ac(nick)
+
+				if not ac_t == "nick not found"
+					@r.concat(get_weather(ac_t).to_s)
+				else
+					@r.concat("nick not found")
+				end
+
+				return @r
 			else
 				return "invalid arguments"
 			end
