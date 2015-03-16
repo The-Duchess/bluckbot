@@ -12,7 +12,77 @@ $LOAD_PATH << './module'
 require '.pluginf.rb'
 
 class Weather < Pluginf
-	#any functions you may need
+
+	def initialize(regex, name, help)
+		@regexp = Regexp.new(regex.to_s)
+		@name = name.to_s
+		@help = help
+		@chan_list = []
+		@chan_list.push("any")
+
+		# Weather user hash and array
+		@users = Hash.new
+		@users_s = Array.new
+
+		if not File.exist?("./res/.weather") then
+			`touch ./res/.weather` #if the user list file does not exist then create it
+		end
+
+		p load_users
+	end
+	
+	def add_user(nick, ac_t)
+		#@dict.store("#{object}", ["#{description}"])
+		@users_s.push(nick.to_s)
+		@users.store(nick.to_s, ac_t.to_s)
+
+		return "added"
+	end
+
+	def update_user(nick, ac_t)
+		@users[:nick] = ac_t.to_s
+		return "updated"
+	end
+
+	def check_user(nick)
+		if @users_s.include? nick then return true end
+
+		return false
+	end
+
+	def cleanup
+		# perform cleanup if module is going to be removed
+		save_users
+	end
+
+	def save_users
+		# Write out users to file
+		File.open("./res/.weather", 'w') do |fw|
+			@users_s.each do |a|
+				fw.puts("#{a}:#{@users.fetch(a)}\n")
+			end
+		end
+
+		return "saved"
+	end
+
+	def load_users
+		# Read users from file
+		File.open("./res/.weather", 'r') do |fr|
+			while line = fr.gets
+				line.chomp!
+				# file format
+				# nick:area code
+				tokens = line.split(':')
+				nick_t = tokens[0]
+				area_c = tokens[1] # area code will always have any spaces removed before being saved
+				@users_s.push(nick_t.to_s)
+				@users.store(nick_tm.to_s, areacode.to_s)
+			end
+		end
+
+		return "loaded"
+	end
 
 	def weatherc(c)
 		wc = Hash.new
@@ -22,14 +92,10 @@ class Weather < Pluginf
 		return wc.fetch(c.to_i).to_s
 	end
 
-	#your definition for script
-	def script(message, nick, chan)
-		@r = ""
-		if message[3..-1].to_s.include? ' '
-			@ac = message[3..-1].to_s.delete! ' '
-		else
-			@ac = message[3..-1].to_s
-		end
+	def get_weather(area_code)
+
+		@r_w = ""
+		@ac = area_code
 
 		url = "http://api.openweathermap.org/data/2.5/weather?q=#{@ac}&mode=json&units=imperial"
 		url_m = "http://api.openweathermap.org/data/2.5/weather?q=#{@ac}&mode=json&units=metric"
@@ -51,7 +117,7 @@ class Weather < Pluginf
 		parsed_json = JSON.parse(contents)
 		parsed_json_m = JSON.parse(contents_m)
 		if parsed_json['main'].nil?
-			@r = "#{@ac.to_s} does not appear to be a valid city name, or maybe you misspelled the country, try again"
+			@r_w = "is this place actually real?"
 		elsif weather_in_f = (parsed_json['main']['temp']).to_i
 			begin
 				weather_in_c = (parsed_json_m['main']['temp']).to_i
@@ -60,16 +126,79 @@ class Weather < Pluginf
 			end
 			humidity = parsed_json['main']['humidity']
 			weathercode = weatherc("#{parsed_json['weather'][0]['id']}")
-			@r.concat("Weather of \x0304#{message[3..-1].to_s}:\x03 #{weathercode} at \x0302#{weather_in_f}°F\x03 or \x0302#{weather_in_c}°C\x03 and winds at \x0311#{parsed_json['wind']['speed']} mph\x03")
+			@r_w.concat("Weather of \x0304#{message[3..-1].to_s}:\x03 #{weathercode} at \x0302#{weather_in_f}°F\x03 or \x0302#{weather_in_c}°C\x03 and winds at \x0311#{parsed_json['wind']['speed']} mph\x03")
 		end
 
+		return @r_w	
+	end
+
+	def get_ac(nick)
+		begin
+			return @users.fetch(nick)
+		rescue => e
+			return "nick not found"
+		end
+	end
+
+	def parse(message, nick, chan)
+		tokens = message.split(' ')
+		cmd = tokens[0] # the command the user is calling [ `w <area code | nick> | `ws <area code> ]
+		@r = "#{nick}: "
+
+		if cmd == "`w" # getting weather for nick or an area code if tokens[1] != nick
+			if tokens[1] == nick and tokens.length == 2
+				if check_user(nick)
+					ac_t = get_ac(nick)
+					@r.concat(get_weather(ac_t).to_s)
+					return @r
+				else
+					return "entry for #{tokens[1]} not found"
+				end
+			elsif tokens[1] != nick and tokens.length == 3
+				ac_t = ""
+				if tokens.length > 2
+					1.upto(tokens.length - 1) do |i|
+						ac_t.concat("#{i}")
+					end
+				else
+					ac_t = tokens[1]
+				end
+				@r.concat(get_weather(ac_t).to_s)
+			else
+				return "invalid arguments"
+			end
+		elsif cmd == "`ws" # sets the weather information for nick
+			if not tokens.length > 1
+				return "invalid arguments"
+			end
+
+			if not check_user(nick)
+				return add_user(nick, ac_t)
+			else
+				return update_user(nick)
+			end
+		else
+			# we have a major problem
+			return "gottverdammt"
+		end
+		
 		return @r
+	end
+
+	#your definition for script
+	def script(message, nick, chan)
+		return parse(message, nick, chan)
 	end
 end
 
-reg_p = /^`w / #regex to call the module
+prefix_s = [
+		/^`ws /,
+		/^`w /
+	     ]
+
+reg_p = Regexp.union(prefix_s) #regex to call the module
 na = "weather" #name for plugin #same as file name without .rb
-de = "usage: `w areacode or City, State description: grabs weather information for an area code or City, State" #description
+de = "usage: `w areacode or City, State | `ws <nick> <areacode>" #description
 
 #plugin = Class_name.new(regex, name, help)
 #passed back to the plugins_s array
