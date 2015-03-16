@@ -77,7 +77,7 @@ class Weather < Pluginf
 				nick_t = tokens[0]
 				area_c = tokens[1] # area code will always have any spaces removed before being saved
 				@users_s.push(nick_t.to_s)
-				@users.store(nick_t.to_s, areacode.to_s)
+				@users.store(nick_t.to_s, area_c.to_s)
 			end
 		end
 
