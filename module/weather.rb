@@ -168,7 +168,7 @@ class Weather < Pluginf
 					ac_t = tokens[1]
 				end
 				@r.concat(get_weather(ac_t).to_s)
-			elsif not message.include? ' '
+			elsif message =~ /^`w$/
 				ac_t = get_ac(nick)
 
 				if not ac_t == "nick not found"
