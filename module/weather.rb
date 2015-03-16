@@ -125,6 +125,8 @@ class Weather < Pluginf
 		url = "api.openweathermap.org/data/2.5/forecast/daily?q=#{@ac}&mode=json&units=imperial&cnt=7"
 		url_m = "api.openweathermap.org/data/2.5/forecast/daily?q=#{@ac}&mode=json&units=metric&cnt=7"
 
+		p "BEFORE READ"
+
 		begin
 			@contents = open(url).read
 		rescue => a
@@ -137,10 +139,14 @@ class Weather < Pluginf
 			return "#{@ac} is this place actually real?"
 		end
 
+		p "AFTER READ"
+
 		contents = open(url).read
 		contents_m = open(url_m).read
 		parsed_json = JSON.parse(contents)
 		parsed_json_m = JSON.parse(contents_m)
+
+		p "BEFORE PARSE INTO DAYS"
 
 		if parsed_json['main'].nil?
 			@r_w = "#{@ac} is this place actually real?"
@@ -149,9 +155,14 @@ class Weather < Pluginf
 			days_fc = parsed_json['main']['list']
 			days_fc_m = parsed_json_m['main']
 
+			p "AT PARSE INTO DAYS"
+
 			0.upto(4) do |i|
 				# temperature F
 				begin
+
+					p "PARSING DAY #{i}"
+
 					temper_f_min = days_fc[i]['temp']['min']
 					t1_n = temp_colors[get_index(temper_f_min)]
 					temper_f_max = days_fc[i]['temp']['max']
@@ -174,6 +185,8 @@ class Weather < Pluginf
 				end
 			end
 		end
+
+		p "DONE PARSING"
 
 		days.each do |a|
 			@r_w.concat("#{a}\n")
