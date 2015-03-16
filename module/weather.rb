@@ -151,7 +151,7 @@ class Weather < Pluginf
 
 		p "BEFORE PARSE INTO DAYS"
 
-		if parsed_json['main'].nil?
+		if parsed_json.nil?
 			@r_w = "#{@ac} is this place actually real?"
 		else
 			# parse website info and put into days
