@@ -173,7 +173,7 @@ class Weather < Pluginf
 			p days_fc[0]['temp']['max'].to_s
 			p "========================================="
 			p "========================================="
-			days_fc[i]['weather'][0]['id']
+			p days_fc[i]['weather'][0]['id']
 
 			p "AT PARSE INTO DAYS"
 
