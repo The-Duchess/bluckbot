@@ -164,6 +164,8 @@ class Weather < Pluginf
 			p days_fc.class.to_s
 			p "========================================="
 			p days_fc.to_s
+			p "========================================="
+			p days_fc[0].to_s
 
 			p "AT PARSE INTO DAYS"
 
