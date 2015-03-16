@@ -151,23 +151,28 @@ class Weather < Pluginf
 
 			0.upto(4) do |i|
 				# temperature F
-				temper_f_min = days_fc[i]['temp']['min']
-				t1_n = temp_colors[get_index(temper_f_min)]
-				temper_f_max = days_fc[i]['temp']['max']
-				t1_x = temp_colors[get_index(temper_f_max)]
-				# temperature C
-				temper_c_min = days_fc_m[i]['temp']['min']
-				t2_n = temp_colors[get_index(temper_c_min)]
-				temper_c_max = days_fc_,[i]['temp']['max']
-				t2_x = temp_colors[get_index(temper_c_max)]
+				begin
+					temper_f_min = days_fc[i]['temp']['min']
+					t1_n = temp_colors[get_index(temper_f_min)]
+					temper_f_max = days_fc[i]['temp']['max']
+					t1_x = temp_colors[get_index(temper_f_max)]
+					# temperature C
+					temper_c_min = days_fc_m[i]['temp']['min']
+					t2_n = temp_colors[get_index(temper_c_min)]
+					temper_c_max = days_fc_,[i]['temp']['max']
+					t2_x = temp_colors[get_index(temper_c_max)]
 
-				weather_condition = weatherc(days_fc[i]['weather'][0]['id'])
+					weather_condition = weatherc(days_fc[i]['weather'][0]['id'])
 
-				wind_speed = days_fc[i]['speed']
+					wind_speed = days_fc[i]['speed']
 
-				humidity = days_fc[i]['humidity']
+					humidity = days_fc[i]['humidity']
 
-				days[i].concat("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{t1_n}#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
+					days[i].concat("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{t1_n}#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
+				rescue => e
+					return "#{@ac} is this place actually real?"
+				end
+			end
 		end
 
 		days.each do |a|
@@ -256,7 +261,6 @@ class Weather < Pluginf
 			end
 
 			return @r
-
 
 		elsif cmd == "`fc" # get forcast for a user
 			
