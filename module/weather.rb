@@ -161,6 +161,8 @@ class Weather < Pluginf
 			days_fc = parsed_json['list']
 			days_fc_m = parsed_json_m['list']
 
+			p days_fc.to_s
+
 			p "AT PARSE INTO DAYS"
 
 			0.upto(4) do |i|
