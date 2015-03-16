@@ -161,7 +161,7 @@ class Weather < Pluginf
 				# temperature F
 				begin
 
-					p "PARSING DAY #{i}"
+					p "PARSING DAY #{i} TEMP"
 
 					temper_f_min = days_fc[i]['temp']['min']
 					t1_n = temp_colors[get_index(temper_f_min)]
@@ -173,13 +173,22 @@ class Weather < Pluginf
 					temper_c_max = days_fc_,[i]['temp']['max']
 					t2_x = temp_colors[get_index(temper_c_max)]
 
+					p "PARSING DAY #{i} WEATHER"
+
 					weather_condition = weatherc(days_fc[i]['weather'][0]['id'])
 
+					p "PARSING DAY #{i} WIND SPEED"
+
 					wind_speed = days_fc[i]['speed']
+
+					p "PARSING DAY #{i} HUMIDITY"
 
 					humidity = days_fc[i]['humidity']
 
 					days[i].concat("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{t1_n}#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
+					
+					p "PARSING DAY #{i} DONE CONCAT FOR DAY"
+
 				rescue => e
 					return "#{@ac} is this place actually real?"
 				end
