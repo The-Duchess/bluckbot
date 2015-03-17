@@ -197,14 +197,18 @@ class Weather < Pluginf
 					p "PARSING DAY #{i} TEMP"
 
 					temper_f_min = days_fc[i]['temp']['min'].to_s
+					t = get_index(temper_f_min)
 					t1_n = 04 #temp_colors[get_index(temper_f_min)].to_i
 					temper_f_max = days_fc[i]['temp']['max'].to_s
+					t = get_index(temper_f_max)
 					t1_x = 04 #temp_colors[get_index(temper_f_max)].to_i
 					p "PARSING DAY #{i} TEMP F DONE"
 					# temperature C
 					temper_c_min = days_fc_m[i]['temp']['min'].to_s
+					t = get_index(temper_c_min)
 					t2_n = 04 #temp_colors[get_index(temper_c_min)].to_i
 					temper_c_max = days_fc_m[i]['temp']['max'].to_s
+					t = get_index(temper_c_max)
 					t2_x = 04 #temp_colors[get_index(temper_c_max)].to_i
 					p "PARSING DAY #{i} TEMP C DONE"
 
