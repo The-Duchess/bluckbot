@@ -99,8 +99,9 @@ class Weather < Pluginf
 		arr = ["Today", "Tomorrow"]
 		week_d = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-		today = Date.today.to_s
-		today[0].upcase!
+		today = Time.now.strftime("%A")
+		#today[0].upcase!
+		i = 
 		i = week_d.find_index(today)
 
 		if i == 5
