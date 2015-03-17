@@ -175,7 +175,7 @@ class Weather < Pluginf
 			p "========================================="
 			p days_fc[0]['weather'].to_s
 			p days_fc[0]['weather'][0].to_s
-			#p days_fc[0]['weather'][0]['id'].to_s
+			p days_fc[0]['weather'][0]['id'].to_s
 
 			p "AT PARSE INTO DAYS"
 
