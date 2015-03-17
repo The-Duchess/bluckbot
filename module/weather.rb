@@ -121,7 +121,8 @@ class Weather < Pluginf
 	def get_forcast(area_code)
 		@ac = area_code
 		@r_w = "\n"
-		days = ["", "", "", "", ""] # weather for various days
+		days = [] # weather for various days
+		days_names = Array.new
 		days_names = get_day_names
 		temp_colors = ["02", "03", "08", "04"] # colors to change text color for temperature
 		
@@ -226,7 +227,7 @@ class Weather < Pluginf
 
 					p "PARSING DAY #{i} BEGIN CONCAT FOR DAY"
 
-					days[i].concat("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{t1_n}#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
+					days.push("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{t1_n}#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
 					
 					p "PARSING DAY #{i} DONE CONCAT FOR DAY"
 
