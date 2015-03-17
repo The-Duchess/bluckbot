@@ -224,6 +224,8 @@ class Weather < Pluginf
 
 					humidity = days_fc[i]['humidity'].to_s
 
+					p "PARSING DAY #{i} BEGIN CONCAT FOR DAY"
+
 					days[i].concat("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{t1_n}#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
 					
 					p "PARSING DAY #{i} DONE CONCAT FOR DAY"
