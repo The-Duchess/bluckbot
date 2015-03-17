@@ -196,6 +196,8 @@ class Weather < Pluginf
 
 					p "PARSING DAY #{i} TEMP"
 
+					p days_fc[i]['temp']['min'].to_s
+
 					temper_f_min = days_fc[i]['temp']['min'].to_s
 					t1_n = temp_colors[get_index(temper_f_min)].to_s
 					temper_f_max = days_fc[i]['temp']['max'].to_s
