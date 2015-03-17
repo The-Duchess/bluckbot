@@ -7,6 +7,7 @@ require 'net/http'
 require 'optparse'
 require 'open-uri'
 require 'json'
+require 'date'
 
 $LOAD_PATH << './module'
 require '.pluginf.rb'
@@ -95,9 +96,32 @@ class Weather < Pluginf
 	# returns a length 5 array of ["today", tomorrow", "NEXT NEXT DAY NAME" ... ]
 	def get_day_names
 		# get today
-		arr = ["Today", "Tomorrow", "Next Day", "Next Next Day"]
+		arr = ["Today", "Tomorrow"]
+		week_d = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-		# add next days
+		today = Date.today.to_s
+		today[0].upcase!
+		i = week_d.find_index(today)
+
+		if i == 5
+			i = 0
+		elsif i == 6
+			i = 1
+		else
+			i = i + 2
+		end
+
+
+		3.times do |j|
+			arr.push(week_d[i])
+
+			if i == 6
+				i = 0
+			else
+				i = i + 1
+			end
+		end
+
 
 		return arr
 	end
@@ -203,7 +227,7 @@ class Weather < Pluginf
 
 					p "PARSING DAY #{i} BEGIN CONCAT FOR DAY"
 
-					days.push("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x0304#{temper_f_min}\x03°F or \x0304#{temper_c_min}\x03°C, max \x0304#{temper_f_max}\x03°F or \x0304#{temper_c_max}\x03°C, Humidity of \x0302#{humidity}\x03 percent, Wind speeds at \x0303#{wind_speed}\x03 mph")
+					days.push("\x0314#{days_names[i]}\x03: Temperature for \x0314#{@ac}\x03: min \x0308#{temper_f_min}\x03°F or \x0308#{temper_c_min}\x03°C, max \x0304#{temper_f_max}\x03°F or \x0304#{temper_c_max}\x03°C, Humidity of \x0302#{humidity}\x03 percent, Wind speeds at \x0303#{wind_speed}\x03 mph")
 					
 					p "PARSING DAY #{i} DONE CONCAT FOR DAY"
 
