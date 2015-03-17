@@ -193,27 +193,27 @@ class Weather < Pluginf
 
 					p "PARSING DAY #{i} TEMP"
 
-					temper_f_min = days_fc[i]['temp']['min']
-					t1_n = temp_colors[get_index(temper_f_min)]
-					temper_f_max = days_fc[i]['temp']['max']
-					t1_x = temp_colors[get_index(temper_f_max)]
+					temper_f_min = days_fc[i]['temp']['min'].to_s
+					t1_n = temp_colors[get_index(temper_f_min)].to_s
+					temper_f_max = days_fc[i]['temp']['max'].to_s
+					t1_x = temp_colors[get_index(temper_f_max)].to_s
 					# temperature C
-					temper_c_min = days_fc_m[i]['temp']['min']
-					t2_n = temp_colors[get_index(temper_c_min)]
-					temper_c_max = days_fc_,[i]['temp']['max']
-					t2_x = temp_colors[get_index(temper_c_max)]
+					temper_c_min = days_fc_m[i]['temp']['min'].to_s
+					t2_n = temp_colors[get_index(temper_c_min)].to_s
+					temper_c_max = days_fc_,[i]['temp']['max'].to_s
+					t2_x = temp_colors[get_index(temper_c_max)].to_s
 
 					p "PARSING DAY #{i} WEATHER"
 
-					weather_condition = weatherc(days_fc[i]['weather'][0]['id'])
+					weather_condition = weatherc(days_fc[i]['weather'][0]['id']).to_s
 
 					p "PARSING DAY #{i} WIND SPEED"
 
-					wind_speed = days_fc[i]['speed']
+					wind_speed = days_fc[i]['speed'].to_s
 
 					p "PARSING DAY #{i} HUMIDITY"
 
-					humidity = days_fc[i]['humidity']
+					humidity = days_fc[i]['humidity'].to_s
 
 					days[i].concat("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{t1_n}#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
 					
