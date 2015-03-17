@@ -164,20 +164,49 @@ class Weather < Pluginf
 			days_fc = parsed_json['list']
 			days_fc_m = parsed_json_m['list']
 
+			p days_fc.class.to_s
+			p "========================================="
+			p days_fc.to_s
+			p "========================================="
+			p days_fc[0].to_s
+			p "========================================="
+			p days_fc[0]['temp'].to_s
+			p "========================================="
+			p days_fc[0]['temp']['min'].to_s
+			p days_fc[0]['temp']['max'].to_s
+			p "========================================="
+			p "========================================="
+			p days_fc[0]['weather'].to_s
+			p days_fc[0]['weather'][0].to_s
+			p days_fc[0]['weather'][0]['id'].to_s
+			p "========================================="
+			p "========================================="
+			p days_fc[0]['speed'].to_s
+			p "========================================="
+			p "========================================="
+			p humidity = days_fc[0]['humidity'].to_s
+			p "========================================="
+			p "========================================="
+
 			p "AT PARSE INTO DAYS"
 
 			0.upto(4) do |i|
 				# temperature F
 				begin
+
+					p "PARSING DAY #{i} TEMP"
+
 					temper_f_min = days_fc[i]['temp']['min'].to_s
 					t1_n = temp_colors[get_index(temper_f_min)].to_s
 					temper_f_max = days_fc[i]['temp']['max'].to_s
 					t1_x = temp_colors[get_index(temper_f_max)].to_s
+					p "PARSING DAY #{i} TEMP F DONE"
 					# temperature C
 					temper_c_min = days_fc_m[i]['temp']['min'].to_s
 					t2_n = temp_colors[get_index(temper_c_min)].to_s
 					temper_c_max = days_fc_m[i]['temp']['max'].to_s
 					t2_x = temp_colors[get_index(temper_c_max)].to_s
+					p "PARSING DAY #{i} TEMP C DONE"
 
 					p "PARSING DAY #{i} WEATHER"
 
