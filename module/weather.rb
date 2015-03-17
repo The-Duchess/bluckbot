@@ -103,7 +103,10 @@ class Weather < Pluginf
 	end
 
 	# returns the appropriate index for a temperature
-	def get_index(temper)
+	def get_index(temperature_t)
+
+		temper = temperature_t.to_i
+
 		if temper < 40
 			return 0
 		elsif 41 <= temper < 60
