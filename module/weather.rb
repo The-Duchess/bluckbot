@@ -165,30 +165,6 @@ class Weather < Pluginf
 			days_fc = parsed_json['list']
 			days_fc_m = parsed_json_m['list']
 
-			p days_fc.class.to_s
-			p "========================================="
-			p days_fc.to_s
-			p "========================================="
-			p days_fc[0].to_s
-			p "========================================="
-			p days_fc[0]['temp'].to_s
-			p "========================================="
-			p days_fc[0]['temp']['min'].to_s
-			p days_fc[0]['temp']['max'].to_s
-			p "========================================="
-			p "========================================="
-			p days_fc[0]['weather'].to_s
-			p days_fc[0]['weather'][0].to_s
-			p days_fc[0]['weather'][0]['id'].to_s
-			p "========================================="
-			p "========================================="
-			p days_fc[0]['speed'].to_s
-			p "========================================="
-			p "========================================="
-			p humidity = days_fc[0]['humidity'].to_s
-			p "========================================="
-			p "========================================="
-
 			p "AT PARSE INTO DAYS"
 
 			0.upto(4) do |i|
@@ -227,7 +203,7 @@ class Weather < Pluginf
 
 					p "PARSING DAY #{i} BEGIN CONCAT FOR DAY"
 
-					days.push("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{t1_n}#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
+					days.push("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x0304#{temper_f_min}\x03°F or \x0304#{temper_c_min}\x03°C, max \x0304#{temper_f_max}\x03°F or \x0304#{temper_c_max}\x03°C, Humidity of \x0302#{humidity}\x03 percent, Wind speeds at \x0303#{wind_speed}\x03 mph")
 					
 					p "PARSING DAY #{i} DONE CONCAT FOR DAY"
 
@@ -446,3 +422,10 @@ de = "usage: `w areacode or City, State or nick | `ws <nick> <areacode>" #descri
 #passed back to the plugins_s array
 plugin = Weather.new(reg_p, na, de)
 $plugins_s.push(plugin)
+
+=begin
+
+
+					days.push("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
+					
+=end
