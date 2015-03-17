@@ -113,7 +113,7 @@ class Weather < Pluginf
 		end
 
 
-		3.times do |j|
+		5.times do |j|
 			arr.push(week_d[i])
 
 			if i == 6
@@ -192,7 +192,7 @@ class Weather < Pluginf
 
 			p "AT PARSE INTO DAYS"
 
-			0.upto(4) do |i|
+			0.upto(3) do |i|
 				# temperature F
 				begin
 
@@ -447,10 +447,3 @@ de = "usage: `w areacode or City, State or nick | `ws <nick> <areacode>" #descri
 #passed back to the plugins_s array
 plugin = Weather.new(reg_p, na, de)
 $plugins_s.push(plugin)
-
-=begin
-
-
-					days.push("\x0304#{days_names[i]}\x03: Temperature for \x0304#{@ac}\x03: min \x03#{temper_f_min}\x03°F or \x03#{t2_n}#{temper_c_min}\x03°C, max \x03#{t2_n}#{temper_f_max}\x03°F or \x03#{t2_m}#{temper_c_max}\x03°C, Humidity of #{humidity} percent, Wind speeds at #{wind_speed} mph")
-					
-=end
