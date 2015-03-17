@@ -176,6 +176,11 @@ class Weather < Pluginf
 			p days_fc[0]['weather'].to_s
 			p days_fc[0]['weather'][0].to_s
 			p days_fc[0]['weather'][0]['id'].to_s
+			p "========================================="
+			p "========================================="
+			p days_fc[0]['speed'].to_s
+			p "========================================="
+			p "========================================="
 
 			p "AT PARSE INTO DAYS"
 
