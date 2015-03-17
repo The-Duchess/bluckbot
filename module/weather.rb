@@ -340,11 +340,11 @@ class Weather < Pluginf
 
 				return @r
 
-			elsif tokens[1] != nick and tokens.length == 3
+			elsif tokens[1] != nick and tokens.length >= 3
 				ac_t = ""
 				if tokens.length > 2
 					1.upto(tokens.length - 1) do |i|
-						ac_t.concat("#{i}")
+						ac_t.concat("#{tokens[i]}")
 					end
 				else
 					ac_t = tokens[1]
@@ -367,11 +367,11 @@ class Weather < Pluginf
 
 				return @r
 
-			elsif tokens[1] != nick and tokens.length == 3
+			elsif tokens[1] != nick and tokens.length >= 2
 				ac_t = ""
 				if tokens.length > 2
 					1.upto(tokens.length - 1) do |i|
-						ac_t.concat("#{i}")
+						ac_t.concat("#{tokens[i]}")
 					end
 				else
 					ac_t = tokens[1]
