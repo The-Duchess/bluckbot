@@ -441,7 +441,7 @@ prefix_s = [
 
 reg_p = Regexp.union(prefix_s) #regex to call the module
 na = "weather" #name for plugin #same as file name without .rb
-de = "usage: `w areacode or City, State or nick | `ws <nick> <areacode>" #description
+de = "usage: `w areacode or City, State or nick | `ws <nick> <areacode> | `fc nick or nothing" #description
 
 #plugin = Class_name.new(regex, name, help)
 #passed back to the plugins_s array
