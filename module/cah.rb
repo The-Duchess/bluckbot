@@ -470,17 +470,113 @@ class Cards < Pluginf
    			end
    		elsif message =~ @prefixes_user[2] and @game_state == "in_round" # `play <card number> : plays a card if you are not the card czar
    			@r = ""
-   			# check player is the card czar and if not then
-   			# if they are tell them they cannot play
-   			# check card rule
-   			# make sure there are enough cards played by player nick and no card index is larger than the number of cards they have - 1
-   			# if so play cards
-   			# if the player has played notice the channel 
-   			# (add to @r nick has player \n; this will be appended with game state change if all players have played)
-   			# else tell the player the cards were not accepted
-   			# if number of played cards == num players then set state to choose_card
-   			# also if number of player cards == num players then append @r
-   			# return notice_chan(chan, @r)
+   			# [x] check player is the card czar and if not then
+   			# [x] if they are tell them they cannot play
+   			# [x] check card rule
+   			# [x] make sure there are enough cards played by player nick and no card index is larger than the number of cards they have - 1
+   			# [x] if so play cards
+   			# [x] generate tokens
+   			# [x] check if the plays will work for the player's hand
+   			# [x] check if nick is in the players list
+   			# [x] play the cards
+   			# [x] draw card
+   			# [x] if the player has played notice the channel 
+   			# [x] (add to @r nick has player \n; this will be appended with game state change if all players have played)
+   			# [x] else tell the player the cards were not accepted
+   			# [x] if number of played cards == num players then set state to choose_card
+   			# [x] also if number of player cards == num players then append @r
+   			# [x] return notice_chan(chan, @r)
+
+   			# check if the player is the card czar
+   			if nick == @current_czar
+   				return notice_chan(nick, "you are the card czar")
+   			end
+
+   			# generate tokens
+   			tokens_c = message.split(' ')
+   			played_t = []
+   			begin
+   				tokens_c.each { |a| played_t.push(a.to_i) }
+   			rescue =>
+   				return notice_chan(nick, "invalid play")
+   			end
+
+   			num_played_c = played_t.length
+
+   			# check valility of of nick against players
+   			player_temp = 0
+
+   			@i = 0
+
+   			@players.each do |a|
+   				if nick == a.get_nick
+   					player_temp = @i
+   					@i = 0
+   					break
+   				end
+
+   				@i = @i + 1
+   			end
+
+   			if @i != 0
+   				@i = 0
+   				return notice_chan(nick, "you are not in the game")
+   			end
+
+   			# make sure all cards are acceptable plays for the player's hand
+   			played_t.each do |j|
+   				0.upto(num_players - 1) do |i|
+   					if (@players[i].get_hand.length - 1) > j
+   						return notice_chan(nick, "invalid play")
+   					end
+   				end
+   			end
+
+   			# check the number of played cards against the rule
+   			if @played_card_b.get_rule == "play_one"
+   				if not num_played_c == 1
+   					return notice_chan(nick, "invalid play")
+   				end
+   			elsif @played_card_b.get_rule == "draw_one_play_two"
+   				if not num_played_c == 2
+   					return notice_chan(nick, "invalid play")
+   				end
+   			elsif @played_card_b.get_rule == "draw_two_play_three"
+   				if not num_played_c == 3
+   					return notice_chan(nick, "invalid play")
+   				end
+   			else
+   				# we have a serious issue
+   				return notice_chan(chan, "we have a serious issue")
+   			end
+
+   			# play card(s)
+   			# played_t.each -> player.hand[] -> play -> played_w_c
+   			temp_arr = Array.new
+   			@played_cards_c.store(nick, temp_arr)
+
+   			played_t.each do |i|
+   				temp_card = @players[player_temp].play_card(i))
+   				@played_cards_c["#{nick}"].push(temp_card.get_text)
+   			end
+
+   			# let the channel know the player has played
+   			@r.concat(notice_chan(chan, "#{nick}: has played\n"))
+
+   			# increment the number of played cards and check if the number has reached num players
+   			@num_played_c = @num_played_c + 1
+
+   			if @num_played_c == @num_players
+   				set_state("choose_card")
+   				@r.concat("enough players have played, wait for card czar to choose a card")
+   			end
+
+   			# draw card
+   			@players[player_temp].draw_card(@whitedeck.draw)
+
+   			# return @r
+   			return @r
+
    		elsif message =~ @prefixes_user[3] and @game_state == "choose_card" # `select <option number> : chooses a card if you are the card czar
    			@r = ""
    			# make sure the player is the card czar
