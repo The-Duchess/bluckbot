@@ -228,7 +228,7 @@ class Weather < Pluginf
 
 					p "PARSING DAY #{i} BEGIN CONCAT FOR DAY"
 
-					days.push("\x0314#{days_names[i]}\x03: Temperature for \x0314#{@ac}\x03: min \x0308#{temper_f_min}\x03°F or \x0308#{temper_c_min}\x03°C, max \x0304#{temper_f_max}\x03°F or \x0304#{temper_c_max}\x03°C, Humidity of \x0302#{humidity}\x03 percent, Wind speeds at \x0303#{wind_speed}\x03 mph")
+					days.push("\x0314#{days_names[i]}\x03: Weather for \x0314#{@ac}\x03 is #{weather_condition}, Temperature: min \x0308#{temper_f_min}\x03°F or \x0308#{temper_c_min}\x03°C, max \x0304#{temper_f_max}\x03°F or \x0304#{temper_c_max}\x03°C, Humidity of \x0302#{humidity}\x03 percent, Wind speeds at \x0303#{wind_speed}\x03 mph")
 					
 					p "PARSING DAY #{i} DONE CONCAT FOR DAY"
 
