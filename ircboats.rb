@@ -289,7 +289,9 @@ class Ircbot
 				#format the message to return as PRIVMSG #channel | nick :message text you want to send to a channel or someone
 				prefix = [
 							/^PRIVMSG /,
-							/^NOTICE /
+							/^NOTICE /,
+							/^KICK/,
+							/^MODE/
 				]
 
 				reg_s = Regexp.union(prefix)
