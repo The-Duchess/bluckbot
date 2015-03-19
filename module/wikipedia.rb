@@ -49,18 +49,18 @@ class Wikipedia < Pluginf
 		#########################################################################################################################################
 		#########################################################################################################################################
 
-		if cmd =~ /^`wiki$/
+		if cmd =~ /^`wiki$/ # `wiki <link>
 			# gets information if a valid wikipedia link
 			# returns first message line length of characters and then the length
 			# also sets previous link
 			# also gives the user a link for the full page
-		elsif cmd =~ /^`ws$/
+		elsif cmd =~ /^`ws$/ # `ws show <search terms> | <search terms> | list | choose <number>
 			# shows and stores search term options
 			# allows the user to pick from search terms from previous search
 			# if show is not specified it will choose the first of the search results and set the previous link
 			# if previous search is not empty and choose is specified with a number then set previous link
 			# the information for that link is then displayed like for `wiki and previous link is set
-		elsif cmd =~ /^`wl$/
+		elsif cmd =~ /^`wl$/ # `wl  show <location> | list
 			# if show is specified along with a location a link will be handed to the user
 			# with information for the page like `wiki
 			# if list is specified the user will be given a list of sections
