@@ -18,18 +18,47 @@ class Wikipedia < Pluginf
 		@chan_list = []
 		@chan_list.push("any")
 
-		@previous_link = ""
-		@previous_search = []
+		#@previous_link = ""
+		#@previous_search = []
+
+		# these variables hold state (it is not saved) so that multiple users can
+		# perform searches like they are were simultaneous
+
+		# current active nicks
+		@nick_list = []
+
+		# {nick_1 => "link", ... , nick_n => "link"}
+		# hash of nicks => links
+		@previous_link = {}
+
+		# {nick_1 => ["link_0",...,"link_n"], ..., nick_n => ["link_0",...,"link_n"]}
+		# hash of nicks => array of links
+		@previous_search = {}
 	end
 
-	def set_prev_link(link)
-		@previous_link = link
+	def check_nick(nick)
+		if @nick_list.include? nick
+			return true
+		end
+
+		return false
+	end
+
+	def add_nick(nick)
+		# push the nick to the list
+		# this should be called along with set_prev_link NOTE: if no link then set to ""
+		# this should be called along with set_prev_Search NOTE: if no search then set to []
+		@nick_list.push(nick.to_s)
+	end
+
+	def set_prev_link(nick, link)
+		#@previous_link = link
 		p "link updated"
 	end
 
-	def set_prev_search(arr)
-		@previous_search = []
-		@previous_search = arr
+	def set_prev_search(nick, arr)
+		#@previous_search = []
+		#@previous_search = arr
 		p "search results updated"
 	end
 	
@@ -43,10 +72,7 @@ class Wikipedia < Pluginf
 		cmd = tokens[0].to_s
 
 		#########################################################################################################################################
-		#########################################################################################################################################
 		# NOTE: it may be more practical to PRIVMSG the user some of these bits of information
-		# NOTE: there is no concurency and any user can fuck up another user's previous_<link | search>
-		#########################################################################################################################################
 		#########################################################################################################################################
 
 		if cmd =~ /^`wiki$/ # `wiki <link>
