@@ -19,7 +19,13 @@ class Aytche < Pluginf
 	end
 end
 
-reg_p = /^h$/ #regex to call the module
+prefix_s = [
+			/^h$/,
+			/^bluckbot: h$/,
+			/^bluckbot, h$/
+		   ]
+
+reg_p = Regexp.union(prefix_s) #regex to call the module
 na = "h" #name for plugin #same as file name without .rb
 de = "responds with h to h" #description
 
