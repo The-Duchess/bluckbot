@@ -490,6 +490,7 @@ class Cards < Pluginf
    			# [x] also if number of player cards == num players then append @r
    			# [ ] append response with a list of the cards to choose from
    			# [x] return notice_chan(chan, @r)
+   			# [x] players draw back cards
 
    			# check if the player is the card czar
    			if nick == @current_czar
@@ -588,11 +589,12 @@ class Cards < Pluginf
    			# [x] check validity of card choice
    			# [x] select card
    			# [x] increment winner
-   			# [ ] clean up round
-   			# [ ] set state
-   			# [ ] deal new black card # this prevents from having to have game state change outside of commands
-   			# [ ] players draw the appropriate number of extra cards
-   			# [ ] notice chan the channel appropriate information (including the new black card)
+   			# [x] clean up round
+   			# [x] set state
+   			# [x] discard old black card
+   			# [x] deal new black card # this prevents from having to have game state change outside of commands
+   			# [x] notice chan the channel appropriate information (including the new black card)
+   			# [x] players draw apprpriate number od extra cards
 
    			# check if the player is the card czar
    			# if not tell them and do not change game state
@@ -623,8 +625,29 @@ class Cards < Pluginf
    			@players.each { |a| if a.get_nick == "#{@played_cards_p[choice - 1]}" then a.increment_score end }
 
    			# clean up round
-
+   			clean_up_round
    			# set state
+   			set_state("in_round")
+   			# discard old black card
+   			@blackdeck.discard(@played_card_b)
+   			# deal new black card
+   			@played_card_b = @blackdeck.draw
+   			# notice the channel # actually append response
+   			@r.concat("\nThe New Black Card is:\n#{@played_card_b.get_text}")
+
+   			# draw extra cards
+   			if @played_card_b.get_rule == "draw_one_play_two"
+   				@players.each { |a| a.draw_card(@whitedeck.draw) }
+   			elsif @played_card_b.get_rule == "draw_two_play_three"
+   				2.times {
+   							@players.each { |a| a.draw_card(@whitedeck.draw) }
+   						}
+   			else
+   				# the rule is "play_one"
+   				# we do not care about play_one
+   			end
+
+   			return @r
 
    		else # invalid command
    			return notice_chan(nick, "you cannot send this command right now")
