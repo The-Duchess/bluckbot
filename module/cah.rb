@@ -450,6 +450,9 @@ class Cards < Pluginf
    			end
 
    			return notice_chan(chan, @r)
+
+   			# give player enough extra cards for the current black card rule
+   			# NOTE TO DO ^
    		elsif message =~ @prefixes_user[1] and @game_state != "not_started" # `leave : leaves an active game
    			is_playing = false
    			@players.each { |a| if a.get_nick == nick then is_playing = true end }
@@ -485,6 +488,7 @@ class Cards < Pluginf
    			# [x] else tell the player the cards were not accepted
    			# [x] if number of played cards == num players then set state to choose_card
    			# [x] also if number of player cards == num players then append @r
+   			# [ ] append response with a list of the cards to choose from
    			# [x] return notice_chan(chan, @r)
 
    			# check if the player is the card czar
@@ -579,14 +583,49 @@ class Cards < Pluginf
 
    		elsif message =~ @prefixes_user[3] and @game_state == "choose_card" # `select <option number> : chooses a card if you are the card czar
    			@r = ""
-   			# make sure the player is the card czar
-   			# if not tell the user they cannot select
-   			# select card
-   			# increment winner
+   			# [x] make sure the player is the card czar
+   			# [x] if not tell the user they cannot select
+   			# [x] check validity of card choice
+   			# [x] select card
+   			# [x] increment winner
+   			# [ ] clean up round
+   			# [ ] set state
+   			# [ ] deal new black card # this prevents from having to have game state change outside of commands
+   			# [ ] players draw the appropriate number of extra cards
+   			# [ ] notice chan the channel appropriate information (including the new black card)
+
+   			# check if the player is the card czar
+   			# if not tell them and do not change game state
+   			if not nick == @current_czar
+   				return notice_chan(nick, "you are not the card czar")
+   			end
+
+   			tokens = message.split(' ')
+
+   			begin
+   				choice = tokens[1].to_i
+   			rescue => e
+   				return notice_chan(nick, "invalid choice")
+   			end
+
+   			# check validity of the card choice
+   			# the choice is not greater than the number of played cards
+   			# the number of choices is not > 1
+   			# the player exists in the played cards players list # this should not be an issue but it may prevent bugs
+   			if choice > @num_played_c or tokens.length > 2 or not @played_cards_p.include? "#{@played_cards_p[choice - 1]}"
+   				return notice_chan(nick, "invalid choice or too many cards selected")
+   			end
+
+   			# choose from displayed list of cards @played_cards_p[choice - 1]
+   			@r.concat("#{@played_cards_p[choice - 1]} is the winner\nThey won with: ")
+   			@played_cards_w["#{@played_cards_p[choice - 1]}"].each { |a| @r.concat("\n#{a}") }
+
+   			@players.each { |a| if a.get_nick == "#{@played_cards_p[choice - 1]}" then a.increment_score end }
+
    			# clean up round
+
    			# set state
-   			# deal new black card # this prevents from having to have game state change outside of commands
-   			# notice chan the channel appropriate information (including the new black card)
+
    		else # invalid command
    			return notice_chan(nick, "you cannot send this command right now")
    		end
