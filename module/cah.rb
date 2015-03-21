@@ -581,7 +581,6 @@ class Cards < Pluginf
 
    			# return @r
    			return @r
-
    		elsif message =~ @prefixes_user[3] and @game_state == "choose_card" # `select <option number> : chooses a card if you are the card czar
    			@r = ""
    			# [x] make sure the player is the card czar
@@ -647,6 +646,7 @@ class Cards < Pluginf
    				# we do not care about play_one
    			end
 
+   			# return response
    			return @r
 
    		else # invalid command

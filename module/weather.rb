@@ -303,7 +303,7 @@ class Weather < Pluginf
 		cmd = tokens[0] # the command the user is calling [ `w <area code |s nick> | `ws <area code> ]
 		@r = "#{nick}: "
 
-		if message.length == 2 # it already matches `w or `s
+		if message.match(/^`w$/)
 
 			ac_t = get_ac(nick)
 
