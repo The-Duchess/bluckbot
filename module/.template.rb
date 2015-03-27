@@ -9,7 +9,7 @@
 $LOAD_PATH << './module'
 require '.pluginf.rb'
 
-class PLUGIN < Pluginf
+class Eightball < Pluginf
 	#any functions you may need
 
 	#your definition for script
@@ -19,11 +19,11 @@ class PLUGIN < Pluginf
 	end
 end
 
-reg_p = // #regex to call the module
-na = "" #name for plugin #same as file name without .rb
-de = "" #description
+reg_p = /^bluckbot:*\?$/ #regex to call the module
+na = "eightball" #name for plugin #same as file name without .rb
+de = "bluckbot: your question? will be answered with an eightball response" #description
 
 #plugin = Class_name.new(regex, name, help)
 #passed back to the plugins_s array
-plugin = PLUGIN.new(reg_p, na, de)
+plugin = Eightball.new(reg_p, na, de)
 $plugins_s.push(plugin)
