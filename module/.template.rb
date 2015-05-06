@@ -31,7 +31,7 @@ end
 #
 # reg_p = Regexp.union(prefix)
 
-reg_p = /^bluckbot:*\?$/ #regex to call the module
+reg_p = // #regex to call the module
 na = "template" #name for plugin #same as file name without .rb
 de = "NOTES ^| HELP" #description
 
