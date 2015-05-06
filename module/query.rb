@@ -15,7 +15,7 @@ require '.pluginf.rb'
 
 class Query_s < Pluginf
 	#any functions you may need
-	def search(query_text)
+	def search(query_text, chan)
 		results = Array.new
 
 		length_l = $logs.length - 1
@@ -28,7 +28,7 @@ class Query_s < Pluginf
 			chan_s = message_reg_s[:params].to_s
 			message_s = message_reg_s[:trail].to_s[0..-2]
 			
-			if message_s.match(/^ACTION /) or message_s.match(/^`query /)
+			if message_s.match(/^ACTION /) or message_s.match(/^`query /) or chan_s != chan
 				#skip
 				next
 			end
@@ -57,7 +57,7 @@ class Query_s < Pluginf
 
 		query_text  = message[7..-1]
 
-		return select(search(query_text), query_text)
+		return select(search(query_text, chan), query_text)
 	end
 end
 
