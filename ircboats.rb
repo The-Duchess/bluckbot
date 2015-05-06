@@ -108,8 +108,8 @@ class Ircbot
 			p "message: #{message}"
 			p "#{message[0..-2].to_s.length}"
 
-			if $logs.length == 100 then
-				$logs.delete_at(99)
+			if $logs.length == 1000 then
+				$logs.delete_at(999)
 				$logs.insert(0, msg)
 				if @logging == true and chan != "#trivia"
 					#system("echo \"#{msg}\" >> ./res/log")

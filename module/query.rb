@@ -18,6 +18,8 @@ class Query_s < Pluginf
 	def search(query_text)
 		results = Array.new
 
+		length_l = $logs.length - 1
+
 		1.upto(length_l) do |a|
 
 			message_reg_s = $logs[a].match(/^(:(?<prefix>\S+) )?(?<command>\S+)( (?!:)(?<params>.+?))?( :(?<trail>.+))?$/)
@@ -26,12 +28,12 @@ class Query_s < Pluginf
 			chan_s = message_reg_s[:params].to_s
 			message_s = message_reg_s[:trail].to_s[0..-2]
 			
-			if message_s.match(/^ACTION /)
+			if message_s.match(/^ACTION /) or message_s.match(/^`query /)
 				#skip
-				continue
+				next
 			end
 			
-			if message_s.to_s.contains? query_text or nick_s.to_s.contains? query_text
+			if message_s.to_s.include? query_text or nick_s.to_s.include? query_text
 				results.push("<#{nick_s}>: #{message_s}")
 			end
 		end
@@ -39,8 +41,8 @@ class Query_s < Pluginf
 		return results
 	end
 
-	def select(results)
-		choice = "#{results.length} Results:\n"
+	def select(results, query_text)
+		choice = "results for : #{query_text}: #{results.length} Results:\n"
 		range = results.length - 1
 
 		r = rand(range)
@@ -53,9 +55,9 @@ class Query_s < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 
-		query_text  = message[8..-1]
+		query_text  = message[7..-1]
 
-		return select(search(query_text))
+		return select(search(query_text), query_text)
 	end
 end
 
