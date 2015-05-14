@@ -119,7 +119,6 @@ class Black_deck # load a deck from the black card file
 		end
 
 		@black_deck.shuffle!
-		@black_deck.shuffle!
 
 	end
 
@@ -129,7 +128,6 @@ class Black_deck # load a deck from the black card file
 			@black_deck.delete_at(0)
 			return temp_c
 		else
-			@black_discard.shuffle!
 			@black_discard.shuffle!
 
 			@black_discard.each { |b| @black_deck.push(b) }
@@ -388,14 +386,14 @@ class Cards < Pluginf
 	# Game State Variables
 	# @game_state = "not_started" #game state
 	# @num_players = 0 #number of current players
-    	# @num_cards = 0 #number of current played cards
-    	# @players = [] #list of players
-    	# @current_czar = nil #current card czar
-    	# @played_cards_w = {} #hash of players -> array of white cards
-    	# @played_cards_p = [] #list of players who played a card that matches by index to the card played
-    	# @played_card_b = nil #current black card
-    	# @displayed = false
-    	##########################################################################################################
+    # @num_cards = 0 #number of current played cards
+    # @players = [] #list of players
+    # @current_czar = nil #current card czar
+    # @played_cards_w = {} #hash of players -> array of white cards
+    # @played_cards_p = [] #list of players who played a card that matches by index to the card played
+    # @played_card_b = nil #current black card
+    # @displayed = false
+    ##########################################################################################################
 
     # handles admin commands
     def admin_parse(message, nick, chan)
