@@ -44,13 +44,15 @@ class Plsrespond < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 
-		tokens = message.split(' ')
+		tokens = message.split(" ")
 
 		p tokens
 
 		phrase = ""
 
 		if tokens[2] == "triggers"
+
+			p "===================triggers==================="
 
 			3.upto(tokens.length.to_i - 2) do |a|
 				phrase.concat("#{tokens[a]} ")
@@ -61,6 +63,8 @@ class Plsrespond < Pluginf
 			$plugins_s.push(Trigger.new(tokens[1], "", "", phrase))
 
 		elsif tokens[2] == "say"
+
+			p "===================say==================="
 
 			3.upto(tokens.length.to_i - 2) do |a|
 				phrase.concat("#{tokens[a]} ")
