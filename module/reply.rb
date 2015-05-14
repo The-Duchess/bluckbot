@@ -46,7 +46,7 @@ class Plsrespond < Pluginf
 
 		tokens = message.split(' ')
 
-		p tokens.to_s
+		p tokens
 
 		phrase = ""
 
