@@ -55,7 +55,7 @@ class Plsrespond < Pluginf
 
 			p "===================triggers==================="
 
-			3.upto(tokens.length.to_i - 2) do |a|
+			3.upto(tokens.length.to_i - 1) do |a|
 				phrase.concat("#{tokens[a]} ")
 			end
 
@@ -67,7 +67,7 @@ class Plsrespond < Pluginf
 
 			p "===================say==================="
 
-			3.upto(tokens.length.to_i - 2) do |a|
+			3.upto(tokens.length.to_i - 1) do |a|
 				phrase.concat("#{tokens[a]} ")
 			end
 
