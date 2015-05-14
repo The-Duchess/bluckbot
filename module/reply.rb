@@ -72,7 +72,7 @@ class Plsrespond < Pluginf
 			return "invalid syntax"
 		end
 
-		return "string"
+		return "added"
 	end
 end
 
