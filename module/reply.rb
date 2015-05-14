@@ -72,7 +72,7 @@ class Plsrespond < Pluginf
 			return "invalid syntax"
 		end
 
-		return "added"
+		return "#{phrase} triggeted by #{tokens[1]}"
 	end
 end
 
