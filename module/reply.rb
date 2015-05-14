@@ -33,14 +33,6 @@ end
 class Plsrespond < Pluginf
 	#any functions you may need
 
-	def initialize(regex, name, help)
-		@regexp = Regexp.new(regex.to_s)
-		@name = name.to_s
-		@help = help
-		@chan_list = []
-		@chan_list.push("any")
-	end
-
 	#your definition for script
 	def script(message, nick, chan)
 
