@@ -46,7 +46,12 @@ class Plsrespond < Pluginf
 
 		tokens = message.split(" ")
 
-		p tokens
+		tokens.each do |a|
+			print "#{a} "
+			STDOUT.flush
+		end
+
+		puts "test"
 
 		phrase = ""
 
