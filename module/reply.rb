@@ -46,6 +46,8 @@ class Plsrespond < Pluginf
 
 		tokens = message.split(' ')
 
+		p tokens.to_s
+
 		phrase = ""
 
 		if tokens[2] == "triggers"
@@ -72,7 +74,7 @@ class Plsrespond < Pluginf
 			return "invalid syntax"
 		end
 
-		return "#{phrase} triggeted by #{tokens[1]}"
+		return "#{phrase} triggered by #{tokens[1]}"
 	end
 end
 
