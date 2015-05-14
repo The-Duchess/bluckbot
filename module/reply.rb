@@ -38,7 +38,7 @@ class Plsrespond < Pluginf
 
 		tokens = message.split(" ")
 
-		if tokens.length.to_i == 1
+		if tokens.length.to_i == 1 or nick == "bluckbot"
 			return ""
 		end
 
