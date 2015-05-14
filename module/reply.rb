@@ -46,6 +46,10 @@ class Plsrespond < Pluginf
 
 		tokens = message.split(" ")
 
+		if tokens.length.to_i == 1
+			return ""
+		end
+
 		tokens.each do |a|
 			print "#{a} "
 			STDOUT.flush
@@ -87,7 +91,7 @@ class Plsrespond < Pluginf
 	end
 end
 
-reg_p = /^`reply / #regex to call the module
+reg_p = /^`reply/ #regex to call the module
 na = "reply" #name for plugin #same as file name without .rb
 de = "reply with programmed text `reply $word triggers $phrase or `reply forget $word or `reply $nick say $phrase" #description
 
