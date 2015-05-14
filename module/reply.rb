@@ -21,10 +21,11 @@ class Trigger < Pluginf
 		@help = help
 		@chan_list = []
 		@chan_list.push("any")
+		@phrase = phrase
 	end
 
 	def script(message, nick, chan)
-
+		return @phrase
 	end
 
 end
@@ -32,7 +33,7 @@ end
 class Plsrespond < Pluginf
 	#any functions you may need
 
-	def initialize(regex, name, help, phrase)
+	def initialize(regex, name, help)
 		@regexp = Regexp.new(regex.to_s)
 		@name = name.to_s
 		@help = help
