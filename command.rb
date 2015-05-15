@@ -14,7 +14,7 @@ end
 def parse(nick, chan, message)
 
     message = message[0..-2].to_s
-    p message
+    #p message
 
     if message.match(/^`load /)
     	

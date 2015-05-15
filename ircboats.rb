@@ -95,7 +95,7 @@ class Ircbot
 
 	def say_to_chan(msg, chan_name)
 		say "PRIVMSG #{chan_name} :#{msg}"
-		p "PRIVMSG #{chan_name} :#{msg}"
+		#p "PRIVMSG #{chan_name} :#{msg}"
 	end
 
 	def run
@@ -113,11 +113,11 @@ class Ircbot
 			command = message_reg[:command].to_s
 			chan = message_reg[:params].to_s
 			message = message_reg[:trail].to_s
-			p "nick: #{nick}"
-			p "command: #{command}"
-			p "channel #{chan}"
-			p "message: #{message}"
-			p "#{message[0..-2].to_s.length}"
+			#p "nick: #{nick}"
+			#p "command: #{command}"
+			#p "channel #{chan}"
+			#p "message: #{message}"
+			#p "#{message[0..-2].to_s.length}"
 
 			if $logs.length == 1000 then
 				$logs.delete_at(999)
