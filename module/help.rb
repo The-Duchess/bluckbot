@@ -46,7 +46,7 @@ class Reaperh < Pluginf
 				/who made you/,
 				/where are you from/,
 				/who created you/,
-				/source/
+				/source\?$/
 			 ]
 
 		prefix_a = Regexp.union(qa)
@@ -71,25 +71,25 @@ class Reaperh < Pluginf
 
 		message_t = message_t[0..-2].to_s
 
-		if tokens.length != 2 and message_t.match(prefix_r)
+		if tokens.length.to_i != 2 and message_t.match(prefix_r)
 			reaper_r.shuffle!
 			return "NOTICE #{nick} :#{reaper_r[2]}"
 		end
 
-		if tokens.length != 2 and message_t.match(prefix_a)
+		if tokens.length.to_i != 2 and message_t.match(prefix_a)
 			reaper_a.shuffle!
 			return "NOTICE #{nick} :#{reaper_a[1]}"
 
 		end
 
-		if tokens.length == 2 and message_t.match(prefix_s)
+		if tokens.length.to_i == 2 and message_t.match(prefix_s)
 			reaper_o.shuffle!
 			return "NOTICE #{nick} :#{reaper_o[1]}"
 		end
 
 		$plugins_s.each do |a|
 			if tokens[1].to_s.downcase == a.name.to_s.downcase
-				@r = "NOTICE #{nick} :here mortal\n a.help"
+				@r = "NOTICE #{nick} :here mortal\n #{a.help}"
 				return @r
 			end
 		end
