@@ -39,7 +39,7 @@ class Ircbot
 		@serv_name = server.to_s
 		@channel = channel.to_s
 		@port = port.to_i
-		print "Connecting to #{@serv_name} on port #{@port}..."
+		print "Connecting to #{@serv_name} on port #{@port}... "
 		STDOUT.flush
 		@socket = TCPSocket.open(@serv_name, @port)
 		if port.to_i != 6667
@@ -54,19 +54,19 @@ class Ircbot
 				end
 			end
 		end
-		print "Authenticating as nick: bluckbot name: test user: k..."
+		print "Authenticating as nick: bluckbot name: test user: k... "
 		STDOUT.flush
 	    	say "NICK bluckbot"
 	    	say "USER k 0 * test"
-	    print "Joining ##{@channel}"
+	    print "Joining ##{@channel}... "
 	    STDOUT.flush
 	    	say "JOIN ##{@channel}"
 	    	$logs = Array.new
 	    	if logging.to_s == "true"
-	    		print "Logging enabled..."
+	    		print "Logging enabled... "
 	    		@logging = true
 	    	else
-	    		print "Logging disabled..."
+	    		print "Logging disabled... "
 	    		@logging = false
 	    	end
 
@@ -271,7 +271,7 @@ class Ircbot
 				if message[0..-2].match(/^`help$/)
 					p parse(nick, chan, "`load use.rb ")
 					p parse(nick, chan, "`load info.rb ")
-					response = "`info for info. `usage for usage. `help $MODULENAME for help on the module"
+					response = "`info for info. `usage for usage. `h $TOPIC for help on a module or random responses"
 					say "NOTICE #{nick} :#{response}"
 					next
 				end
