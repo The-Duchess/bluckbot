@@ -63,18 +63,26 @@ class Reaperh < Pluginf
 
 		tokens = message.split(" ")
 
-		if tokens.length != 2 and message.match(prefix_r)
+		message_t = ""
+
+		1.upto(tokens.length - 1) do |a|
+			message_t.concat("#{tokens[a]} ")
+		end
+
+		message_t = message_t[0..-2].to_s
+
+		if tokens.length != 2 and message_t.match(prefix_r)
 			reaper_r.shuffle!
 			return "NOTICE #{nick} :#{reaper_r[2]}"
 		end
 
-		if tokens.length != 2 and message.match(prefix_a)
+		if tokens.length != 2 and message_t.match(prefix_a)
 			reaper_a.shuffle!
 			return "NOTICE #{nick} :#{reaper_a[1]}"
 
 		end
 
-		if tokens.length == 2 and tokens[1].to_s.match(prefix_s)
+		if tokens.length == 2 and message_t.match(prefix_s)
 			reaper_o.shuffle!
 			return "NOTICE #{nick} :#{reaper_0[1]}"
 		end
