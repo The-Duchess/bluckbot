@@ -80,7 +80,7 @@ class Reaperh < Pluginf
 		end
 
 		$plugins_s.each do |a|
-			if tokens[1].downcase == a.downcase
+			if tokens[1].to_s.downcase == a.name.to_s.downcase
 				@r = "NOTICE #{nick} :here mortal\n a.help"
 				return @r
 			end
