@@ -39,6 +39,8 @@ class Ircbot
 		@serv_name = server.to_s
 		@channel = channel.to_s
 		@port = port.to_i
+		print "Connecting to #{@serv_name} on port #{@port}..."
+		STDOUT.flush
 		@socket = TCPSocket.open(@serv_name, @port)
 		if port.to_i != 6667
 			ssl_context = OpenSSL::SSL::SSLContext.new
@@ -52,15 +54,23 @@ class Ircbot
 				end
 			end
 		end
+		print "Authenticating as nick: bluckbot name: test user: k..."
+		STDOUT.flush
 	    	say "NICK bluckbot"
 	    	say "USER k 0 * test"
+	    print "Joining ##{@channel}"
+	    STDOUT.flush
 	    	say "JOIN ##{@channel}"
 	    	$logs = Array.new
 	    	if logging.to_s == "true"
+	    		print "Logging enabled..."
 	    		@logging = true
 	    	else
+	    		print "Logging disabled..."
 	    		@logging = false
 	    	end
+
+	    	STDOUT.flush
 
 	    	@channel_s = []
 	    	@channel_s.push("##{channel}")
@@ -68,6 +78,7 @@ class Ircbot
 	    	
 	    	$admin_s = []
 
+	    	puts "Loading admin file"
 	    	File.open("./res/.admins", 'r') do |fr|
 	    		while line = fr.gets
 	    			line.chomp!
@@ -329,8 +340,6 @@ class Ircbot
 		@socket.sysclose
 	end
 end
-
-ARGV.each { |a| p a.to_s}
 
 bot1 = Ircbot.new("#{ARGV[0].to_s}", "#{ARGV[1].to_i}", "#{ARGV[2].to_s}", "#{ARGV[3].to_s}") #, "#{ARGV[4].to_s}")
 
