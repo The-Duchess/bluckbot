@@ -107,7 +107,7 @@ end
 # reg_p = Regexp.union(prefix)
 
 reg_p = /^`h / #regex to call the module
-na = "template" #name for plugin #same as file name without .rb
+na = "help" #name for plugin #same as file name without .rb
 de = "`h [topic] provides help on modules or if one was not given an appropriate Reaper style response ise given" #description
 
 #plugin = Class_name.new(regex, name, help)
