@@ -74,7 +74,7 @@ class Reaperh < Pluginf
 
 		end
 
-		if tokens.length < 2 and tokens[1].match(prefix_s)
+		if tokens.length == 2 and tokens[1].to_s.match(prefix_s)
 			reaper_o.shuffle!
 			return "NOTICE #{nick} :#{reaper_0[1]}"
 		end
