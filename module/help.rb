@@ -84,7 +84,7 @@ class Reaperh < Pluginf
 
 		if tokens.length == 2 and message_t.match(prefix_s)
 			reaper_o.shuffle!
-			return "NOTICE #{nick} :#{reaper_0[1]}"
+			return "NOTICE #{nick} :#{reaper_o[1]}"
 		end
 
 		$plugins_s.each do |a|
