@@ -46,7 +46,7 @@ class Reaperh < Pluginf
 				/who made you/,
 				/where are you from/,
 				/who created you/,
-				/source\?/
+				/source/
 			 ]
 
 		prefix_a = Regexp.union(qa)
