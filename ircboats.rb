@@ -229,7 +229,7 @@ class Ircbot
 
 				if not $admin_s.include? nick
 					say_to_chan("You must gather your party before venturing forth.", chan)
-					say_to_chan("please do not disturb the irc bots.", nick)
+					say "NOTICE #{nick} :please do not disturb the irc bots."
 					next
 				else
 
