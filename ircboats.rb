@@ -145,6 +145,7 @@ class Ircbot
 			end
 
 			if nick == "bluckbot"
+				message = "NIL"
 				next
 			end
 
@@ -176,7 +177,7 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`list channels$/) and chan == nick
-				#list = ""
+
 				@channel_s.each do |a|
 					p a
 					say "NOTICE #{nick} :#{a.split(' ')[0].to_s}"
@@ -194,9 +195,8 @@ class Ircbot
 					say_to_chan(message_t[0..-2], arg[1].to_s)
 					next
 				else
-					say "NOTICE #{nick} :you are not in the admin file"
-					say "NOTICE #{nick} :please contact the bot owner for questions"
-    				end
+					"NOTICE #{nick} :please do not disturb the irc bots."
+    			end
 			end
 
 			if message[0..-2].match(/^`k /)
@@ -214,9 +214,13 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`ignore /)
-				nick_b = message[8..-2].split(' ')
-				nick_b.each do |a|
-					@ignore_s.push(a.to_s)
+				if $admin_s.include? nick
+					nick_b = message[8..-2].split(' ')
+					nick_b.each do |a|
+						@ignore_s.push(a.to_s)
+					end
+				else
+					say "NOTICE #{nick} :please do not disturb the irc bots."
 				end
 			end
 
@@ -258,16 +262,17 @@ class Ircbot
 			end
 
 			if message[0..-2].match(/^`part/)
-				say "PART #{chan}"
-				next
+				if $admin_s.include? nick
+					say "PART #{chan}"
+					next
+				else
+					say "NOTICE #{nick} :please do not disturb the irc bots."
+				end
 			end
 
 			if message[0..- 2].match(/^`plsgo$/)
     				if $admin_s.include? nick.to_s
-    				#	$plugins_s.each do |a|
-    				#		p parse(nick, chan, "`unload #{a.name} ")
-    				#	end
-						say_to_chan("sorry for the disturbance sempai", chan)
+						say_to_chan("This exchange is over.", chan)
 						quit
 						break
 					else
@@ -293,8 +298,7 @@ class Ircbot
 					@respond = parse(nick, chan, "`load #{message[8..-2]}.rb ")
 					say_to_chan(@respond, chan)
     			else
-					say "NOTICE #{nick} :you are not in the admin file"
-					say "NOTICE #{nick} :please contact the bot owner for questions"
+    				say "NOTICE #{nick} :please do not disturb the irc bots."
     			end
 
 			end
@@ -343,7 +347,7 @@ class Ircbot
 	end
 
 	def quit
-		say "PART ##{@channel} :pls no more testing!"
+		say "PART ##{@channel} :"
 		say 'QUIT'
 
 		@socket.sysclose

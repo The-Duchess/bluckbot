@@ -19,7 +19,7 @@ def parse(nick, chan, message)
     if message.match(/^`load /)
     	
 	   if not check_admin(nick)
-	     return "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
+	     return "NOTICE #{nick} :please do not disturb the irc bots."
 	   end
     	
         if message.match(/^`load /) and message.length > 5 then
@@ -93,10 +93,9 @@ def parse(nick, chan, message)
 
     if message.match(/^`unload /)
     	
-    	#currently disabled to preven the bot getting kicked
-        #if not check_admin(nick)
-	    #return "#{nick}: is not in the admin file\nplease contact the bot owner for questions"
-	    #end
+        if not check_admin(nick)
+	       return "NOTICE #{nick} :please do not disturb the irc bots."
+	    end
     	
     	@ii = 0
     	@r = ""
@@ -123,7 +122,7 @@ def parse(nick, chan, message)
     if message.match(/^`mass load$/)
     	
     	if not check_admin(nick)
-		  return "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
+		  return "NOTICE #{nick} :please do not disturb the irc bots."
 	   end
     	
     	temp_r = []
