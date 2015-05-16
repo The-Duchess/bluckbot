@@ -222,19 +222,28 @@ class Ircbot
 
 			if message.match(/^`join ##?/)
 				say "JOIN #{message[6..-2]}"
-				if message[6..-2].include? ' '
-					if @channel_s.include? message[6..-2].to_s
-						next
-					end
 
-					@channel_s.push(message[6..-2].to_s)
+				if not $admin_s.include? nick
+					say_to_chan("You must gather your party before venturing forth.", chan)
+					say_to_chan("please do not disturb the irc bots.", nick)
 					next
 				else
-					if @channel_s.include? message[6..-2].to_s
+
+					if message[6..-2].include? ' '
+						if @channel_s.include? message[6..-2].to_s
+							next
+						end
+
+						@channel_s.push(message[6..-2].to_s)
 						next
+					else
+						if @channel_s.include? message[6..-2].to_s
+							next
+						end
+
+						@channel_s.push(message[6..-2].to_s)
 					end
 
-					@channel_s.push(message[6..-2].to_s)
 				end
 
 				next
