@@ -37,7 +37,7 @@ load 'command.rb'
 class Ircbot
 	def initialize(server, port, channel, logging)
 		$nick_name = ""
-		File.open ("./res/.nick_name", "r") do |fr|
+		File.open("./res/.nick_name", 'r') do |fr|
 			while line = fr.gets
 				line = line.chomp!
 				$nick_name = line
