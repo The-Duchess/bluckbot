@@ -37,6 +37,12 @@
 
 - To create Plugins follow the template ./module/.template.rb
 
+**Config Files**
+- .admins contains the list of admin users as nicks
+- .chanlist contains a list of channels that can be joined with `load chans
+- .modlist contains a list of modules as their file names that can be loaded with `mass load
+- .nick_name contains the nick for the bot (default: bluckbot)
+
 > This source code comes with no warranty, implied or otherwise, and is published under the GNU/GPL v3 license.
 > you should have recieved a copy of the license with this software, if not you can find it at:
 >>http://www.gnu.org/licenses/gpl-3.0.html
