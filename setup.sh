@@ -27,4 +27,7 @@ echo "creating module list"
 touch ./res/.modlist
 echo "creating admin list"
 touch ./res/.admins
+echo "creating nick file"
+touch ./res/.nick_name
+echo "bluckbot" > ./res/.nick_name
 echo "setup complete"

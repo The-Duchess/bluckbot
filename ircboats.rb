@@ -36,6 +36,15 @@ load 'command.rb'
 
 class Ircbot
 	def initialize(server, port, channel, logging)
+		$nick_name = ""
+		File.open ("./res/.nick_name", "r") do |fr|
+			while line = fr.gets
+				line = line.chomp!
+				$nick_name = line
+				break
+			end
+			break
+		end
 		@serv_name = server.to_s
 		@channel = channel.to_s
 		@port = port.to_i
@@ -54,9 +63,9 @@ class Ircbot
 				end
 			end
 		end
-		print "Authenticating as nick: bluckbot name: test user: k... "
+		print "Authenticating as nick: #{$nick_name} name: test user: k... "
 		STDOUT.flush
-	    	say "NICK bluckbot"
+	    	say "NICK #{$nick_name}"
 	    	say "USER k 0 * test"
 	    print "Joining ##{@channel}... "
 	    STDOUT.flush
@@ -137,14 +146,14 @@ class Ircbot
 				end
 			end
 
-			if chan == "bluckbot"
+			if chan == "#{nick_name}"
 				#system("echo \"#{@serv_name} #{msg}\" >> ./res/log_p")
 				#File.open("./res/log_p", 'a') { |fw| fw.puts "#{@serv_name} #{msg}"}
 				File.write("./res/log_p", "#{@serv_name} #{msg}", File.size("./res/log_p"), mode: 'a')
 				chan = nick
 			end
 
-			if nick == "bluckbot"
+			if nick == $nick_name
 				message = "NIL"
 				next
 			end
@@ -153,7 +162,7 @@ class Ircbot
 				next
 			end
 
-			if message[0..-2].include? "ACTION pets bluckbot"
+			if message[0..-2].include? "ACTION pets #{$nick_name}"
 				say_to_chan("#{nick} ( \x0304◕\x03‿\x0304◕\x03)",chan)
 			end
 

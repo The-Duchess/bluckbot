@@ -83,7 +83,7 @@ class PLUGIN < Pluginf
 				@r = "#{nick}: 「#{nick_s}」 "
 			end
 			
-			if message_s.match(sed_a) and chan == chan_s and nick_s != "bluckbot" then 
+			if message_s.match(sed_a) and chan == chan_s and nick_s != $nick_name then 
 				included = true
 				string_a = message_s.to_s
 				nick_a = nick_s.to_s
