@@ -40,7 +40,7 @@ class Eightball < Pluginf
 	end
 end
 
-reg_p = /^bluckbot[:,]?\s?(.+)\?/ #regex to call the module
+reg_p = /^#{$nick_name}[:,]?\s?(.+)\?/ #regex to call the module
 na = "eightball" #name for plugin #same as file name without .rb
 de = "bluckbot: yes no question? will get an eightball style answer" #description
 

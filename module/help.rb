@@ -30,8 +30,8 @@ class Reaperh < Pluginf
 
 		qr = [
 				/what are you/,
-				/bluckbot\?/,
-				/bluckbot is/
+				/#{$nick_name}\?/,
+				/#{$nick_name} is/
 			 ]
 
 		prefix_r = Regexp.union(qr)

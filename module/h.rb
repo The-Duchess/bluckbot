@@ -21,8 +21,8 @@ end
 
 prefix_s = [
 			/^h$/,
-			/^bluckbot: h$/,
-			/^bluckbot, h$/
+			/^#{$nick_name}: h$/,
+			/^#{$nick_name}, h$/
 		   ]
 
 reg_p = Regexp.union(prefix_s) #regex to call the module
