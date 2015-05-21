@@ -146,7 +146,7 @@ class Ircbot
 				end
 			end
 
-			if chan == "#{nick_name}"
+			if chan == "#{$nick_name}"
 				#system("echo \"#{@serv_name} #{msg}\" >> ./res/log_p")
 				#File.open("./res/log_p", 'a') { |fw| fw.puts "#{@serv_name} #{msg}"}
 				File.write("./res/log_p", "#{@serv_name} #{msg}", File.size("./res/log_p"), mode: 'a')
