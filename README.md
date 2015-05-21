@@ -37,7 +37,8 @@
 
 - To create Plugins follow the template ./module/.template.rb
 
-**Config Files**
+**Config Files (./res/)**
+
 - .admins contains the list of admin users as nicks
 - .chanlist contains a list of channels that can be joined with `load chans
 - .modlist contains a list of modules as their file names that can be loaded with `mass load
