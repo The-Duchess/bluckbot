@@ -190,6 +190,7 @@ class Ircbot
 				@channel_s.each do |a|
 					p a
 					say "NOTICE #{nick} :#{a.split(' ')[0].to_s}"
+					next
 				end
 
 				next
@@ -216,6 +217,7 @@ class Ircbot
 					2.upto(tokens.length - 1) { |a| reason.concat("#{tokens[a].to_s}")}
 
 					say "KICK #{chan} #{user} \"#{reason}\""
+					next
 				else
 					say "NOTICE #{nick} :you are not in the admin file"
 					say "NOTICE #{nick} :please contact the bot owner for questions"
@@ -227,7 +229,9 @@ class Ircbot
 					nick_b = message[8..-2].split(' ')
 					nick_b.each do |a|
 						@ignore_s.push(a.to_s)
+						say "NOTICE #{a} :You had been informed not to disturb the irc bots but apparently you couldn't help yourself."
 					end
+					next
 				else
 					say "NOTICE #{nick} :please do not disturb the irc bots."
 				end
@@ -239,9 +243,23 @@ class Ircbot
 					nick_b.each do |a|
 						@ignore_s.delete_if { |b| b == a }
 					end
+					next
 				else
 					say "NOTICE #{nick} :please do not disturb the irc bots."
 				end
+			end
+
+			if message[0..-2].match(/`lsign/) #list ignored nicks
+				if $admin_s.include? nick
+					say "NOTICE #{nick} :Ignored Nicks =================="
+					@ignore_s.each do |a|
+						say "NOTICE #{nick} :#{a}"
+					end
+					say "NOTICE #{nick} :================================="
+					next
+				else
+					say "NOTICE #{nick} :please do not disturb the irc bots."
+				end	
 			end
 
 			if message.match(/^`join ##?/)
@@ -279,6 +297,7 @@ class Ircbot
 						fw.puts a
 					end
 				end
+				next
 			end
 
 			if message[0..-2].match(/^`part/)
@@ -317,6 +336,7 @@ class Ircbot
 					say_to_chan(@respond, chan)
 					@respond = parse(nick, chan, "`load #{message[8..-2]}.rb ")
 					say_to_chan(@respond, chan)
+					next
     			else
     				say "NOTICE #{nick} :please do not disturb the irc bots."
     			end
