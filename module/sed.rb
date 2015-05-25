@@ -12,6 +12,9 @@ class PLUGIN < Pluginf
 #any functions you may need
 #your definition for script
 	def script(message, nick, chan)
+
+		if nick == $nick_name then return "" end
+
 		command_s = message
 		#temp_c = message[1]
 		#command_set = command_s.split("#{temp_c}")

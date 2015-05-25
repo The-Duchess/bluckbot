@@ -119,7 +119,7 @@ class Ircbot
 
 			message_reg = msg.match(/^(:(?<prefix>\S+) )?(?<command>\S+)( (?!:)(?<params>.+?))?( :(?<trail>.+))?$/)
 			nick = message_reg[:prefix].to_s.split("!")[0]
-			command = message_reg[:command].to_s
+			commadn = message_reg[:command].to_s
 			chan = message_reg[:params].to_s
 			message = message_reg[:trail].to_s
 			#p "nick: #{nick}"
@@ -227,6 +227,17 @@ class Ircbot
 					nick_b = message[8..-2].split(' ')
 					nick_b.each do |a|
 						@ignore_s.push(a.to_s)
+					end
+				else
+					say "NOTICE #{nick} :please do not disturb the irc bots."
+				end
+			end
+
+			if message[0..-2].match(/^`unignore /)
+				if $admin_s.include? nick
+					nick_b = message[8..-2].split(' ')
+					nick_b.each do |a|
+						@ignore_s.delete_if { |b| b == a }
 					end
 				else
 					say "NOTICE #{nick} :please do not disturb the irc bots."
