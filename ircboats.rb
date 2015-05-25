@@ -305,7 +305,7 @@ class Ircbot
 				if message[0..-2].match(/^`help$/)
 					p parse(nick, chan, "`load use.rb ")
 					p parse(nick, chan, "`load info.rb ")
-					response = "`info for info. `usage for usage. `h $TOPIC for help on a module or random responses"
+					response = "`info for info. `usage for usage. `help $TOPIC for help on a module"
 					say "NOTICE #{nick} :#{response}"
 					next
 				end
