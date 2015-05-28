@@ -129,17 +129,21 @@ class Ircbot
 			#p "#{message[0..-2].to_s.length}"
 
 			if $logs.length == 1000 then
-				$logs.delete_at(999)
-				$logs.insert(0, msg)
-				if @logging == true and chan != "#trivia"
+
+				if nick != $nick_name
+					$logs.delete_at(999)
+					$logs.insert(0, msg)
+				end
+				
+				if @logging == true and nick != $nick_name
 					#system("echo \"#{msg}\" >> ./res/log")
 					#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
 					File.write("./res/log", "#{msg}", File.size("./res/log"), mode: 'a')
 
 				end
 			else
-				$logs.insert(0, msg)
-				if @logging == true and chan != "#trivia"
+				if nick != $nick_name then $logs.insert(0, msg) end
+				if @logging == true and nick != $nick_name
 					#system("echo \"#{msg}\" >> ./res/log")
 					#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
 					File.write("./res/log", "#{msg}", File.size("./res/log"), mode: 'a')
