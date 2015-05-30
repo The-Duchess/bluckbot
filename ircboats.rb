@@ -315,6 +315,9 @@ class Ircbot
 
 			if message[0..- 2].match(/^`plsgo$/)
     				if $admin_s.include? nick.to_s
+    					$plugins_s.each do |i|
+    						i.cleanup
+    					end
 						say_to_chan("This exchange is over.", chan)
 						quit
 						break
