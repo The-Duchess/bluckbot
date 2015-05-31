@@ -145,7 +145,7 @@ class Weather < Pluginf
 
 	def get_forcast(area_code)
 		@ac = area_code
-		@r_w = "\n"
+		@r_w = ""
 		days = [] # weather for various days
 		days_names = Array.new
 		days_names = get_day_names
@@ -301,7 +301,7 @@ class Weather < Pluginf
 	def parse(message, nick, chan)
 		tokens = message.split(' ')
 		cmd = tokens[0] # the command the user is calling [ `w <area code |s nick> | `ws <area code> ]
-		@r = "#{nick}: "
+		@r = ""
 
 		if message.match(/^`w$/)
 
