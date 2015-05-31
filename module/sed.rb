@@ -83,7 +83,7 @@ class PLUGIN < Pluginf
 				message_set.each { |a| message_s.concat("#{a} ") }
 				message_s = message_s[0..-2]
 			else
-				@r = "#{nick}: 「#{nick_s}」 "
+				@r = "「#{nick_s}」 "
 			end
 			
 			if message_s.match(sed_a) and chan == chan_s and nick_s != $nick_name then 
