@@ -218,7 +218,7 @@ class Ircbot
 					arg = message[0..-2].split(' ')
 					message_t = ""
 					2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ")}
-					say_to_chan("\001ACTION #{message_t[0..-2]}\001, arg[1].to_s)
+					say_to_chan("\001ACTION #{message_t[0..-2]}\001", arg[1].to_s)
 					next
 				else
 					"NOTICE #{nick} :please do not disturb the irc bots."
