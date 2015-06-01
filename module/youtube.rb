@@ -66,7 +66,7 @@ class YouTube < Pluginf
 	end
 end
 
-reg_p = /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?([\w-]{10,})$/
+reg_p = /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?([\w-]{10,})/
 na = "YouTube"
 de = "catches youtube links"
 
