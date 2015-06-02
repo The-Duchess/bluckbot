@@ -119,7 +119,7 @@ class Ircbot
 
 			message_reg = msg.match(/^(:(?<prefix>\S+) )?(?<command>\S+)( (?!:)(?<params>.+?))?( :(?<trail>.+))?$/)
 			nick = message_reg[:prefix].to_s.split("!")[0]
-			commadn = message_reg[:command].to_s
+			command = message_reg[:command].to_s
 			chan = message_reg[:params].to_s
 			message = message_reg[:trail].to_s
 			#p "nick: #{nick}"
