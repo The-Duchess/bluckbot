@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./res/.config.sh
 if [[ "$PASS_YN" == "TRUE" ]]; then
 	ruby ./ircboats.rb "$NETWORK_N" "$PORT_V" "$CHANNEL_N" "$LOGGING_YN" "PASS" "$PASSPHRASE"
