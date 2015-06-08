@@ -155,10 +155,13 @@ def setup_modules_file
 		if input != "N" and input != "n" and input != "exit" and input.match(/.rb$/) and !input.include? "" and input != "list"
 			`echo "#{input}" >> ./res/.modlist`
 		elsif input == "list"
-			ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1]}
+			ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1] }
 			print "available modules: "
 			STDOUT.flush
-			ra.each do { |a| print "#{a} "; STDOUT.flush; }
+			ra.each do |a| 
+				print "#{a} "
+				STDOUT.flush
+			end
 			puts ""
 		else
 			puts "invalid input"
