@@ -55,7 +55,7 @@ def setup_channels_file
 		input = STDIN.gets
 		input = input.chomp
 
-		if input != "N" and input != "n" input != "exit" and !input.match(/^\#/)
+		if input != "N" and input != "n" and input != "exit" and !input.match(/^\#/)
 			`echo "#{input}" >> ./res/.chanlist`
 		else
 			puts "invalid input"
