@@ -158,7 +158,7 @@ def setup_modules_file
 			ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1]}
 			print "available modules: "
 			STDOUT.flush
-			ra.each do { |a| print "#{a} "; STDOUT.flush}
+			ra.each do { |a| print "#{a} "; STDOUT.flush; }
 			puts ""
 		else
 			puts "invalid input"
