@@ -27,7 +27,7 @@ def setup_admin_file
 		input = STDIN.gets
 		input = input.chomp
 
-		if input != "N" and input != "n" input != "exit" and !input.include? " "
+		if input != "N" and input != "n" and input != "exit" and !input.include? " "
 			`echo \"#{input}\" >> ./res/.admins`
 		else
 			puts "invalid input"
