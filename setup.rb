@@ -123,19 +123,19 @@ def setup_config_script
 		pass = intput
 	end
 
-	echo "#!/bin/sh" > ./res/.config.sh
-	echo "#network name" >> ./res/.config.sh
-	echo "export NETWORK_N=#{network_id}" >> ./res/.config.sh
-	echo "#Port Number" >> ./res/.config.sh
-	echo "export PORT_V=#{port}" >> ./res/.config.sh
-	echo "#channel name without the #" >> ./res/.config.sh
-	echo "export CHANNEL_N=#{channel}" >> ./res/.config.sh
-	echo "#LOGGING TRUE | FALSE" >> ./res/.config.sh
-	echo "export LOGGING_YN=#{logging}" >> ./res/.config.sh
-	echo "#WHETHER TO USE PASS TRUE | FALSE" >> ./res/.config.sh
-	echo "export PASS_YN=#{pass_y_n}" >> ./res/.config.sh
-	echo "#Passphrase" >> ./res/.config.sh
-	echo "export PASSPHRASE=#{pass}" >> ./res/.config.sh
+	`echo "#!/bin/sh" > ./res/.config.sh`
+	`echo "#network name" >> ./res/.config.sh`
+	`echo "export NETWORK_N=#{network_id}" >> ./res/.config.sh`
+	`echo "#Port Number" >> ./res/.config.sh`
+	`echo "export PORT_V=#{port}" >> ./res/.config.sh`
+	`echo "#channel name without the #" >> ./res/.config.sh`
+	`echo "export CHANNEL_N=#{channel}" >> ./res/.config.sh`
+	`echo "#LOGGING TRUE | FALSE" >> ./res/.config.sh`
+	`echo "export LOGGING_YN=#{logging}" >> ./res/.config.sh`
+	`echo "#WHETHER TO USE PASS TRUE | FALSE" >> ./res/.config.sh`
+	`echo "export PASS_YN=#{pass_y_n}" >> ./res/.config.sh`
+	`echo "#Passphrase" >> ./res/.config.sh`
+	`echo "export PASSPHRASE=#{pass}" >> ./res/.config.sh`
 
 end
 
@@ -192,6 +192,7 @@ def setup_nick_name
 end
 
 def start_bot
+
 	`./run.sh`
 end
 
