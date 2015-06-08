@@ -109,7 +109,7 @@ def setup_config_script
 	input = input.chomp
 	logging = input
 
-	print "enter whther the network uses a password to connect [TRUE | FALSE]: "
+	print "enter whether the network uses a password to connect [TRUE | FALSE]: "
 	STDOUT.flush
 	input = STDIN.gets
 	input = input.chomp
@@ -143,6 +143,7 @@ def setup_modules_file
 	input = ""
 	`echo "usage.rb" > ./res/.modlist`
 	`echo "info.rb" >> ./res/.modlist`
+	`echo "admins.rb" >> ./res/.modlist`
 
 	puts "enter a module for the ircbot to load with `mass load\nentering n, N and exit will allow you to skip\nentering list will list available modules"
 

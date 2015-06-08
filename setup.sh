@@ -27,6 +27,7 @@ echo "creating module list"
 touch ./res/.modlist
 echo "usage.rb" > ./res/.modlist
 echo "info.rb" >> ./res/.modlist
+echo "admins.rb" >> ./res/.modlist
 echo "creating admin list"
 touch ./res/.admins
 echo "creating nick file"
