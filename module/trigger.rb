@@ -22,11 +22,11 @@ class Triggered < Pluginf
 		@chan_list = []
 		@chan_list.push("any")
 
-		prefix = [
+		@prefix = [
 					/^`trigger /,
 				 ]
 
-		prefix_print = [
+		@prefix_print = [
 							nil, # so that the primary trigger won't cause any issues with indeces
 						 ]
 
