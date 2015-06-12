@@ -130,7 +130,11 @@ class Triggered < Pluginf
 		elsif message.match(/^`trigger list$/)
 			return list(nick)
 		elsif message.match(/^`trigger remove /)
-			return remove(tokens[2].to_i)
+			begin
+				return remove(tokens[2].to_i)
+			rescue => e
+				return "invalid input"
+			end
 		else
 			if message.match(@regexp) and !message.match(/^`trigger/)
 				# find a trigger
