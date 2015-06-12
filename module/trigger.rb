@@ -81,7 +81,7 @@ class Triggered < Pluginf
 		ii = 1
 
 		3.upto(@prefix.length - 1) do |i|
-			r.concat("[#{ii}]: regex: [#{prefix[i]}] shows: [#{prefix_print[i]}]\n")
+			r.concat("[#{ii}]: regex: [#{@prefix[i]}] shows: [#{@prefix_print[i]}]\n")
 			ii = ii + 1
 		end
 
