@@ -124,8 +124,8 @@ end
 # reg_p = Regexp.union(prefix)
 
 reg_p = /^`trigger / #regex to call the module
-na = "message trigger" #name for plugin #same as file name without .rb
-de = "`trigger add <regex> shows <message>" #description
+na = "trigger" #name for plugin #same as file name without .rb
+de = "`trigger add: <regex> shows: <message>" #description
 
 #plugin = Class_name.new(regex, name, help)
 #pushed onto to the end of plugins array array
