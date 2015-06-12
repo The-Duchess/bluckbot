@@ -63,7 +63,7 @@ class Triggered < Pluginf
 	def save
 		File.open("./res/.triggered", "w") do |fw|
 			3.upto(@prefix.length.to_i - 1) do |i|
-				fw.puts "#{prefix[i].to_s} _:_ #{prefix_print[i]}"
+				fw.puts "#{@prefix[i].to_s} _:_ #{@prefix_print[i]}"
 			end
 		end
 	end
