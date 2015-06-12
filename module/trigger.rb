@@ -129,7 +129,7 @@ class Triggered < Pluginf
 			return "added"
 		elsif message.match(/^`trigger list$/)
 			return list(nick)
-		elsif message.match(/^trigger remove /)
+		elsif message.match(/^`trigger remove /)
 			return remove(tokens[2].to_i)
 		else
 			if message.match(@regexp) and !message.match(/^`trigger/)
