@@ -24,10 +24,14 @@ class Triggered < Pluginf
 
 		@prefix = [
 					/^`trigger /,
+					/^`trigger list$/,
+					/^trigger remove /
 				 ]
 
 		@prefix_print = [
 							nil, # so that the primary trigger won't cause any issues with indeces
+							nil, # so that the list trigger won't cause any issues with indeces
+							nil, # so that the remove trigger won't cause any issues with indeces
 						 ]
 
 		if not File.exist?("./res/.triggered") then
@@ -58,7 +62,7 @@ class Triggered < Pluginf
 
 	def save
 		File.open("./res/.triggered", "w") do |fw|
-			1.upto(@prefix.length.to_i - 1) do |i|
+			3.upto(@prefix.length.to_i - 1) do |i|
 				fw.puts "#{prefix[i].to_s} _:_ #{prefix_print[i]}"
 			end
 		end
@@ -69,6 +73,31 @@ class Triggered < Pluginf
 		@prefix_print.push(print_msg.to_s)
 
 		@regexp = Regexp.union(@prefix)
+	end
+
+	def list(nick)
+
+		r = "NOTICE #{nick} :"
+		ii = 1
+
+		3.upto(@prefix.length - 1) do |i|
+			r.concat("[#{ii}]: regex: [#{prefix[i]}] shows: [#{prefix_print[i]}]\n")
+			ii = ii + 1
+		end
+
+		return r
+	end
+
+	def remove(index)
+		if index < 1 then return "cannot remove" end
+
+		ii = index + 2
+		@prefix.delete_at(ii)
+		@prefix_print.delete_at(ii)
+
+		@regexp = Regexp.union(@prefix)
+
+		return "removed"
 	end
 
 	#your definition for script
@@ -98,7 +127,10 @@ class Triggered < Pluginf
 			add(regex_str, message_str)
 
 			return "added"
-
+		elsif message.match(/^`trigger list$/)
+			return list(nick)
+		elsif message.match(/^trigger remove /)
+			return remove(tokens[2].to_i)
 		else
 			if message.match(@regexp) and !message.match(/^`trigger/)
 				# find a trigger
@@ -111,7 +143,6 @@ class Triggered < Pluginf
 		end
 
 		return ""
-			
 	end
 end
 
@@ -125,7 +156,7 @@ end
 
 reg_p = /^`trigger / #regex to call the module
 na = "trigger" #name for plugin #same as file name without .rb
-de = "`trigger add: <regex> shows: <message>" #description
+de = "`trigger (add: <regex> shows: <message> | list | remove <index given by list> )" #description
 
 #plugin = Class_name.new(regex, name, help)
 #pushed onto to the end of plugins array array
