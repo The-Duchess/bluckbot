@@ -120,7 +120,7 @@ def setup_config_script
 		STDOUT.flush
 		input = STDIN.gets
 		input = input.chomp
-		pass = intput
+		pass = input
 	end
 
 	`echo "#!/bin/sh" > ./res/.config.sh`
@@ -141,7 +141,7 @@ end
 
 def setup_modules_file
 	input = ""
-	`echo "usage.rb" > ./res/.modlist`
+	`echo "use.rb" > ./res/.modlist`
 	`echo "info.rb" >> ./res/.modlist`
 	`echo "admins.rb" >> ./res/.modlist`
 
