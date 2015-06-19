@@ -138,7 +138,7 @@ class Ircbot
 				if @logging == true and nick != $nick_name
 					#system("echo \"#{msg}\" >> ./res/log")
 					#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
-					temp_line = "[SERVER: #{@serv_name}] #{command} #{chan} :#{message.chomp!}\n"
+					temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message.chomp!}\n"
 					File.write("./res/log", "#{temp_line}", File.size("./res/log"), mode: 'a')
 
 				end
@@ -147,7 +147,7 @@ class Ircbot
 				if @logging == true and nick != $nick_name
 					#system("echo \"#{msg}\" >> ./res/log")
 					#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
-					temp_line = "[SERVER: #{@serv_name}] #{command} #{chan} :#{message.chomp!}\n"
+					temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message.chomp!}\n"
 					File.write("./res/log", "#{temp_line}", File.size("./res/log"), mode: 'a')
 				end
 			end
