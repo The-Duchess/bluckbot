@@ -212,25 +212,14 @@ class Weather < Pluginf
 					temper_c_max = days_fc_m[i]['temp']['max'].to_s
 					#t = get_index(temper_c_max)
 					t2_x = 04 #temp_colors[get_index(temper_c_max)].to_i
-					p "PARSING DAY #{i} TEMP C DONE"
-
-					p "PARSING DAY #{i} WEATHER"
 
 					weather_condition = weatherc(days_fc[i]['weather'][0]['id']).to_s
 
-					p "PARSING DAY #{i} WIND SPEED"
-
 					wind_speed = days_fc[i]['speed'].to_s
-
-					p "PARSING DAY #{i} HUMIDITY"
 
 					humidity = days_fc[i]['humidity'].to_s
 
-					p "PARSING DAY #{i} BEGIN CONCAT FOR DAY"
-
 					days.push("\x0314#{days_names[i]}\x03: Weather for \x0314#{@ac}\x03 is #{weather_condition}, Temperature: min \x0308#{temper_f_min}\x03°F or \x0308#{temper_c_min}\x03°C, max \x0304#{temper_f_max}\x03°F or \x0304#{temper_c_max}\x03°C, Humidity of \x0302#{humidity}\x03 percent, Wind speeds at \x0303#{wind_speed}\x03 mph")
-					
-					p "PARSING DAY #{i} DONE CONCAT FOR DAY"
 
 				rescue => e
 					return "#{@ac} is this place actually real?"
@@ -288,6 +277,12 @@ class Weather < Pluginf
 		end
 
 		return @r_w	
+	end
+
+	def get_forecast_yahoo(area_code)
+	end
+
+	def get_weather_yahoo(area_code)
 	end
 
 	def get_ac(nick)

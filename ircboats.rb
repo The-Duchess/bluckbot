@@ -138,7 +138,8 @@ class Ircbot
 				if @logging == true and nick != $nick_name
 					#system("echo \"#{msg}\" >> ./res/log")
 					#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
-					File.write("./res/log", "#{msg}", File.size("./res/log"), mode: 'a')
+					temp_line = "#{command} #{chan} :#{message.chomp!}"
+					File.write("./res/log", "#{temp_line}", File.size("./res/log"), mode: 'a')
 
 				end
 			else
@@ -153,7 +154,8 @@ class Ircbot
 			if chan == "#{$nick_name}"
 				#system("echo \"#{@serv_name} #{msg}\" >> ./res/log_p")
 				#File.open("./res/log_p", 'a') { |fw| fw.puts "#{@serv_name} #{msg}"}
-				File.write("./res/log_p", "#{@serv_name} #{msg}", File.size("./res/log_p"), mode: 'a')
+				temp_line = "PM LOG FILE ENTRY INFO: NETWORK: #{@serv_name} MESSAGE INFO: NICK: #{nick} MESSAGE_PARAM: #{message.chomp!}"
+				File.write("./res/log_p", "#{temp_line}", File.size("./res/log_p"), mode: 'a')
 				chan = nick
 			end
 
