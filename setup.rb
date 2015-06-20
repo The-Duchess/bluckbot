@@ -17,6 +17,7 @@
 
 def setup_admin_file
 	input = ""
+	first = true
 	`echo \"\" > ./res/.admins`
 
 	puts "you must enter at least one admin nick for the bot"
@@ -28,7 +29,8 @@ def setup_admin_file
 		input = input.chomp
 
 		if input != "N" and input != "n" and input != "exit" and !input.include? " "
-			`echo \"#{input}\" >> ./res/.admins`
+			if first then `echo \"#{input}\" > ./res/.admins`; first = false; end
+			if !first then `echo \"#{input}\" >> ./res/.admins` end
 		else
 			puts "invalid input"
 			input = "y"
