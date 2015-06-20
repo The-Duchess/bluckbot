@@ -102,7 +102,7 @@ class Ircbot
 	    	File.open("./res/.admins", 'r') do |fr|
 	    		while line = fr.gets
 	    			line.chomp!
-	    			if line != ""
+	    			if line != "\n" and line != "" and line != "\r\n"
 	    				$admin_s.push(line.to_s)
 	    			end
 	    			puts "		|"
