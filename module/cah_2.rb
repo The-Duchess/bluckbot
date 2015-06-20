@@ -3,12 +3,6 @@
 # author: apels <Alice Duchess>
 # module as defined by .plugin.rb
 #############################################################################################
-# GLOBALS:
-# - $logs are stored like [most recent - least recent], they are also unparsed
-# - $admins is the list of admins
-# - $plugins_s is the array of active plugins
-#############################################################################################
-
 
 $LOAD_PATH << './module'
 require '.pluginf.rb'
