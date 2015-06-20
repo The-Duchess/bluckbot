@@ -64,7 +64,13 @@ class Ircbot
 			end
 		end
 		puts "	|"
-		puts "	|_Authenticating as nick: #{$nick_name} name: test user: k"
+		puts "	|_Authenticating"
+		puts "		|"
+		puts "		|_Nick: #{$nick_name}"
+		puts "		|"
+		puts "		|_Name: test"
+		puts "		|"
+		puts "		|_User: k"
 		#STDOUT.flush
 	    	say "NICK #{$nick_name}"
 	    	say "USER k 0 * test"
