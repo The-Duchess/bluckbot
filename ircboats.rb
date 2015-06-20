@@ -48,8 +48,8 @@ class Ircbot
 		@serv_name = server.to_s
 		@channel = channel.to_s
 		@port = port.to_i
-		print "Connecting to #{@serv_name} on port #{@port}... "
-		STDOUT.flush
+		puts "Connecting to #{@serv_name} on port #{@port}"
+		#STDOUT.flush
 		@socket = TCPSocket.open(@serv_name, @port)
 		if port.to_i != 6667
 			ssl_context = OpenSSL::SSL::SSLContext.new
@@ -63,19 +63,23 @@ class Ircbot
 				end
 			end
 		end
-		print "Authenticating as nick: #{$nick_name} name: test user: k... "
-		STDOUT.flush
+		puts "	|"
+		puts "	|_Authenticating as nick: #{$nick_name} name: test user: k"
+		#STDOUT.flush
 	    	say "NICK #{$nick_name}"
 	    	say "USER k 0 * test"
-	    print "Joining ##{@channel}... "
-	    STDOUT.flush
+	    puts "	|"
+	    puts "	|_Joining ##{@channel}"
+	    #STDOUT.flush
 	    	say "JOIN ##{@channel}"
 	    	$logs = Array.new
 	    	if logging.to_s == "true"
-	    		print "Logging enabled... "
+	    		puts "	|"
+	    		puts "	|_Logging enabled"
 	    		@logging = true
 	    	else
-	    		print "Logging disabled... "
+	    		puts "	|"
+	    		puts "	|_Logging disabled"
 	    		@logging = false
 	    	end
 
@@ -87,14 +91,18 @@ class Ircbot
 	    	
 	    	$admin_s = []
 
-	    	puts "Loading admin file"
+	    	puts "	|"
+	    	puts "	|_Loading admin file"
 	    	File.open("./res/.admins", 'r') do |fr|
 	    		while line = fr.gets
 	    			line.chomp!
 	    			$admin_s.push(line.to_s)
+	    			puts "		|"
+	    			puts "		|_#{line}"
 	    		end
 	    	end
 
+	    	puts "done!"
     end
 
 	def say(msg)
