@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # ruby irc bot
-# author apels Alice Duchess
+# author: Alice Duchess (lolth)
 # usage:
 # NOTE: bluckbot is tested in ruby 2.1, if your default ruby is not 2.1 then run ruby-2.1 or higher instead
 # also gems will need to be installed to your ruby of 2.1 or higher so that they will be loaded
