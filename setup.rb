@@ -60,8 +60,10 @@ def setup_channels_file
 		if input != "N" and input != "n" and input != "exit" and !input.match(/^\#/)
 			`echo "#{input}" >> ./res/.chanlist`
 		else
-			puts "invalid input"
-			input = "y"
+			if input != "N" and input != "n" and input != "exit"
+				puts "invalid input"
+				input = "y"
+			end
 		end
 
 		print "add another channel to the channels file [Y/n]? "
