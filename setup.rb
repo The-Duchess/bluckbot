@@ -171,8 +171,10 @@ def setup_modules_file
 			end
 			puts ""
 		else
-			puts "invalid input"
-			input = "y"
+			if input != "N" and input != "n" and input != "exit"
+				puts "invalid input"
+				input = "y"
+			end
 		end
 
 		print "add another module to the modules file [Y/n]? "
