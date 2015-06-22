@@ -111,12 +111,14 @@ def setup_config_script
 	STDOUT.flush
 	input = STDIN.gets
 	input = input.chomp
+	input.upcase!
 	logging = input
 
 	print "enter whether the network uses a password to connect [TRUE | FALSE]: "
 	STDOUT.flush
 	input = STDIN.gets
 	input = input.chomp
+	input.upcase!
 	pass_y_n = input
 
 	if pass_y_n == "TRUE"
