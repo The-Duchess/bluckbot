@@ -203,6 +203,7 @@ def start_bot
 end
 
 def main
+	`mkdir ./res`
 	setup_admin_file
 	setup_channels_file
 	setup_modules_file
