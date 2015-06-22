@@ -18,7 +18,7 @@
 def setup_admin_file
 	input = ""
 	first = true
-	`echo \"\" > ./res/.admins`
+	`rm -f ./res/.admins/`
 
 	puts "you must enter at least one admin nick for the bot"
 
