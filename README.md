@@ -7,6 +7,18 @@
 - To setup run setup.sh and it will create the necessary files/folders for basic operation and configure manually
 
 >note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
+>libraries
+>>require 'cgi'
+>>require 'json'
+>>require 'open-uri'
+>>require 'net/http'
+>>require 'optparse'
+>>require 'date'
+>>require 'socket'
+>>require 'openssl'
+>>require 'google/api_client'
+>>require 'net/http'
+>>require 'multi_json'
 
 - To run, edit the ./res/.config.sh file and run ./run.sh
 
