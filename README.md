@@ -22,40 +22,14 @@
 
 - To run, edit the ./res/.config.sh file and run ./run.sh
 
->\#!/bin/bash
-
->\#network name
-
->export NETWORK_N=
-
->\#Port Number
-
->export PORT_V=
-
->\#channel name without the #
-
->export CHANNEL_N=
-
->\#LOGGING TRUE | FALSE
-
->export LOGGING_YN=
-
->\#WHETHER TO USE PASS TRUE | FALSE
-
->export PASS_YN=
-
->\#Passphrase
-
->export PASSPHRASE=
-
 - To create Plugins follow the template ./module/.template.rb
 
 **Config Files (./res/)**
 
-- .admins contains the list of admin users as nicks
-- .chanlist contains a list of channels that can be joined with `load chans
-- .modlist contains a list of modules as their file names that can be loaded with `mass load
-- .nick_name contains the nick for the bot (default: bluckbot)
+>- .admins contains the list of admin users as nicks
+>- .chanlist contains a list of channels that can be joined with `load chans
+>- .modlist contains a list of modules as their file names that can be loaded with `mass load
+>- .nick_name contains the nick for the bot (default: bluckbot)
 
 **Using:**
 
