@@ -25,6 +25,9 @@ def parse(nick, chan, message)
         if message.match(/^`load /) and message.length > 5 then
     		$LOAD_PATH << './module'
     		ls = message.to_s[6..-1]
+            if !ls.match(/.rb$/)
+                ls = "#{ls}.rb"
+            end
     		#checks if the module is already loaded
     		@ra = ""
     		$plugins_s.each { |a| @ra.concat("#{a.name.downcase}.rb ")}
