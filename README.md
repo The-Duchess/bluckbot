@@ -50,7 +50,7 @@
 >- \`help modules : gives help for all loaded modules
 >- \`mass load : loads a preset set of modules in ./res/.modlist
 
-- To create Plugins follow the template ./module/.template.rb
+> Note: To create Plugins follow the template ./module/.template.rb
 
 
 **Warranty and License**
