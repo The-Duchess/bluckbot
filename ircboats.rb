@@ -208,7 +208,11 @@ class Ircbot
 				next
 			end
 
-			if message[0..-2].match(/^`list channels$/) and chan == nick
+			if message[0..-2].match(/^`list channels$/)
+				if !$admin_s.include? nick.to_s
+					say "NOTICE #{nick} :please do not disturb the irc bots."
+					next
+				end
 
 				@channel_s.each do |a|
 					p a
