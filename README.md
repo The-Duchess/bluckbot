@@ -21,12 +21,9 @@
 >- 'net/http'
 >- 'multi_json'
 
-- To run, edit the ./res/.config.sh file and run ./run.sh
-
-- To create Plugins follow the template ./module/.template.rb
-
 **Config Files (./res/)**
 
+>- .config.sh contains the connection information for the bot
 >- .admins contains the list of admin users as nicks
 >- .chanlist contains a list of channels that can be joined with `load chans
 >- .modlist contains a list of modules as their file names that can be loaded with `mass load
@@ -50,6 +47,8 @@
 >- \`help $MODULE : gives help on a certain module
 >- \`help modules : gives help for all loaded modules
 >- \`mass load : loads a preset set of modules in ./res/.modlist
+
+- To create Plugins follow the template ./module/.template.rb
 
 
 **Warranty and License**
