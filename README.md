@@ -52,6 +52,10 @@
 
 > Note: To create Plugins follow the template ./module/.template.rb
 
+**Screenshot**
+
+![Alt text](https://github.com/The-Duchess/bluckbot/blob/master/demo.png)
+
 
 **Warranty and License**
 
