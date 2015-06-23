@@ -5,6 +5,7 @@
 - Bluckbot is written by Alice "Duchess" Archer
 - To setup for use without manually configuring, run setup.rb
 - To setup run setup.sh and it will create the necessary files/folders for basic operation and configure manually
+- To run if configs are setup run ./run.sh
 
 >note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
 >libraries
