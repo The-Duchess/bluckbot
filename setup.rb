@@ -210,6 +210,8 @@ end
 
 def main
 	`mkdir ./res`
+	`touch ./res/log`
+	`touch ./res/log_p`
 	setup_admin_file
 	setup_channels_file
 	setup_modules_file
