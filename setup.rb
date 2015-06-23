@@ -150,7 +150,7 @@ def setup_modules_file
 	`echo "use.rb" > ./res/.modlist`
 	`echo "info.rb" >> ./res/.modlist`
 	`echo "admins.rb" >> ./res/.modlist`
-
+	puts "use.rb, info.rb and admins.rb have already been added as they are neccessary."
 	puts "enter a module for the ircbot to load with `mass load\nentering n, N and exit will allow you to skip\nentering list will list available modules"
 
 	while input != "N" and input != "n" and input != "exit"
