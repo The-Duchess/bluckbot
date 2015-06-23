@@ -8,17 +8,28 @@
 
 >note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
 >libraries
->>require 'cgi'
->>require 'json'
->>require 'open-uri'
->>require 'net/http'
->>require 'optparse'
->>require 'date'
->>require 'socket'
->>require 'openssl'
->>require 'google/api_client'
->>require 'net/http'
->>require 'multi_json'
+>> 'cgi'
+
+>> 'json'
+
+>> 'open-uri'
+
+>> 'net/http'
+
+>> 'optparse'
+
+>> 'date'
+
+>> 'socket'
+
+>> 'openssl'
+
+>> 'google/api_client'
+
+>> 'net/http'
+
+>> 'multi_json'
+
 
 - To run, edit the ./res/.config.sh file and run ./run.sh
 
