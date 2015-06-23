@@ -58,23 +58,23 @@
 - .nick_name contains the nick for the bot (default: bluckbot)
 
 **Using:**
->-commands
->-\`plsgo : tells the bot to quit
->-\`ignore $NICK : tells the bot to ignore a nick
->-\`save | \`load chans : saves and loads channels from currently active and previously saved
->-/msg bluckbot `list channels : lists channels, must be a pm from the owner
->-\`msg $NICK message : sends a message to $NICK
->-\`part : parts the active channel
->-\`join $#CHANNEL : joins a channel
->-\`k $NICK reason: only accessible to the owner and kicks a user from the channel
->-\`help : prints help
->-\`load $MODULE : loads a module
->-\`unload $MODULE : unloads a module
->-\`ls : lists modules
->-\`list : lists loaded modules
->-\`help $MODULE : gives help on a certain module
->-\`help modules : gives help for all loaded modules
->-\`mass load : loads a preset set of modules in ./res/.modlist
+
+>- \`plsgo : tells the bot to quit
+>- \`ignore $NICK : tells the bot to ignore a nick
+>- \`save | \`load chans : saves and loads channels from currently active and previously saved
+>- /msg bluckbot `list channels : lists channels, must be a pm from the owner
+>- \`msg $NICK message : sends a message to $NICK
+>- \`part : parts the active channel
+>- \`join $#CHANNEL : joins a channel
+>- \`k $NICK reason: only accessible to the owner and kicks a user from the channel
+>- \`help : prints help
+>- \`load $MODULE : loads a module
+>- \`unload $MODULE : unloads a module
+>- \`ls : lists modules
+>- \`list : lists loaded modules
+>- \`help $MODULE : gives help on a certain module
+>- \`help modules : gives help for all loaded modules
+>- \`mass load : loads a preset set of modules in ./res/.modlist
 
 > This source code comes with no warranty, implied or otherwise, and is published under the GNU/GPL v3 license.
 > you should have recieved a copy of the license with this software, if not you can find it at:
