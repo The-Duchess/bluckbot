@@ -6,6 +6,8 @@
 - To setup for use without manually configuring, run setup.rb
 - To setup run setup.sh and it will create the necessary files/folders for basic operation and you can configure manually
 - To run if configs are setup run ./run.sh
+- The config setup scripts rely on linux core utils and will not work in windows.
+- The screenshot below is the bot running and being viewed in weechat via PuTTY running in Windows 8.1
 
 > Note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
 
