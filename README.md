@@ -40,7 +40,7 @@
 >- \`unignore $NICK : tells the bot to remove a nick from the ignore list
 >- \`lsign : gives a list of ignored nicks
 >- \`save | \`load chans : saves and loads channels from currently active and previously saved
->- /msg bluckbot `list channels : lists channels
+>- \`list channels : lists channels
 >- \`msg $NICK message : sends a message to $NICK
 >- \`act $CHANNEL action : sends an action to $CHANNEL
 >- \`part : parts the bot from the channel this is sent from
