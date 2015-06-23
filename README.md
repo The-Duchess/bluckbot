@@ -6,7 +6,7 @@
 - To setup for use without manually configuring, run setup.rb
 - To setup run setup.sh and it will create the necessary files/folders for basic operation and configure manually
 
->note: some modules may have their own files
+>note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
 
 - To run, edit the ./res/.config.sh file and run ./run.sh
 
