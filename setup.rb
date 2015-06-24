@@ -245,7 +245,7 @@ def main
 	else
 		puts "[ ] No Custom Nick Added To res/.nick_name"
 	end
-	
+
 	puts "[✔] Comfig Script Complete"
 
 	print "do you want to start the irc bot now [Y/n]? "
@@ -255,6 +255,7 @@ def main
 	if input != 'n' and input != 'N'
 		start_bot
 	end
+	
 end
 
 main

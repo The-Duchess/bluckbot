@@ -9,6 +9,11 @@
 - The config setup scripts rely on linux core utils and will not work in windows.
 - The screenshot below is the bot seen via PuTTY running in Windows 8.1
 
+> Bugs:
+
+>- pm commands have the last character cut off
+
+
 > Note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
 
 **Libraries**
