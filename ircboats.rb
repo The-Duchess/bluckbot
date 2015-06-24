@@ -171,7 +171,7 @@ class Ircbot
 			if chan == "#{$nick_name}"
 				#system("echo \"#{@serv_name} #{msg}\" >> ./res/log_p")
 				#File.open("./res/log_p", 'a') { |fw| fw.puts "#{@serv_name} #{msg}"}
-				temp_line = "PM LOG FILE ENTRY INFO: NETWORK: #{@serv_name} MESSAGE INFO: NICK: #{nick} MESSAGE_PARAM: #{message.chomp!}\n"
+				temp_line = "PM LOG FILE ENTRY INFO: NETWORK: #{@serv_name} MESSAGE INFO: NICK: #{nick} MESSAGE_PARAM: #{message.chomp}\n"
 				File.write("./res/log_p", "#{temp_line}", File.size("./res/log_p"), mode: 'a')
 				chan = nick
 			end
