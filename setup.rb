@@ -15,6 +15,10 @@
 # this script will also overwrite existing config files
 # there is no existing default outside of .modlist and .nick_name
 
+$channels = false
+$nickname = false
+$plugins = false
+
 def setup_admin_file
 	input = ""
 	first = true
@@ -59,6 +63,7 @@ def setup_channels_file
 
 		if input != "N" and input != "n" and input != "exit" and !input.match(/^\#/)
 			`echo "#{input}" >> ./res/.chanlist`
+			$channels = true
 		else
 			if input != "N" and input != "n" and input != "exit"
 				puts "invalid input"
@@ -161,6 +166,7 @@ def setup_modules_file
 
 		if input != "N" and input != "n" and input != "exit" and input.match(/.rb$/) and !input.include? " " and input != "list"
 			`echo "#{input}" >> ./res/.modlist`
+			$plugins = true
 		elsif input == "list"
 			ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1] }
 			print "available modules: "
@@ -200,6 +206,7 @@ def setup_nick_name
 		input = STDIN.gets
 		input = input.chomp
 		`echo \"#{input}\" > ./res/.nick_name`
+		$nickname = true
 	end
 end
 
@@ -217,6 +224,29 @@ def main
 	setup_modules_file
 	setup_nick_name
 	setup_config_script
+
+	`clear`
+	puts "[✔] Admins Added To res/.admins"
+	
+	if $channels 
+		puts "[✔] Channels addded To res/.chanlist"
+	else
+		puts "[ ] No Channels Added To res/.chanlists"
+	end
+
+	if $plugins
+		puts "[✔] Modules Added To res/.modlist"
+	else
+		puts "[ ] No Modules Added  To res/.modlist"
+	end
+
+	if $nickname
+		puts "[✔] Custom Nick Added To res/.nick_name"
+	else
+		puts "[ ] No Custom Nick Added To res/.nick_name"
+	end
+	
+	puts "[✔] Comfig Script Complete"
 
 	print "do you want to start the irc bot now [Y/n]? "
 	STDOUT.flush
