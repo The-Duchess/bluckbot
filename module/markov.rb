@@ -68,7 +68,7 @@ class Template < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 
-		if message.match(/^?/)
+		if message.match(/^\?/)
 			p "triggering message generate"
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
