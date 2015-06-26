@@ -24,7 +24,7 @@ class Template < Pluginf
 		@chan_list.push("any")
 
 		if !File.exist? ("./res/.dictionary.mmd")
-			@m = MarkyMarkov::Dictionary.new("./res/.dictionary", 1)
+			@m = MarkyMarkov::Dictionary.new("./res/.dictionary", 3)
 			@m.parse_string "this is a test"
 			if File.exist? ("./res/lg")
 				@m.parse_file "./res/lg"
@@ -32,7 +32,7 @@ class Template < Pluginf
 
 			@m.save_dictionary!
 		else
-			@m = MarkyMarkov::Dictionary.new("./res/.dictionary", 1)
+			@m = MarkyMarkov::Dictionary.new("./res/.dictionary", 3)
 		end
 	end
 
