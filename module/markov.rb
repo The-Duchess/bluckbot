@@ -40,7 +40,7 @@ class Template < Pluginf
 
 
 	def cleanup
-		m.save
+		@m.save
 	end
 
 	#your definition for script
