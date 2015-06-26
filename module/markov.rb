@@ -11,6 +11,7 @@
 
 # this plugin requires files from https://github.com/epitron/markovchat to be placed
 # in ./res/ along with a db
+# you also may want to have a text file lg in ./res to make it run properly
 
 $LOAD_PATH << './module'
 require '.pluginf.rb'
@@ -68,7 +69,7 @@ class Template < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 
-		if message.match(/^\?/)
+		if message.match(/^[?]/)
 			p "triggering message generate"
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
@@ -83,10 +84,10 @@ end
 
 prefix = [
 		//,
-		/^\?/
+		/^[?]/
 	   ]
 
- reg_p = Regexp.union(prefix)
+reg_p = Regexp.union(prefix)
 
 #reg_p = // #regex to call the module
 na = "markov" #name for plugin #same as file name without .rb
