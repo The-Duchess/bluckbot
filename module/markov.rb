@@ -55,7 +55,7 @@ class Template < Pluginf
 			while line = fr.gets
 				line = line.chomp
 				# pass line to markov chain obj
-				@markov_object.add_sentence("#{line}")
+				@m.add_sentence("#{line}")
 			end
 		end
 	end
