@@ -44,12 +44,12 @@ class Template < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 
-		if message.match(/^[?]/)
+		if message.match(/^`post/)
 			p "triggering message generate"
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
-			@r = `marky_markov listen \"#{word}\"`
-			return @r
+			@r = @m.generate_n_sentences 2
+			return @r[rand(2)]
 		else
 			Process.detach( fork { @m.parse_string("#{message}") } )
 			return ""
@@ -59,7 +59,7 @@ end
 
 prefix = [
 		//,
-		/^[?]/
+		/^`post/
 	   ]
 
 reg_p = Regexp.union(prefix)
