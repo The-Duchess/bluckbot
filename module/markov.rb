@@ -47,9 +47,9 @@ class Template < Pluginf
 		if message.match(/^[?]/)
 			p "triggering message generate"
 			message = message[1..-1].to_s
-			//word = message.split(" ")[0].to_s
-			@r = @m.generate_n_sentences 3
-			return @r[rand(3)]
+			word = message.split(" ")[0].to_s
+			@r = @m.listen word
+			return @r
 		else
 			Process.detach( fork { @m.parse_string("#{message}") } )
 			return ""
