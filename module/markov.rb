@@ -46,7 +46,7 @@ class Template < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 
-		if message.match(/^?/)
+		if message.match(/^\?/)
 			message = message[1..-1].to_s
 			@r = @m.chat(message.to_s)
 			return @r
