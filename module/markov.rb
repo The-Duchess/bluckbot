@@ -30,12 +30,12 @@ class Template < Pluginf
 
 		if !File.exists?("markovchain.db")
 			`touch markovchain.db`
+			@m = MarkovChat.new("markovchain.db")
 			@m.add_sentence("r u a big guy")
 			@m.add_sentence("benis")
 			@m.add_sentence("sayaka is a slut")
 			@m.add_sentence("HURR DURR MUH SOMETHING RETARDED")
 			@m.add_sentence("piss")
-			@m = MarkovChat.new("markovchain.db")
 			@m.save
 			#@markov_object.load
 		else
@@ -58,7 +58,7 @@ class Template < Pluginf
 		if message.match(/^\?/)
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
-			@r = @m.chat(word)
+			@r = @m.chat("#{word}")
 			return @r
 		else
 			Process.detach( fork { @m.add_sentence("#{message}") } )
