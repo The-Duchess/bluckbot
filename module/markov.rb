@@ -52,9 +52,8 @@ class Template < Pluginf
 			return @r
 		else
 			Process.detach( fork { @m.add_sentence("#{message}") } )
+			return ""
 		end
-
-		return "string"
 	end
 end
 
