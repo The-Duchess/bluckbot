@@ -1,4 +1,4 @@
-**Bluckbot Version 1.5.0**
+**Bluckbot Version 1.5.5**
 
 - Bluckbot is a modular/plugable irc bot written with the Ruby programming language
 - Bluckbot requires ruby 2.1 or higher
