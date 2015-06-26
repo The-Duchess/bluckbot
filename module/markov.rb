@@ -45,11 +45,11 @@ class Template < Pluginf
 	def script(message, nick, chan)
 
 		if message.match(/^`post/)
-			p "triggering message generate"
-			message = message[1..-1].to_s
-			word = message.split(" ")[0].to_s
+			#p "triggering message generate"
+			#message = message[1..-1].to_s
+			#word = message.split(" ")[0].to_s
 			@r = @m.generate_n_sentences 3
-			@r = @r.split(".")[rand(3)].to_s
+			@r = @r.split(".")[rand(2)].to_s
 			#p @r.class
 			#p @r
 			return @r
