@@ -471,10 +471,10 @@ class Ircbot
 					next
 				end
 
-				if message[0..-1].match(/^`reload /)
+				if message[0..-1].match(/^`reload /) and message.length > 8
 					if $admin_s.include? nick.to_s
-						unload("`unload #{message[8..-1]}", nick, chan)
-						load("`load #{message[8..-1]}.rb", nick, chan)
+						unload_mod("`unload #{message[8..-1]}", nick, chan)
+						load_mod("`load #{message[8..-1]}.rb", nick, chan)
 						next
 					else
 						say "NOTICE #{nick} :please do not disturb the irc bots."
@@ -483,7 +483,7 @@ class Ircbot
 				end
 
 				if message.match(/^`load /) and message.length > 5
-					load("`load #{message[6..-1]}.rb", nick, chan)
+					load("`load #{message[6..-1]}", nick, chan)
 					next
 				end
 
@@ -532,7 +532,7 @@ class Ircbot
 					say_to_chan("no plugin: #{message[6..-1]} was found", chan)
 				end
 
-				if message.match(/^`unload /)
+				if message.match(/^`unload /) and message.length > 8
 					unload("`unload #{message[8..-1]}", nick, chan)
 					next
 				end
