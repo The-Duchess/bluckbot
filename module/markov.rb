@@ -56,6 +56,7 @@ class Template < Pluginf
 	def script(message, nick, chan)
 
 		if message.match(/^\?/)
+			p "triggering message generate"
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
 			@r = @m.chat("#{word}")
