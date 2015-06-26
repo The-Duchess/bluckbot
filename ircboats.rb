@@ -617,18 +617,21 @@ class Ircbot
 						end
 					end
 				end
-			end
 		end
+	end
 
-		def quit
-			say "PART ##{@channel} :"
-			say 'QUIT'
+	def quit
+		say "PART ##{@channel} :"
+		say 'QUIT'
 
-			@socket.sysclose
-		end
+		@socket.sysclose
+	end
 end
 
-
+def main
 	bot1 = Ircbot.new("#{ARGV[0].to_s}", "#{ARGV[1].to_i}", "#{ARGV[2].to_s}", "#{ARGV[3].to_s}") #, "#{ARGV[4].to_s}")
 
 	bot1.run
+end
+
+main
