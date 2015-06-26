@@ -79,7 +79,7 @@ class Ircbot
 		#STDOUT.flush
 		say "JOIN ##{@channel}"
 		$logs = Array.new
-		if logging.to_s == "true"
+		if logging.to_s == "TRUE"
 			puts "	|"
 			puts "	|_Logging enabled"
 			@logging = true
