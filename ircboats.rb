@@ -234,7 +234,7 @@ class Ircbot
 					if @logging == true and nick != $nick_name
 						#system("echo \"#{msg}\" >> ./res/log")
 						#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
-						temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message.chomp!}\n"
+						temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message}\n"
 						File.write("./res/log", "#{temp_line}", File.size("./res/log"), mode: 'a')
 
 					end
@@ -247,7 +247,7 @@ class Ircbot
 					if @logging == true and nick != $nick_name
 						#system("echo \"#{msg}\" >> ./res/log")
 						#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
-						temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message.chomp!}\n"
+						temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message}\n"
 						File.write("./res/log", "#{temp_line}", File.size("./res/log"), mode: 'a')
 					end
 				end
@@ -255,7 +255,7 @@ class Ircbot
 				if chan == "#{$nick_name}"
 					#system("echo \"#{@serv_name} #{msg}\" >> ./res/log_p")
 					#File.open("./res/log_p", 'a') { |fw| fw.puts "#{@serv_name} #{msg}"}
-					temp_line = "PM LOG FILE ENTRY INFO: NETWORK: #{@serv_name} MESSAGE INFO: NICK: #{nick} MESSAGE_PARAM: #{message.chomp}\n"
+					temp_line = "PM LOG FILE ENTRY INFO: NETWORK: #{@serv_name} MESSAGE INFO: NICK: #{nick} MESSAGE_PARAM: #{message}\n"
 					File.write("./res/log_p", "#{temp_line}", File.size("./res/log_p"), mode: 'a')
 					chan = nick
 				end
