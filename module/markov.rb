@@ -66,7 +66,7 @@ class Template < Pluginf
 			@r = @r.split(".")[rand(2)].to_s
 			#p @r.class
 			#p @r
-			return @r
+			return shrink(@r)
 		else
 			Process.detach( fork { @m.parse_string("#{message}") } )
 			return ""
