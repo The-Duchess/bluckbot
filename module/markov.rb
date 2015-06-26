@@ -65,8 +65,8 @@ prefix = [
  reg_p = Regexp.union(prefix)
 
 #reg_p = // #regex to call the module
-na = "template" #name for plugin #same as file name without .rb
-de = "NOTES ^| HELP" #description
+na = "markov" #name for plugin #same as file name without .rb
+de = "?<word> generates a message based on what people have said and the <word>" #description
 
 #plugin = Class_name.new(regex, name, help)
 #pushed onto to the end of plugins array array
