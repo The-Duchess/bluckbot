@@ -655,18 +655,17 @@ class Ircbot
 
 			#if the reponse is actually worth running the send and it is also a string
 		end
+
+		def quit
+			say "PART ##{@channel} :"
+			say 'QUIT'
+
+			@socket.sysclose
+		end
 	end
 
-	def quit
-		say "PART ##{@channel} :"
-		say 'QUIT'
+	bot1 = Ircbot.new("#{ARGV[0].to_s}", "#{ARGV[1].to_i}", "#{ARGV[2].to_s}", "#{ARGV[3].to_s}") #, "#{ARGV[4].to_s}")
 
-		@socket.sysclose
-	end
-end
+	bot1.run
 
-bot1 = Ircbot.new("#{ARGV[0].to_s}", "#{ARGV[1].to_i}", "#{ARGV[2].to_s}", "#{ARGV[3].to_s}") #, "#{ARGV[4].to_s}")
-
-bot1.run
-
-#Thread.new { bot1.run }
+	#Thread.new { bot1.run }
