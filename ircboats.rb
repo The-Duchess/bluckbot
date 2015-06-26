@@ -123,6 +123,14 @@ class Ircbot
 		#p "PRIVMSG #{chan_name} :#{msg}"
 	end
 
+	def check_admin(nick)
+		if $admin_s.include? nick
+			return true
+		else
+			return false
+		end
+	end
+
 	def load(message, nick, chan)
 		if not check_admin(nick)
 			say "NOTICE #{nick} :please do not disturb the irc bots."
@@ -137,22 +145,25 @@ class Ircbot
 			end
 			#checks if the module is already loaded
 			@ra = ""
-			$plugins_s.each { |a| @ra.concat("#{a.name.downcase}.rb ")}
+			$plugins_s.each { |a| @ra.concat("#{a.name.downcase}.rb ") }
 			@rb = @ra[0..-1].split(" ")
 			@rb.each do |a|
 				if a == ls
 					say_to_chan("#{ls} is already loaded", channel)
+					return
 				end
 			end
 			#checks if the module is is there
-			@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-2]}
+			@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-2] }
 			if not @ra.include? ls
 				say_to_chan("#{ls} does not exist", chan)
+				return
 			end
 			#load ls
 			load "#{ls}"
 			$LOAD_PATH << './'
 			say_to_chan("#{ls} loaded", chan)
+			return
 		end
 
 		return
@@ -163,6 +174,7 @@ class Ircbot
 
 			if not check_admin(nick)
 				say "NOTICE #{nick} :please do not disturb the irc bots."
+				return
 			end
 
 			@ii = 0
@@ -176,7 +188,8 @@ class Ircbot
 					p a.class.to_s
 					$plugins_s[@ii].cleanup
 					$plugins_s.delete_at(@ii)
-					return @r
+					say_to_chan(@r, chan)
+					return
 				else
 					@ii += 1
 				end
@@ -300,7 +313,7 @@ class Ircbot
 					if $admin_s.include? nick.to_s
 						arg = message[0..-1].split(' ')
 						message_t = ""
-						2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ")}
+						2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ") }
 						say_to_chan(message_t[0..-1], arg[1].to_s)
 						next
 					else
@@ -314,7 +327,7 @@ class Ircbot
 					if $admin_s.include? nick.to_s
 						arg = message[0..-1].split(' ')
 						message_t = ""
-						2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ")}
+						2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ") }
 						say_to_chan("\001ACTION #{message_t[0..-1]}\001", arg[1].to_s)
 						next
 					else
@@ -329,7 +342,7 @@ class Ircbot
 						reason = ""
 						tokens = message[0..-1].split(' ')
 						user = tokens[1].to_s
-						2.upto(tokens.length - 1) { |a| reason.concat("#{tokens[a].to_s}")}
+						2.upto(tokens.length - 1) { |a| reason.concat("#{tokens[a].to_s}") }
 
 						say "KICK #{chan} #{user} \"#{reason}\""
 						next
@@ -448,7 +461,7 @@ class Ircbot
 					end
 				end
 
-				if message[0..-1].match(/^`help/)
+				if message[0..-1].match(/^`help$/)
 					if message[0..-1].match(/^`help$/)
 						response = "`info for info. `usage for usage. `help $TOPIC for help on a module"
 						say "NOTICE #{nick} :#{response}"
@@ -469,8 +482,8 @@ class Ircbot
 					next
 				end
 
-				if message.match(/^`load /) and message.length > 5 then
-					load("`load #{message[8..-1]}.rb", nick, chan)
+				if message.match(/^`load /) amd message.length > 5
+					load("`load #{message[6..-1]}.rb", nick, chan)
 					next
 				end
 
@@ -478,12 +491,11 @@ class Ircbot
 
 					if not check_admin(nick)
 						say "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
-
 					end
 
 					@r = "NOTICE #{nick} :"
-					@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1]}
-					@ra.each { |a| @r.concat("#{a} ")}
+					@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1] }
+					@ra.each { |a| @r.concat("#{a} ") }
 					say @r[0..-1].to_s
 
 				end
@@ -512,7 +524,7 @@ class Ircbot
 						#p a.name.to_s
 						if a.name.to_s.downcase == message.to_s.downcase[6..-1]
 							@r = "NOTICE #{nick} :#{a.name} description: #{a.help}"
-							return @r
+							say @r.to_s
 						end
 
 						next
@@ -540,7 +552,7 @@ class Ircbot
 						end
 					end
 					temp_p = []
-					$plugins_s.each { |a| temp_p.push("#{a.name.downcase}.rb")}
+					$plugins_s.each { |a| temp_p.push("#{a.name.downcase}.rb") }
 					temp_r.each do |a|
 						if temp_p.include? a
 							p "#{a} is already loaded"
@@ -582,7 +594,7 @@ class Ircbot
 										if response.include? "\n"
 											@res_new = response.split("\n")
 											tokens = @res_new[0].split(' ')
-											1.upto(@res_new.length - 1) { |a| @res_new[a].prepend("#{tokens[0]} #{tokens[1]} :")}
+											1.upto(@res_new.length - 1) { |a| @res_new[a].prepend("#{tokens[0]} #{tokens[1]} :") }
 											@res_new.each do |a|
 												say "#{a}"
 											end
