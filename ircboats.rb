@@ -131,7 +131,7 @@ class Ircbot
 		end
 	end
 
-	def load(message, nick, chan)
+	def load_mod(message, nick, chan)
 		if not check_admin(nick)
 			say "NOTICE #{nick} :please do not disturb the irc bots."
 			return
@@ -169,7 +169,7 @@ class Ircbot
 		return
 	end
 
-	def unload(message, nick, chan)
+	def unload_mod(message, nick, chan)
 		if message.match(/^`unload /)
 
 			if not check_admin(nick)
@@ -483,7 +483,7 @@ class Ircbot
 				end
 
 				if message.match(/^`load /) and message.length > 5
-					load("`load #{message[6..-1]}", nick, chan)
+					load_mod("`load #{message[6..-1]}", nick, chan)
 					next
 				end
 
@@ -533,7 +533,7 @@ class Ircbot
 				end
 
 				if message.match(/^`unload /) and message.length > 8
-					unload("`unload #{message[8..-1]}", nick, chan)
+					unload_mod("`unload #{message[8..-1]}", nick, chan)
 					next
 				end
 
