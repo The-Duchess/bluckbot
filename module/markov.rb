@@ -48,7 +48,7 @@ class Template < Pluginf
 
 		if message.match(/^?/)
 			message = message[1..-1].to_s
-			@r = @m.chat(message)
+			@r = @m.chat(message.to_s)
 			return @r
 		else
 			Process.detach( fork { @m.add_sentence("#{message}") } )
@@ -58,7 +58,6 @@ class Template < Pluginf
 	end
 end
 
-allows you to support multiple regexes
 prefix = [
 		//,
 		/^\?/
