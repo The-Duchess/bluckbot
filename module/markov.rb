@@ -10,7 +10,7 @@
 #############################################################################################
 
 # this plugin requires files from https://github.com/epitron/markovchat to be placed
-# in ./res/
+# in ./res/ along with a db
 
 $LOAD_PATH << './module'
 require '.pluginf.rb'
@@ -36,6 +36,8 @@ class Template < Pluginf
 			@m = MarkovChat.new("markovchain.db")
 			#@markov_object.load
 	    end
+
+	    @m.load
 	end
 
 
