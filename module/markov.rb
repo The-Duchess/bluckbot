@@ -48,7 +48,8 @@ class Template < Pluginf
 
 		if message.match(/^\?/)
 			message = message[1..-1].to_s
-			@r = @m.chat(message.to_s)
+			word = message.split(" ")[0].to_s
+			@r = @m.chat(word)
 			return @r
 		else
 			Process.detach( fork { @m.add_sentence("#{message}") } )
