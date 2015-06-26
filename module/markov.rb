@@ -14,7 +14,8 @@
 
 $LOAD_PATH << './module'
 require '.pluginf.rb'
-require 'res/markovchat.rb'
+$LOAD_PATH << './res'
+require 'markovchat.rb'
 
 class Template < Pluginf
 	
