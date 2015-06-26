@@ -63,7 +63,7 @@ class Template < Pluginf
 			#message = message[1..-1].to_s
 			#word = message.split(" ")[0].to_s
 			@r = @m.generate_n_sentences 3
-			@r = @r.split(".")[rand(2)].to_s
+			@r = @r.split(".")[rand(@r.split(".").length)].to_s
 			#p @r.class
 			#p @r
 			return shrink(@r)
