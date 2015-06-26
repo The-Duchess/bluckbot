@@ -24,7 +24,7 @@ class Template < Pluginf
 		@chan_list.push("any")
 
 		if !File.exist? ("./res/.dictionary.mmd")
-			@m = MarkyMarkov::TemporaryDictionary.new
+			@m = MarkyMarkov::Dictionary.new("./res/dictionary", 5)
 			@m.parse_string "this is a test"
 			if File.exist? ("./res/lg")
 				markov.parse_file "./res/lg"
@@ -32,7 +32,7 @@ class Template < Pluginf
 
 			@m.save_dictionary!
 		else
-			@m = MarkyMarkov::Dictionary.new("./res/dictionary")
+			@m = MarkyMarkov::Dictionary.new("./res/dictionary", 5)
 		end
 	end
 
@@ -48,8 +48,8 @@ class Template < Pluginf
 			p "triggering message generate"
 			message = message[1..-1].to_s
 			//word = message.split(" ")[0].to_s
-			@r = @m.generate_n_sentences 1
-			return @r
+			@r = @m.generate_n_sentences 3
+			return @r[rand(3)]
 		else
 			Process.detach( fork { @m.parse_string("#{message}") } )
 			return ""
