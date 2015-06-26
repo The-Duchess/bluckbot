@@ -27,7 +27,7 @@ class Template < Pluginf
 			@m = MarkyMarkov::Dictionary.new("./res/dictionary", 5)
 			@m.parse_string "this is a test"
 			if File.exist? ("./res/lg")
-				markov.parse_file "./res/lg"
+				@m.parse_file "./res/lg"
 			end
 
 			@m.save_dictionary!
