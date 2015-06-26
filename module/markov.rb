@@ -48,8 +48,8 @@ class Template < Pluginf
 			p "triggering message generate"
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
-			@r = @m.generate_n_sentences 2
-			return @r[rand(2)]
+			@r = @m.generate_n_sentences 1
+			return @r
 		else
 			Process.detach( fork { @m.parse_string("#{message}") } )
 			return ""
