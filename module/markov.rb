@@ -48,7 +48,7 @@ class Template < Pluginf
 			p "triggering message generate"
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
-			@r = @m.listen word
+			@r = `marky_markov listen \"#{word}\"`
 			return @r
 		else
 			Process.detach( fork { @m.parse_string("#{message}") } )
