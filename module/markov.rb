@@ -41,6 +41,20 @@ class Template < Pluginf
 		@m.save_dictionary!
 	end
 
+	def shrink(str)
+		tokens = str.split(" ")
+		if tokens.length > 12
+			len = rand(5) + 7
+			@r_shrink = ""
+			0.upto(len) { |a| @r_shrink.contcat("#{a} ") }
+			@r_shrink = @r_shrink[0..-2].to_s
+			@r_shrink.concat(".")
+			return @r_shrink
+		else
+			return str
+		end
+	end
+
 	#your definition for script
 	def script(message, nick, chan)
 
