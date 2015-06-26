@@ -25,6 +25,7 @@
 >- 'google/api_client'
 >- 'net/http'
 >- 'multi_json'
+>- 'marky_markov'
 
 **Config Files (./res/)**
 
