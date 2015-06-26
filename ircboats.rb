@@ -32,7 +32,7 @@
 require 'socket'
 require 'openssl'
 
-#load 'command.rb'
+$plugins_s = Array.new
 
 class Ircbot
 	def initialize(server, port, channel, logging)
@@ -109,8 +109,6 @@ class Ircbot
 				puts "		|_#{line}"
 			end
 		end
-
-		$plugins_s = Array.new
 
 		puts "done!"
 	end
