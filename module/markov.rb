@@ -49,6 +49,8 @@ class Template < Pluginf
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
 			@r = @m.generate_n_sentences 5
+			p @r.class
+			p @r
 			return @r[rand(5)]
 		else
 			Process.detach( fork { @m.parse_string("#{message}") } )
