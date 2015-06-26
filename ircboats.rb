@@ -560,9 +560,8 @@ class Ircbot
 					end
 				end
 
-				#response = parse(nick, chan, message)
 				if $plugins_s.class != nil
-					if $plugins_s_s.length > 0 then
+					if $plugins_s.length > 0 then
 						$plugins_s.each do |a|
 							if message.match(a.regex) and (a.chans.include? chan or a.chans.include? "any") then
 								response = a.script(message, nick, chan)
