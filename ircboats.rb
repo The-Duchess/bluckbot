@@ -125,7 +125,7 @@ class Ircbot
 		#p "PRIVMSG #{chan_name} :#{msg}"
 	end
 
-	def load(message)
+	def load(message, nick, chan)
 		if not check_admin(nick)
 			say "NOTICE #{nick} :please do not disturb the irc bots."
 			return
@@ -160,7 +160,7 @@ class Ircbot
 		return
 	end
 
-	def unload(message)
+	def unload(message, nick, chan)
 		if message.match(/^`unload /)
 
 			if not check_admin(nick)
@@ -459,8 +459,8 @@ class Ircbot
 
 				if message[0..-1].match(/^`reload /)
 					if $admin_s.include? nick.to_s
-						unload("`unload #{message[8..-1]}")
-						load("`load #{message[8..-1]}.rb")
+						unload("`unload #{message[8..-1]}", nick, chan)
+						load("`load #{message[8..-1]}.rb", nick, chan)
 						next
 					else
 						say "NOTICE #{nick} :please do not disturb the irc bots."
@@ -469,203 +469,156 @@ class Ircbot
 				end
 
 				if message.match(/^`load /) and message.length > 5 then
-					$LOAD_PATH << './module'
-					ls = message.to_s[6..-1]
-					if !ls.match(/.rb$/)
-						ls = "#{ls}.rb"
+					load("`load #{message[8..-1]}.rb", nick, chan)
+					next
+				end
+
+				if message.match(/^`ls$/)
+
+					if not check_admin(nick)
+						say "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
+
 					end
-					#checks if the module is already loaded
-					@ra = ""
-					$plugins_s.each { |a| @ra.concat("#{a.name.downcase}.rb ")}
-					@rb = @ra[0..-1].split(" ")
-					@rb.each do |a|
-						if a == ls
-							say_to_chan("#{ls} is already loaded", channel)
+
+					@r = "NOTICE #{nick} :"
+					@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1]}
+					@ra.each { |a| @r.concat("#{a} ")}
+					say @r[0..-1].to_s
+
+				end
+
+
+				if message.match(/^`list$/)
+
+					@r = "NOTICE #{nick} :"
+
+					$plugins_s.each do |a|
+						#p a.class.to_s
+						#p a.regex.to_s
+						#p a.name.to_s
+						#p a.help.to_s
+						@r.concat("#{a.name} ")
+					end
+
+					say @r[0..-2].to_s
+				end
+
+				if message.match(/^`help /)
+					@ii = 0
+					@r = ""
+					$plugins_s.each do |a|
+						#p message.to_s[6..-1]
+						#p a.name.to_s
+						if a.name.to_s.downcase == message.to_s.downcase[6..-1]
+							@r = "NOTICE #{nick} :#{a.name} description: #{a.help}"
+							return @r
 						end
-					end
-					#checks if the module is is there
-					@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-2]}
-					if not @ra.include? ls
-						say_to_chan("#{ls} does not exist", chan)
-					end
-					#load ls
-					load "#{ls}"
-					$LOAD_PATH << './'
-					say_to_chan("#{ls} loaded", chan)
-				end
 
-				next
-			end
-
-			if message.match(/^`ls$/)
-
-				if not check_admin(nick)
-					say "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
-
-				end
-
-				@r = "NOTICE #{nick} :"
-				@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1]}
-				@ra.each { |a| @r.concat("#{a} ")}
-				say @r[0..-1].to_s
-
-			end
-
-
-			if message.match(/^`list$/)
-
-				@r = "NOTICE #{nick} :"
-
-				$plugins_s.each do |a|
-					#p a.class.to_s
-					#p a.regex.to_s
-					#p a.name.to_s
-					#p a.help.to_s
-					@r.concat("#{a.name} ")
-				end
-
-				say @r[0..-2].to_s
-			end
-
-			if message.match(/^`help /)
-				@ii = 0
-				@r = ""
-				$plugins_s.each do |a|
-					#p message.to_s[6..-1]
-					#p a.name.to_s
-					if a.name.to_s.downcase == message.to_s.downcase[6..-1]
-						@r = "NOTICE #{nick} :#{a.name} description: #{a.help}"
-						return @r
-					end
-
-					next
-				end
-
-				say_to_chan("no plugin: #{message[6..-1]} was found", chan)
-			end
-
-			if message.match(/^`unload /)
-
-				if not check_admin(nick)
-					say "NOTICE #{nick} :please do not disturb the irc bots."
-				end
-
-				@ii = 0
-				@r = ""
-				$plugins_s.each do |a|
-					#p message.to_s[8..-1]
-					#p a.name.to_s
-					if a.name.to_s.downcase == message.to_s.downcase[8..-1]
-						@r = "plugin #{a.name.to_s} removed"
-						p "class"
-						p a.class.to_s
-						$plugins_s[@ii].cleanup
-						$plugins_s.delete_at(@ii)
-						return @r
-					else
-						@ii += 1
-					end
-
-					next
-				end
-
-				say_to_chan("no plugin was unloaded", chan)
-			end
-
-			if message.match(/^`mass load$/)
-
-				if not check_admin(nick)
-					return "NOTICE #{nick} :please do not disturb the irc bots."
-				end
-
-				temp_r = []
-				File.open("./res/.modlist", 'r') do |fr|
-					while line = fr.gets
-						line.chomp!
-						temp_r.push(line.to_s)
-					end
-				end
-				temp_p = []
-				$plugins_s.each { |a| temp_p.push("#{a.name.downcase}.rb")}
-				temp_r.each do |a|
-					if temp_p.include? a
-						p "#{a} is already loaded"
 						next
 					end
 
-					$LOAD_PATH << './module'
-					begin
-						load "#{a}"
-					rescue => e
-						p "failed to load #{a}"
+					say_to_chan("no plugin: #{message[6..-1]} was found", chan)
+				end
+
+				if message.match(/^`unload /)
+					unload("`unload #{message[8..-1]}", nick, chan)
+					next
+				end
+
+				if message.match(/^`mass load$/)
+
+					if not check_admin(nick)
+						return "NOTICE #{nick} :please do not disturb the irc bots."
 					end
 
-					$LOAD_PATH << './'
+					temp_r = []
+					File.open("./res/.modlist", 'r') do |fr|
+						while line = fr.gets
+							line.chomp!
+							temp_r.push(line.to_s)
+						end
+					end
+					temp_p = []
+					$plugins_s.each { |a| temp_p.push("#{a.name.downcase}.rb")}
+					temp_r.each do |a|
+						if temp_p.include? a
+							p "#{a} is already loaded"
+							next
+						end
+
+						$LOAD_PATH << './module'
+						begin
+							load "#{a}"
+						rescue => e
+							p "failed to load #{a}"
+						end
+
+						$LOAD_PATH << './'
+					end
 				end
-			end
 
-			#response = parse(nick, chan, message)
+				#response = parse(nick, chan, message)
 
-			if $plugins_s_s.length > 0 then
-				$plugins_s.each do |a|
-					if message.match(a.regex) and (a.chans.include? chan or a.chans.include? "any") then
-						response = a.script(message, nick, chan)
+				if $plugins_s_s.length > 0 then
+					$plugins_s.each do |a|
+						if message.match(a.regex) and (a.chans.include? chan or a.chans.include? "any") then
+							response = a.script(message, nick, chan)
 
-						if response.length > 0 and response.class.to_s.downcase == "string"
-							#this grants a form of access to sockets and allows
-							#the bot to run special commands through modules
-							#say "PRIVMSG #{chan_name} :#{msg}"
-							#format the message to return as PRIVMSG #channel | nick :message text you want to send to a channel or someone
-							prefix = [
-								/^PRIVMSG /,
-								/^NOTICE /,
-								/^KICK/,
-								/^MODE/
-							]
+							if response.length > 0 and response.class.to_s.downcase == "string"
+								#this grants a form of access to sockets and allows
+								#the bot to run special commands through modules
+								#say "PRIVMSG #{chan_name} :#{msg}"
+								#format the message to return as PRIVMSG #channel | nick :message text you want to send to a channel or someone
+								prefix = [
+									/^PRIVMSG /,
+									/^NOTICE /,
+									/^KICK/,
+									/^MODE/
+								]
 
-							reg_s = Regexp.union(prefix)
+								reg_s = Regexp.union(prefix)
 
-							if response.match(reg_s) # or any other i feel like adding
-								if response.include? "\n"
-									@res_new = response.split("\n")
-									tokens = @res_new[0].split(' ')
-									1.upto(@res_new.length - 1) { |a| @res_new[a].prepend("#{tokens[0]} #{tokens[1]} :")}
-									@res_new.each do |a|
-										say "#{a}"
+								if response.match(reg_s) # or any other i feel like adding
+									if response.include? "\n"
+										@res_new = response.split("\n")
+										tokens = @res_new[0].split(' ')
+										1.upto(@res_new.length - 1) { |a| @res_new[a].prepend("#{tokens[0]} #{tokens[1]} :")}
+										@res_new.each do |a|
+											say "#{a}"
+										end
+									else
+										say "#{response}"
 									end
 								else
-									say "#{response}"
-								end
-							else
-								if response.include? "\n"
-									@res_new = response.split("\n")
-									@res_new.each do |a|
-										say_to_chan("#{a}", chan)
+									if response.include? "\n"
+										@res_new = response.split("\n")
+										@res_new.each do |a|
+											say_to_chan("#{a}", chan)
+										end
+									else
+										say_to_chan("#{response}", chan)
 									end
-								else
-									say_to_chan("#{response}", chan)
-								end
 
-								next
+									next
+								end
 							end
 						end
 					end
 				end
+
+				#if the reponse is actually worth running the send and it is also a string
 			end
 
-			#if the reponse is actually worth running the send and it is also a string
+			def quit
+				say "PART ##{@channel} :"
+				say 'QUIT'
+
+				@socket.sysclose
+			end
 		end
 
-		def quit
-			say "PART ##{@channel} :"
-			say 'QUIT'
+		bot1 = Ircbot.new("#{ARGV[0].to_s}", "#{ARGV[1].to_i}", "#{ARGV[2].to_s}", "#{ARGV[3].to_s}") #, "#{ARGV[4].to_s}")
 
-			@socket.sysclose
-		end
-	end
+		bot1.run
 
-	bot1 = Ircbot.new("#{ARGV[0].to_s}", "#{ARGV[1].to_i}", "#{ARGV[2].to_s}", "#{ARGV[3].to_s}") #, "#{ARGV[4].to_s}")
-
-	bot1.run
-
-	#Thread.new { bot1.run }
+		#Thread.new { bot1.run }
