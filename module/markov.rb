@@ -46,7 +46,7 @@ class Template < Pluginf
 		if tokens.length > 12
 			len = rand(5) + 7
 			@r_shrink = ""
-			0.upto(len) { |a| @r_shrink.contcat("#{a} ") }
+			0.upto(len) { |a| @r_shrink.concat("#{a} ") }
 			@r_shrink = @r_shrink[0..-2].to_s
 			@r_shrink.concat(".")
 			return @r_shrink
