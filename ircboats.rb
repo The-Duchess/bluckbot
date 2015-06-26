@@ -561,54 +561,54 @@ class Ircbot
 				end
 
 				#response = parse(nick, chan, message)
+				if $plugins_s.class != nil
+					if $plugins_s_s.length > 0 then
+						$plugins_s.each do |a|
+							if message.match(a.regex) and (a.chans.include? chan or a.chans.include? "any") then
+								response = a.script(message, nick, chan)
 
-				if $plugins_s_s.length > 0 then
-					$plugins_s.each do |a|
-						if message.match(a.regex) and (a.chans.include? chan or a.chans.include? "any") then
-							response = a.script(message, nick, chan)
+								if response.length > 0 and response.class.to_s.downcase == "string"
+									#this grants a form of access to sockets and allows
+									#the bot to run special commands through modules
+									#say "PRIVMSG #{chan_name} :#{msg}"
+									#format the message to return as PRIVMSG #channel | nick :message text you want to send to a channel or someone
+									prefix = [
+										/^PRIVMSG /,
+										/^NOTICE /,
+										/^KICK/,
+										/^MODE/
+									]
 
-							if response.length > 0 and response.class.to_s.downcase == "string"
-								#this grants a form of access to sockets and allows
-								#the bot to run special commands through modules
-								#say "PRIVMSG #{chan_name} :#{msg}"
-								#format the message to return as PRIVMSG #channel | nick :message text you want to send to a channel or someone
-								prefix = [
-									/^PRIVMSG /,
-									/^NOTICE /,
-									/^KICK/,
-									/^MODE/
-								]
+									reg_s = Regexp.union(prefix)
 
-								reg_s = Regexp.union(prefix)
-
-								if response.match(reg_s) # or any other i feel like adding
-									if response.include? "\n"
-										@res_new = response.split("\n")
-										tokens = @res_new[0].split(' ')
-										1.upto(@res_new.length - 1) { |a| @res_new[a].prepend("#{tokens[0]} #{tokens[1]} :")}
-										@res_new.each do |a|
-											say "#{a}"
+									if response.match(reg_s) # or any other i feel like adding
+										if response.include? "\n"
+											@res_new = response.split("\n")
+											tokens = @res_new[0].split(' ')
+											1.upto(@res_new.length - 1) { |a| @res_new[a].prepend("#{tokens[0]} #{tokens[1]} :")}
+											@res_new.each do |a|
+												say "#{a}"
+											end
+										else
+											say "#{response}"
 										end
 									else
-										say "#{response}"
-									end
-								else
-									if response.include? "\n"
-										@res_new = response.split("\n")
-										@res_new.each do |a|
-											say_to_chan("#{a}", chan)
+										if response.include? "\n"
+											@res_new = response.split("\n")
+											@res_new.each do |a|
+												say_to_chan("#{a}", chan)
+											end
+										else
+											say_to_chan("#{response}", chan)
 										end
-									else
-										say_to_chan("#{response}", chan)
-									end
 
-									next
+										next
+									end
 								end
 							end
 						end
 					end
 				end
-
 				#if the reponse is actually worth running the send and it is also a string
 
 			end
