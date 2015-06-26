@@ -28,9 +28,9 @@ class Template < Pluginf
 
 		@m = nil
 
-		if !File.exists?("markovchain.db")
+		if !File.exists?("./res/markovchain.db")
 			`touch markovchain.db`
-			@m = MarkovChat.new("markovchain.db")
+			@m = MarkovChat.new("./res/markovchain.db")
 			@m.add_sentence("r u a big guy")
 			@m.add_sentence("benis")
 			@m.add_sentence("sayaka is a slut")
@@ -39,12 +39,25 @@ class Template < Pluginf
 			@m.save
 			#@markov_object.load
 		else
-			@m = MarkovChat.new("markovchain.db")
+			@m = MarkovChat.new("./res/markovchain.db")
 			@m.save
 			#@markov_object.load
 	    end
 
 	    @m.load
+
+	    if !File.exists?("./res/lg")
+	    	return
+	    end
+
+		# read in file into markov bot
+		File.open("./res/lg", "r") do |fr|
+			while line = fr.gets
+				line = line.chomp
+				# pass line to markov chain obj
+				@markov_object.add_sentence("#{line}")
+			end
+		end
 	end
 
 
@@ -55,7 +68,7 @@ class Template < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 
-		if message.match(/^\?/)
+		if message.match(/^?/)
 			p "triggering message generate"
 			message = message[1..-1].to_s
 			word = message.split(" ")[0].to_s
