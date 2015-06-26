@@ -274,6 +274,300 @@ class Ircbot
 
 					say_to_chan("#{nick} ( \x0304◕\x03‿\x0304◕\x03)",chan)
 				end
+				if message[0..-1].match(/^`load chans/)
+					File.open("./res/.chanlist", 'r') do |fr|
+						while line = fr.gets
+							#say_to_chan(line, "apels_")
+							if line.include? ' '
+								if @channel_s.include? line.to_s
+									next
+								end
+
+								say "JOIN #{line}"
+								@channel_s.push(line.to_s)
+								next
+							end
+						end
+					end
+
+					next
+				end
+
+				if message[0..-1].match(/^`list channels$/)
+					if !$admin_s.include? nick.to_s
+						say "NOTICE #{nick} :please do not disturb the irc bots."
+						next
+					end
+
+					@channel_s.each do |a|
+						p a
+						say "NOTICE #{nick} :#{a.split(' ')[0].to_s}"
+						next
+					end
+
+					next
+					#say_to_chan(list, chan)
+				end
+
+				if message[0..-1].match(/^`msg /) and nick == chan
+					if $admin_s.include? nick.to_s
+						arg = message[0..-1].split(' ')
+						message_t = ""
+						2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ") }
+						say_to_chan(message_t[0..-1], arg[1].to_s)
+						next
+					else
+						"NOTICE #{nick} :please do not disturb the irc bots."
+					end
+
+					next
+				end
+
+				if message[0..-1].match(/^`act /) and nick == chan
+					if $admin_s.include? nick.to_s
+						arg = message[0..-1].split(' ')
+						message_t = ""
+						2.upto(arg.length.to_i - 1) { |a| message_t.concat("#{arg[a].to_s} ") }
+						say_to_chan("\001ACTION #{message_t[0..-1]}\001", arg[1].to_s)
+						next
+					else
+						"NOTICE #{nick} :please do not disturb the irc bots."
+					end
+
+					next
+				end
+
+				if message[0..-1].match(/^`k /)
+					if $admin_s.include? nick.to_s
+						reason = ""
+						tokens = message[0..-1].split(' ')
+						user = tokens[1].to_s
+						2.upto(tokens.length - 1) { |a| reason.concat("#{tokens[a].to_s}") }
+
+						say "KICK #{chan} #{user} \"#{reason}\""
+						next
+					else
+						say "NOTICE #{nick} :you are not in the admin file"
+						say "NOTICE #{nick} :please contact the bot owner for questions"
+					end
+
+					next
+				end
+
+				if message[0..-1].match(/^`ignore /)
+					if $admin_s.include? nick
+						nick_b = message[8..-1].split(' ')
+						nick_b.each do |a|
+							@ignore_s.push(a.to_s)
+							say "NOTICE #{a} :You had been informed not to disturb the irc bots but apparently you couldn't help yourself."
+						end
+						next
+					else
+						say "NOTICE #{nick} :please do not disturb the irc bots."
+					end
+
+					next
+				end
+
+				if message[0..-1].match(/^`unignore /)
+					if $admin_s.include? nick
+						nick_b = message[8..-1].split(' ')
+						nick_b.each do |a|
+							@ignore_s.delete_if { |b| b == a }
+						end
+						next
+					else
+						say "NOTICE #{nick} :please do not disturb the irc bots."
+					end
+
+					next
+				end
+
+				if message[0..-1].match(/`lsign/) #list ignored nicks
+					if $admin_s.include? nick
+						say "NOTICE #{nick} :Ignored Nicks ===================="
+						@ignore_s.each do |a|
+							say "NOTICE #{nick} :#{a}"
+						end
+						say "NOTICE #{nick} :=================================="
+						next
+					else
+						say "NOTICE #{nick} :please do not disturb the irc bots."
+					end
+
+					next
+				end
+
+				if message.match(/^`join ##?/)
+					say "JOIN #{message[6..-1]}"
+
+					if not $admin_s.include? nick
+						say_to_chan("You must gather your party before venturing forth.", chan)
+						say "NOTICE #{nick} :please do not disturb the irc bots."
+						next
+					else
+
+						if message[6..-1].include? ' '
+							if @channel_s.include? message[6..-1].to_s
+								next
+							end
+
+							@channel_s.push(message[6..-1].to_s)
+							next
+						else
+							if @channel_s.include? message[6..-1].to_s
+								next
+							end
+
+							@channel_s.push(message[6..-1].to_s)
+						end
+
+					end
+
+					next
+				end
+
+				if message[0..-1].match(/^`save chans/)
+					File.open("./res/.chanlist", 'w') do |fw|
+						@channel_s.each do |a|
+							fw.puts a
+						end
+					end
+					next
+				end
+
+				if message[0..-1].match(/^`part/)
+					if $admin_s.include? nick
+						say "PART #{chan}"
+						next
+					else
+						say "NOTICE #{nick} :please do not disturb the irc bots."
+					end
+
+					next
+				end
+
+				if message[0..- 1].match(/^`plsgo$/)
+					if $admin_s.include? nick.to_s
+						$plugins_s.each do |i|
+							i.cleanup
+						end
+						say_to_chan("This exchange is over.", chan)
+						quit
+						break
+					else
+						say "NOTICE #{nick} :you are not in the admin file"
+						say "NOTICE #{nick} :please contact the bot owner for questions"
+					end
+				end
+
+				if message[0..-1].match(/^`help$/)
+					if message[0..-1].match(/^`help$/)
+						response = "`info for info. `usage for usage. `help $TOPIC for help on a module"
+						say "NOTICE #{nick} :#{response}"
+						next
+					end
+
+					next
+				end
+
+				if message[0..-1].match(/^`reload /)
+					if $admin_s.include? nick.to_s
+						unload("`unload #{message[8..-1]}", nick, chan)
+						load("`load #{message[8..-1]}.rb", nick, chan)
+						next
+					else
+						say "NOTICE #{nick} :please do not disturb the irc bots."
+					end
+					next
+				end
+
+				if message.match(/^`load /) and message.length > 5
+					load("`load #{message[6..-1]}.rb", nick, chan)
+					next
+				end
+
+				if message.match(/^`ls$/)
+
+					if not check_admin(nick)
+						say "NOTICE #{nick} :you are not in the admin file\nplease contact the bot owner for questions"
+					end
+
+					@r = "NOTICE #{nick} :"
+					@ra = `ls ./module/`.split("\n").each { |a| a.to_s[0..-1] }
+					@ra.each { |a| @r.concat("#{a} ") }
+					say @r[0..-1].to_s
+
+				end
+
+				if message.match(/^`list$/)
+
+					@r = "NOTICE #{nick} :"
+
+					$plugins_s.each do |a|
+						#p a.class.to_s
+						#p a.regex.to_s
+						#p a.name.to_s
+						#p a.help.to_s
+						@r.concat("#{a.name} ")
+					end
+
+					say @r[0..-2].to_s
+				end
+
+				if message.match(/^`help /)
+					@ii = 0
+					@r = ""
+					$plugins_s.each do |a|
+						#p message.to_s[6..-1]
+						#p a.name.to_s
+						if a.name.to_s.downcase == message.to_s.downcase[6..-1]
+							@r = "NOTICE #{nick} :#{a.name} description: #{a.help}"
+							say @r.to_s
+						end
+
+						next
+					end
+
+					say_to_chan("no plugin: #{message[6..-1]} was found", chan)
+				end
+
+				if message.match(/^`unload /)
+					unload("`unload #{message[8..-1]}", nick, chan)
+					next
+				end
+
+				if message.match(/^`mass load$/)
+
+					if not check_admin(nick)
+						return "NOTICE #{nick} :please do not disturb the irc bots."
+					end
+
+					temp_r = []
+					File.open("./res/.modlist", 'r') do |fr|
+						while line = fr.gets
+							line.chomp!
+							temp_r.push(line.to_s)
+						end
+					end
+					temp_p = []
+					$plugins_s.each { |a| temp_p.push("#{a.name.downcase}.rb") }
+					temp_r.each do |a|
+						if temp_p.include? a
+							p "#{a} is already loaded"
+							next
+						end
+
+						$LOAD_PATH << './module'
+						begin
+							load "#{a}"
+						rescue => e
+							p "failed to load #{a}"
+						end
+
+						$LOAD_PATH << './'
+					end
+				end
 
 
 				#if $plugins_s.class != nil
