@@ -30,10 +30,17 @@ class Template < Pluginf
 
 		if !File.exists?("markovchain.db")
 			`touch markovchain.db`
+			@m.add_sentence("r u a big guy")
+			@m.add_sentence("benis")
+			@m.add_sentence("sayaka is a slut")
+			@m.add_sentence("HURR DURR MUH SOMETHING RETARDED")
+			@m.add_sentence("piss")
 			@m = MarkovChat.new("markovchain.db")
+			@m.save
 			#@markov_object.load
 		else
 			@m = MarkovChat.new("markovchain.db")
+			@m.save
 			#@markov_object.load
 	    end
 
