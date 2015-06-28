@@ -21,7 +21,14 @@ class YouTube < Pluginf
 	#your definition for script
 	def script(message, nick, chan)
 		@r = ""
-		video_n = message.split("=")[1].to_s.split(" ")[0].to_s
+		video_n = ""
+
+		if message.include? "="
+			video_n = message.split("=")[1].to_s.split(" ")[0].to_s
+		else
+			video_n = message.split(".be")[1].to_s[1..-1].to_s
+		end
+
 		response = "\x031,0You\x030,4Tube\x03 "
 		result = Hash.new
 
