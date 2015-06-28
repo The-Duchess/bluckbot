@@ -31,8 +31,8 @@
 
 >- .config.sh contains the connection information for the bot
 >- .admins contains the list of admin users as nicks
->- .chanlist contains a list of channels that can be joined with `load chans
->- .modlist contains a list of modules as their file names that can be loaded with `mass load
+>- .chanlist contains a list of channels that can be joined with \`load chans
+>- .modlist contains a list of modules as their file names that can be loaded with \`mass load
 >- .nick_name contains the nick for the bot (default: bluckbot)
 
 **Using:**

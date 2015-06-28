@@ -10,23 +10,25 @@
 # example for ssl     ruby ircboats.rb irc.rizon.net 6697 channelname false
 # example for network with a PASS ruby ircboats.rb somenet 6697 channelname false PASS passphrase
 ####################################################################################################################
-# commands
-# `plsgo : tells the bot to quit
-# `ignore $NICK : tells the bot to ignore a nick
-# `save | `load chans : saves and loads channels from currently active and previously saved
-# /msg bluckbot `list channels : lists channels, must be a pm from the owner
-# `msg $NICK message : sends a message to $NICK
-# `part : parts the active channel
-# `join $#CHANNEL : joins a channel
-# `k $NICK reason: only accessible to the owner and kicks a user from the channel
-# `help : prints help
-# `load $MODULE : loads a module
-# `unload $MODULE : unloads a module
-# `ls : lists modules
-# `list : lists loaded modules
-# `help $MODULE : gives help on a certain module
-# `help modules : gives help for all loaded modules
-# `mass load : loads a preset set of modules in ./res/.modlist
+#>- \`plsgo : tells the bot to quit
+#>- \`ignore $NICK : tells the bot to ignore a nick
+#>- \`unignore $NICK : tells the bot to remove a nick from the ignore list
+#>- \`lsign : gives a list of ignored nicks
+#>- \`save | \`load chans : saves and loads channels from currently active and previously saved
+#>- \`list channels : lists channels
+#>- \`msg $NICK message : sends a message to $NICK
+#>- \`act $CHANNEL action : sends an action to $CHANNEL
+#>- \`part : parts the bot from the channel this is sent from
+#>- \`join $#CHANNEL : joins a channel
+#>- \`k $NICK reason: only accessible to the owner and kicks a user from the channel
+#>- \`help : prints help
+#>- \`load $MODULE : loads a module
+#>- \`unload $MODULE : unloads a module
+#>- \`reload $MODULE : reloads a module
+#>- \`ls : lists modules
+#>- \`list : lists loaded modules
+#>- \`help $MODULE : gives help on a certain module
+#>- \`mass load : loads a preset set of modules in ./res/.modlist
 ####################################################################################################################
 
 require 'socket'
@@ -234,7 +236,7 @@ class Ircbot
 					if @logging == true and nick != $nick_name
 						#system("echo \"#{msg}\" >> ./res/log")
 						#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
-						temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message.chomp!}\n"
+						temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message}\n"
 						File.write("./res/log", "#{temp_line}", File.size("./res/log"), mode: 'a')
 
 					end
@@ -247,7 +249,7 @@ class Ircbot
 					if @logging == true and nick != $nick_name
 						#system("echo \"#{msg}\" >> ./res/log")
 						#File.open("./res/log", 'a') { |fw| fw.puts "#{msg}"}
-						temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message.chomp!}\n"
+						temp_line = "[SERVER: #{@serv_name}] [NICK: #{nick}] #{command} #{chan} :#{message}\n"
 						File.write("./res/log", "#{temp_line}", File.size("./res/log"), mode: 'a')
 					end
 				end
@@ -255,7 +257,7 @@ class Ircbot
 				if chan == "#{$nick_name}"
 					#system("echo \"#{@serv_name} #{msg}\" >> ./res/log_p")
 					#File.open("./res/log_p", 'a') { |fw| fw.puts "#{@serv_name} #{msg}"}
-					temp_line = "PM LOG FILE ENTRY INFO: NETWORK: #{@serv_name} MESSAGE INFO: NICK: #{nick} MESSAGE_PARAM: #{message.chomp}\n"
+					temp_line = "PM LOG FILE ENTRY INFO: NETWORK: #{@serv_name} MESSAGE INFO: NICK: #{nick} MESSAGE_PARAM: #{message}\n"
 					File.write("./res/log_p", "#{temp_line}", File.size("./res/log_p"), mode: 'a')
 					chan = nick
 				end
