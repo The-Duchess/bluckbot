@@ -32,7 +32,7 @@ class Admin < Pluginf
 
 	   	File.open("./res/.admins", 'w') do |fw|
 	   		$admin_s.each do |fw_l|
-	   			fw.write(fw_l.to_s)
+	   			fw.write("#{fw_l}\n")
 	   		end
     	end
 
