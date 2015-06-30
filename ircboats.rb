@@ -151,7 +151,7 @@ class Ircbot
 			@rb = @ra[0..-1].split(" ")
 			@rb.each do |a|
 				if a == ls
-					say_to_chan("#{ls} is already loaded", channel)
+					say_to_chan("#{ls} is already loaded", chan)
 					return
 				end
 			end
