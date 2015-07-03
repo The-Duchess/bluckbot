@@ -17,7 +17,7 @@ Plugins should be made using the template. There are things you will need to cha
 >- Change the Class Name to somehting appropriate for your plugin, note: ruby requires class name to begin with a capital. Also change the Template at the bottom where the new instance is allocated.
 >- the prefix option allows for more complex regex to trigger the plugin. since the easiest way to determine what to do in IRC is regex pattern matching; plugins are called if the message someone says (the message variable) matches the pattern. so either use a simple regex or a union of a set. this variable is reg_p at the bottom.
 >- you will need to set the name. the convention to allow for easy reloading without storing additional variables works by having the downcase of the name be the filename without the .rb. this also requires your filename to be lower case, so remember that when you save. the variable for name is na.
->- you may also want to provide a description or help for users for your plugin. this the variable de.
+>- you may also want to provide a description or help for users for your plugin. this is variable de.
 
 After that there are some globals that are more convenient to be stored globally as opposed to passed around. these are the backlog which are stored most recent to least recent. they the unparsed message lines read from the IRC sock. you also have a list of admins by nick to filter users or abuse the bot if you feel like exploiting your own bot instance. and there is the plugin list but you shouldn't need to use this unless you want to make a plugin to remove the need of the bot core control.
 
