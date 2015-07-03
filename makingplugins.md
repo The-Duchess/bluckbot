@@ -18,6 +18,6 @@ Plugins should be made using the template. There are things you will need to cha
 
 After that there are some globals are are more convenient to be stored globally as opposed to passed around. these are the backlog which are stored most recent to least recent. they the unparsed message lines read from the IRC sock. you also have a list of admins by nick to filter users or abuse the bot if you feel like exploiting your own bot instance. and there is the plugin list but you shouldn't need to use this unless you want to make a plugin to remove the need of the bot core control.
 
-You can add additional functions to the bot, and multithread if you want, however remember that irc is driven from events of reads from the sock and triggers for plugins are synchronous with this. however all plugins that match a regex will be checked so you can use a regex // and manage threads on any message.
+You can add additional functions to the plugin inside the class, and multithread if you want, however remember that irc is driven from events of reads from the sock and triggers for plugins are synchronous with this. however all plugins that match a regex will be checked so you can use a regex // and manage threads on any message.
 
 a last note. plugins default to ["any"] for channels that they can be called in. this can be edited if you want something to work only in one. a good example would be a multiplayer game.
