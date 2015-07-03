@@ -20,4 +20,4 @@ After that there are some globals are are more convenient to be stored globally 
 
 You can add additional functions to the plugin inside the class, and multithread if you want, however remember that irc is driven from events of reads from the sock and triggers for plugins are synchronous with this. however all plugins that match a regex will be checked so you can use a regex // and manage threads on any message.
 
-a last note. plugins default to ["any"] for channels that they can be called in. this can be edited if you want something to work only in one. a good example would be a multiplayer game.
+a last note. plugins default to ["any"] for channels that they can be called in. this can be edited if you want something to work only in any set of locations. a good example would be a multiplayer game.
