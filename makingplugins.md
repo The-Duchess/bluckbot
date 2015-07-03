@@ -5,7 +5,9 @@ Plugins use polymorphism to achieve a modular behavior by making plugins parent 
 >This is Achieved by the base class stored in module/.pluginf.rb which stores default functionss for initalization, script, and cleanup as well as other functions you will not need to or should not touch (i.e regex).
 - initialization can be edited to allow you to hold additional variables in the plugin class and load files
 - script is the function that is called by the bot core and is what should return your message line
-> NOTE: if you return a string not prefixed by a command destination : then the message will be set back to the previous channel in one message per line; delimited by \n. however if you prefix that with command destination : the bot core formats it into a number of messages based on \n as a delimiter and puts the command destination : at the beginning of all of them. not all commands are supported; as of now PRIVMSG, NOTICE, KICK, and MODE are supported. any information on this can be located in the IRC RFC.
+
+>> NOTE: if you return a string not prefixed by a "command destination :" then the message will be set back to the previous channel in one message per line; delimited by '\n'. however if you prefix that with "command destination :" the bot core formats it into a number of messages based on '\n' as a delimiter and puts the "command destination :" at the beginning of all of them. not all commands are supported; as of now PRIVMSG, NOTICE, KICK, and MODE are supported. any information on this can be located in the IRC RFC.
+>
 - cleanup allows for modules to save files on close as this function is called when a plugin is unloaded and when the bot exits safely.
 
 Plugins should be made using the template. There are things you will need to change in order you make your plugin behave as well as conventions you will need to follow. most, if not all, of this information is in module/.template.rb but i will clarify what needs to be done to create your plugin.
