@@ -57,7 +57,7 @@
 >- \`help $MODULE : gives help on a certain module
 >- \`mass load : loads a preset set of modules in ./res/.modlist
 
-> Note: To create Plugins follow the template ./module/.template.rb
+> Note: To create Plugins follow the [Instructions](https://github.com/The-Duchess/bluckbot/blob/master/makingplugins.md)
 
 **Screenshot**
 
