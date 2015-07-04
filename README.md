@@ -12,7 +12,7 @@
 
 > Note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
 
-**Libraries**
+**Libraries for Default Instance and All Existing Plugins**
 
 >- 'cgi'
 >- 'json'
