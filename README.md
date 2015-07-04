@@ -3,7 +3,7 @@
 - Bluckbot is a modular/plugable irc bot written with the Ruby programming language
 - Bluckbot requires ruby 2.1 or higher
 - Bluckbot is written by Alice "Duchess" Archer
-- To use run clone this repository on your machine and then choose your method of setup
+- To use, clone this repository on your machine and then choose your method of setup
 - To setup for use without manually configuring, run setup.rb
 - To setup run setup.sh and it will create the necessary files/folders for basic operation and you can configure manually
 - To run if configs are setup run ./run.sh
