@@ -8,7 +8,7 @@
 - To run if configs are setup run ./run.sh
 - The config setup scripts rely on linux core utils and will not work in windows.
 - The screenshot below is the bot seen via PuTTY running in Windows 8.1
-
+- Note: To create Plugins follow the [Instructions](https://github.com/The-Duchess/bluckbot/blob/master/makingplugins.md)
 
 > Note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
 
@@ -56,8 +56,6 @@
 >- \`list : lists loaded modules
 >- \`help $MODULE : gives help on a certain module
 >- \`mass load : loads a preset set of modules in ./res/.modlist
-
-> Note: To create Plugins follow the [Instructions](https://github.com/The-Duchess/bluckbot/blob/master/makingplugins.md)
 
 **Screenshot**
 
