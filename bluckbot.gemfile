@@ -1,0 +1,14 @@
+source 'https://rubygems.org'
+
+gem 'rubysl-open-uri'
+gem 'rubysl-optparse'
+gem 'multi-json'
+gem 'json'
+
+group :markov
+	gem 'marky_markov'
+end
+
+group :youtube
+	gem 'google-api-client'
+end
