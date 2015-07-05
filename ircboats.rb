@@ -542,7 +542,7 @@ class Ircbot
 				if message.match(/^`mass load$/)
 
 					if not check_admin(nick)
-						return "NOTICE #{nick} :please do not disturb the irc bots."
+						say "NOTICE #{nick} :please do not disturb the irc bots."
 					end
 
 					temp_r = []
