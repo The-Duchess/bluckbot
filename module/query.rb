@@ -43,7 +43,7 @@ class Query_s < Pluginf
 
 	def select(results, query_text)
 		choice = "results for : #{query_text}: #{results.length} Results:\n"
-		range = results.length - 1
+		range = results.length
 
 		r = rand(range)
 
