@@ -70,12 +70,12 @@ class Ircbot
 		puts "	 	 "
 		puts "	 	 ↪ Nick: #{$nick_name}"
 		puts "	 	 "
-		puts "		 ↪ Name: test"
+		puts "		 ↪ Name: bluckbot"
 		puts "	 	 "
-		puts "	 	 ↪ User: k"
+		puts "	 	 ↪ User: bluckbot"
 		#STDOUT.flush
 		say "NICK #{$nick_name}"
-		say "USER k 0 * test"
+		say "USER bluckbot 0 * bluckbot"
 		puts "	 "
 		puts "	 ↪ Joining ##{@channel}"
 		#STDOUT.flush
