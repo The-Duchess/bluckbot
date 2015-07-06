@@ -66,28 +66,28 @@ class Ircbot
 			end
 		end
 		puts "	 "
-		puts "	 ↪Authenticating"
+		puts "	 ↪ Authenticating"
 		puts "	 	 "
-		puts "	 	 ↪Nick: #{$nick_name}"
+		puts "	 	 ↪ Nick: #{$nick_name}"
 		puts "	 	 "
-		puts "		 ↪Name: test"
+		puts "		 ↪ Name: test"
 		puts "	 	 "
-		puts "	 	 ↪User: k"
+		puts "	 	 ↪ User: k"
 		#STDOUT.flush
 		say "NICK #{$nick_name}"
 		say "USER k 0 * test"
 		puts "	 "
-		puts "	 ↪Joining ##{@channel}"
+		puts "	 ↪ Joining ##{@channel}"
 		#STDOUT.flush
 		say "JOIN ##{@channel}"
 		$logs = Array.new
 		if logging.to_s == "TRUE"
 			puts "	 "
-			puts "	 ↪Logging enabled"
+			puts "	 ↪ Logging enabled"
 			@logging = true
 		else
 			puts "	 "
-			puts "	 ↪Logging disabled"
+			puts "	 ↪ Logging disabled"
 			@logging = false
 		end
 
@@ -100,7 +100,7 @@ class Ircbot
 		$admin_s = []
 
 		puts "	 "
-		puts "	 ↪Loading admin file"
+		puts "	 ↪ Loading admin file"
 		File.open("./res/.admins", 'r') do |fr|
 			while line = fr.gets
 				line.chomp!
@@ -108,7 +108,7 @@ class Ircbot
 					$admin_s.push(line.to_s)
 				end
 				puts "		 "
-				puts "		 ↪#{line}"
+				puts "		 ↪ #{line}"
 			end
 		end
 
