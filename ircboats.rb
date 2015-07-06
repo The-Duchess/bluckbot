@@ -65,29 +65,29 @@ class Ircbot
 				end
 			end
 		end
-		puts "	|"
-		puts "	|_Authenticating"
-		puts "	|	|"
-		puts "	|	|_Nick: #{$nick_name}"
-		puts "	|	|"
-		puts "	|	|_Name: test"
-		puts "	|	|"
-		puts "	|	|_User: k"
+		puts "	 "
+		puts "	 ↪Authenticating"
+		puts "	 	 "
+		puts "	 	 ↪Nick: #{$nick_name}"
+		puts "	 	 "
+		puts "		 ↪Name: test"
+		puts "	 	 "
+		puts "	 	 ↪User: k"
 		#STDOUT.flush
 		say "NICK #{$nick_name}"
 		say "USER k 0 * test"
-		puts "	|"
-		puts "	|_Joining ##{@channel}"
+		puts "	 "
+		puts "	 ↪Joining ##{@channel}"
 		#STDOUT.flush
 		say "JOIN ##{@channel}"
 		$logs = Array.new
 		if logging.to_s == "TRUE"
-			puts "	|"
-			puts "	|_Logging enabled"
+			puts "	 "
+			puts "	 ↪Logging enabled"
 			@logging = true
 		else
-			puts "	|"
-			puts "	|_Logging disabled"
+			puts "	 "
+			puts "	 ↪Logging disabled"
 			@logging = false
 		end
 
@@ -99,16 +99,16 @@ class Ircbot
 
 		$admin_s = []
 
-		puts "	|"
-		puts "	|_Loading admin file"
+		puts "	 "
+		puts "	 ↪Loading admin file"
 		File.open("./res/.admins", 'r') do |fr|
 			while line = fr.gets
 				line.chomp!
 				if line != "\n" and line != "" and line != "\r\n"
 					$admin_s.push(line.to_s)
 				end
-				puts "		|"
-				puts "		|_#{line}"
+				puts "		 "
+				puts "		 ↪#{line}"
 			end
 		end
 
