@@ -226,6 +226,14 @@ class Ircbot
 
 				message = message.chomp
 
+				#if command == "PRIVMSG"
+					puts "message"
+					puts "	↪ nick: #{nick}"
+					puts "	↪ command: #{command}"
+					puts "	↪ channel: #{chan}"
+					puts "	↪ msg: #{message}"
+				#end
+
 				if $logs.length == 1000 then
 
 					if nick != $nick_name
