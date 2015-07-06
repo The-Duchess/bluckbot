@@ -231,19 +231,19 @@ def main
 	if $channels 
 		puts "[✔] Channels addded To res/.chanlist"
 	else
-		puts "[ ] No Channels Added To res/.chanlists"
+		puts "[ ] Channels Added To res/.chanlists"
 	end
 
 	if $plugins
 		puts "[✔] Modules Added To res/.modlist"
 	else
-		puts "[ ] No Modules Added  To res/.modlist"
+		puts "[ ] Modules Added  To res/.modlist"
 	end
 
 	if $nickname
 		puts "[✔] Custom Nick Added To res/.nick_name"
 	else
-		puts "[ ] No Custom Nick Added To res/.nick_name"
+		puts "[ ] Custom Nick Added To res/.nick_name"
 	end
 
 	puts "[✔] Comfig Script Complete"
