@@ -10,11 +10,11 @@ Plugins use polymorphism to achieve a modular behavior by making plugins parent 
 >
 - cleanup allows for modules to save files on close as this function is called when a plugin is unloaded and when the bot exits safely.
 
-Plugins should be made using the template. There are things you will need to change in order you make your plugin behave as well as conventions you will need to follow. most, if not all, of this information is in module/.template.rb but i will clarify what needs to be done to create your plugin.
+Plugins should be made using the template. There are things you will need to change in order you make your plugin behave as well as conventions you will need to follow. most, if not all, of this information is in module/.template.rb as well as this file will clarify what needs to be done to create your plugin.
 
 >Things to change
 >- any additional libraries you will need, as well as gems, must be loaded before the change in $LOAD_PATH.
->- Change the Class Name to somehting appropriate for your plugin, note: ruby requires class name to begin with a capital. Also change the Template at the bottom where the new instance is allocated.
+>- Change the Class Name to something appropriate for your plugin, note: ruby requires class name to begin with a capital character. Also change the Template at the bottom where the new instance is allocated.
 >- the prefix option allows for more complex regex to trigger the plugin. since the easiest way to determine what to do in IRC is regex pattern matching; plugins are called if the message someone says (the message variable) matches the pattern. so either use a simple regex or a union of a set. this variable is reg_p at the bottom.
 >- you will need to set the name. the convention to allow for easy reloading without storing additional variables works by having the downcase of the name be the filename without the .rb. this also requires your filename to be lower case, so remember that when you save. the variable for name is na.
 >- you may also want to provide a description or help for users for your plugin. this is variable de.
