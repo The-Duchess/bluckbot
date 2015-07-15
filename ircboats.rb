@@ -551,6 +551,7 @@ class Ircbot
 
 					if not check_admin(nick)
 						say "NOTICE #{nick} :please do not disturb the irc bots."
+						next
 					end
 
 					temp_r = []
