@@ -528,18 +528,22 @@ class Ircbot
 				if message.match(/^`help /)
 					@ii = 0
 					@r = ""
+					found = false
 					$plugins_s.each do |a|
 						#p message.to_s[6..-1]
 						#p a.name.to_s
 						if a.name.to_s.downcase == message.to_s.downcase[6..-1]
 							@r = "NOTICE #{nick} :#{a.name} description: #{a.help}"
 							say @r.to_s
+							found = true
 						end
 
 						next
 					end
 
-					say_to_chan("no plugin: #{message[6..-1]} was found", chan)
+					if !found == true then say_to_chan("no plugin: #{message[6..-1]} was found", chan) end
+
+					next
 				end
 
 				if message.match(/^`unload /) and message.length > 8
