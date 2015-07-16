@@ -246,7 +246,7 @@ def main
 		puts "[ ] Custom Nick Added To res/.nick_name"
 	end
 
-	puts "[✔] Comfig Script Complete"
+	puts "[✔] Config Script Complete"
 
 	print "do you want to start the irc bot now [Y/n]? "
 	STDOUT.flush
