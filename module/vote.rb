@@ -167,6 +167,15 @@ class Vote < Pluginf
 			unlock_vote(topic)
 		elsif tokens[1] == "list"
 			# fuck this noise
+			if tokens[2] == "topics"
+				
+			elsif tokens[2] == "choices"
+
+			elsif tokens[2] == "voters"
+
+			else
+				response = "bad arguments"
+			end
 		elsif tokens.length >= 3
 			choice = tokens[tokens.length - 1].to_s
 			topic = ""
@@ -179,6 +188,8 @@ class Vote < Pluginf
 		else
 			response = "bad arguments"
 		end
+
+		return response
 
 	end
 end
