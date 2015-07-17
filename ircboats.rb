@@ -218,21 +218,15 @@ class Ircbot
 				command = message_reg[:command].to_s
 				chan = message_reg[:params].to_s
 				message = message_reg[:trail].to_s
-				#p "nick: #{nick}"
-				#p "command: #{command}"
-				#p "channel #{chan}"
-				#p "message: #{message}"
-				#p "#{message[0..-1].to_s.length}"
 
 				message = message.chomp
 
-				#if command == "PRIVMSG"
-				#	puts "message"
-				#	puts "	↪ nick: #{nick}"
-				#	puts "	↪ command: #{command}"
-				#	puts "	↪ channel: #{chan}"
-				#	puts "	↪ msg: #{message}"
-				#end
+				# puts "message"
+				# puts "	↪ nick: #{nick}"
+				# puts "	↪ command: #{command}"
+				# puts "	↪ channel: #{chan}"
+				# puts "	↪ msg: #{message}"
+
 
 				if $logs.length == 1000 then
 
