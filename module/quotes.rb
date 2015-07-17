@@ -14,9 +14,9 @@ require '.pluginf.rb'
 class Quote < Pluginf
 
 	def cleanup
-		p save
+		save
 	end
-	
+
 	#adds a description to the key object
 	#if the key does not exist then add it to the hash and the array
 	def add(object, description)
@@ -36,7 +36,7 @@ class Quote < Pluginf
 		#system("echo '#{object}:#{description}' >> ./res/.quotes")
 		#File.open("./res/.quotes", mode: 'a') { |fw| fw.puts "#{object}:#{description}" }
 		File.write("./res/.quotes", "#{object}:#{description}", File.size("./res/.quotes"), mode: 'a')
-		
+
 		return "added"
 	end
 
@@ -78,14 +78,14 @@ class Quote < Pluginf
 				description.concat("#{symbols[a]} ")
 			end
 
-			p "command"
-			p symbols[0]
-			p "nick"
-			p symbols[1]
-			p "said"
-			p symbols[2]
-			p "quote"
-			p description
+			# p "command"
+			# p symbols[0]
+			# p "nick"
+			# p symbols[1]
+			# p "said"
+			# p symbols[2]
+			# p "quote"
+			# p description
 
 			return add(object, description[0..-2])
 
@@ -112,10 +112,10 @@ class Quote < Pluginf
 		File.open("./res/.quotes", 'w') do |fw|
 			temp = ""
 			@keys.each do |a|
-				p a
+				# p a
 				@dict.fetch("#{a}").each { |b| p "THIS IS b: #{b}"; temp.concat("#{b.chomp}"); temp.concat(", ")}
 				temp = temp[0..-3]
-				p temp
+				# p temp
 				if temp.length != 0
 					fw.puts "#{a}:#{temp}"
 				end
@@ -138,7 +138,7 @@ class Quote < Pluginf
 				if description_st.include? ","
 					description_s = description_st.split(", ")
 				else
-					p "BEFORE ADD"
+					# p "BEFORE ADD"
 					#add(object_t, description_st)
 					if @keys.include? object_t
 						@dict["#{object_t}"].push(description_st) #broken
@@ -148,10 +148,10 @@ class Quote < Pluginf
 					end
 					next
 				end
-				p description_s
+				# p description_s
 				description_s.each do |a|
 					a = a.chomp
-					p "BEFORE ADD"
+					# p "BEFORE ADD"
 					#add(object_t, a)
 					if @keys.include? object_t
 						@dict["#{object_t}"].push(a.to_s) #broken
@@ -183,11 +183,11 @@ class Quote < Pluginf
 		@dict = Hash.new(0)
 		@chan_list = []
 		@chan_list.push("any")
-		
+
 		if not File.exist?("./res/.quotes") then
 			`touch ./res/.quotes` #if the karma file does not exist create it
 		end
-		
+
 		load
 		#ObjectSpace.define_finalizer(self, Dict.method(:save))
 	end
