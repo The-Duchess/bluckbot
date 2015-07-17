@@ -105,10 +105,13 @@ class Vote < Pluginf
 	end
 
 	#your definition for script
+	# admin functions
 	# `vote add topic choices
-	# `vote topic choice
+	# 	- add topic: <topic> choices: <choices delimited by a space>
 	# `vote lock topic
 	# `vote unlock topic
+	# general user functions
+	# `vote topic choice
 	# `vote list topics
 	# `vote list choices topic
 	# `vote list voters topic
@@ -128,7 +131,7 @@ end
 
 reg_p = /^`vote / #regex to call the module
 na = "vote" #name for plugin #same as file name without .rb
-de = "`vote [add topic choices] | [topic choice] | [lock topic] | [unlock topic] | [list topics] | [list choices topic] | [list voters topic] " #description
+de = "admin functions\n  `vote add topic: <topic> choices: <choices delimited by a space>\n  `vote lock topic\n  `vote unlock topic\ngeneral user functions\n  `vote topic choice\n  `vote list topics\n  `vote list choices topic  \n`vote list voters topic"
 
 #plugin = Class_name.new(regex, name, help)
 #pushed onto to the end of plugins array array
