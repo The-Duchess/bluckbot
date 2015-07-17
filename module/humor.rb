@@ -40,7 +40,7 @@ class Joke < Pluginf
 			end
 		end
 
-		p @jokes
+		# p @jokes
 	end
 
 	def add(joke)

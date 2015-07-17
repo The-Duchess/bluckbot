@@ -31,7 +31,7 @@ class Weather < Pluginf
 
 		p load_users
 	end
-	
+
 	def add_user(nick, ac_t)
 		#@dict.store("#{object}", ["#{description}"])
 		@users_s.push(nick.to_s)
@@ -101,7 +101,7 @@ class Weather < Pluginf
 
 		today = Time.now.strftime("%A")
 		#today[0].upcase!
-		i = 
+		i =
 		i = week_d.find_index(today)
 
 		if i == 5
@@ -140,7 +140,7 @@ class Weather < Pluginf
 			return 2
 		else
 			return 3
-		end	
+		end
 	end
 
 	def get_forcast(area_code)
@@ -150,35 +150,35 @@ class Weather < Pluginf
 		days_names = Array.new
 		days_names = get_day_names
 		temp_colors = ["02", "03", "08", "04"] # colors to change text color for temperature
-		
+
 		url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=#{@ac}&mode=json&units=imperial&cnt=7"
 		url_m = "http://api.openweathermap.org/data/2.5/forecast/daily?q=#{@ac}&mode=json&units=metric&cnt=7"
 
-		p "BEFORE READ"
+		# p "BEFORE READ"
 
 
 		begin
 			@contents = open(url).read
 		rescue => a
-			p a
+			# p a
 			return "#{@ac} is this place actually real?"
 		end
 
 		begin
 			@contents_m = open(url_m).read
 		rescue => a
-			p a
+			# p a
 			return "#{@ac} is this place actually real?"
 		end
 
-		p "AFTER READ"
+		# p "AFTER READ"
 
 		contents = open(url).read
 		contents_m = open(url_m).read
 		parsed_json = JSON.parse(contents)
 		parsed_json_m = JSON.parse(contents_m)
 
-		p "BEFORE PARSE INTO DAYS"
+		# p "BEFORE PARSE INTO DAYS"
 
 		#p contents.to_s
 		#p  parsed_json.to_s
@@ -190,13 +190,13 @@ class Weather < Pluginf
 			days_fc = parsed_json['list']
 			days_fc_m = parsed_json_m['list']
 
-			p "AT PARSE INTO DAYS"
+			# p "AT PARSE INTO DAYS"
 
 			0.upto(3) do |i|
 				# temperature F
 				begin
 
-					p "PARSING DAY #{i} TEMP"
+					# p "PARSING DAY #{i} TEMP"
 
 					temper_f_min = days_fc[i]['temp']['min'].to_s
 					#t = get_index(temper_f_min)
@@ -227,7 +227,7 @@ class Weather < Pluginf
 			end
 		end
 
-		p "DONE PARSING"
+		# p "DONE PARSING"
 
 		days.each do |a|
 			@r_w.concat("#{a}\n")
@@ -276,7 +276,7 @@ class Weather < Pluginf
 			@r_w.concat("Weather of \x0304#{@ac.to_s}:\x03 #{weathercode} at \x0302#{weather_in_f}°F\x03 or \x0302#{weather_in_c}°C\x03 and winds at \x0311#{parsed_json['wind']['speed']} mph\x03")
 		end
 
-		return @r_w	
+		return @r_w
 	end
 
 	def get_forecast_yahoo(area_code)
@@ -323,7 +323,7 @@ class Weather < Pluginf
 			return @r
 
 		elsif cmd == "`fc" # get forcast for a user
-			
+
 			if (tokens[1] == nick or check_user(tokens[1])) and tokens.length == 2
 				ac_t = get_ac(tokens[1])
 
@@ -418,7 +418,7 @@ class Weather < Pluginf
 			# we have a major problem
 			return "gottverdammt"
 		end
-		
+
 		return @r
 	end
 

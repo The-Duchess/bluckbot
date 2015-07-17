@@ -61,9 +61,9 @@ class UrbDict < Pluginf
 				@parts.push(@rt[((len * a) + i)..-1])
 				break
 			end
-		
-			p "mid"
-			p @rt[((len * a) + i)..((len * (a + 1)) + i)].to_s
+
+			# p "mid"
+			# p @rt[((len * a) + i)..((len * (a + 1)) + i)].to_s
 			@parts.push(@rt[((len * a) + i)..((len * (a + 1)) + i)])
 
 			if i == 0

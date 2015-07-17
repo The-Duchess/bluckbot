@@ -14,9 +14,9 @@ require '.pluginf.rb'
 class Dict < Pluginf
 
 	def cleanup
-		p save
+		save
 	end
-	
+
 	#adds a description to the key object
 	#if the key does not exist then add it to the hash and the array
 	def add(object, description)
@@ -103,10 +103,10 @@ class Dict < Pluginf
 		File.open("./res/.dict", 'w') do |fw|
 			temp = ""
 			@keys.each do |a|
-				p a
+				# p a
 				@dict.fetch("#{a}").each { |b| p "THIS IS b: #{b}"; temp.concat("#{b.chomp}"); temp.concat(", ")}
 				temp = temp[0..-3]
-				p temp
+				# p temp
 				if temp.length != 0
 					fw.puts "#{a}:#{temp}"
 				end
@@ -129,7 +129,7 @@ class Dict < Pluginf
 				if description_st.include? ","
 					description_s = description_st.split(", ")
 				else
-					p "BEFORE ADD"
+					# p "BEFORE ADD"
 					#add(object_t, description_st)
 					if @keys.include? object_t
 						@dict["#{object_t}"].push(description_st) #broken
@@ -142,7 +142,7 @@ class Dict < Pluginf
 				p description_s
 				description_s.each do |a|
 					a = a.chomp
-					p "BEFORE ADD"
+					# p "BEFORE ADD"
 					#add(object_t, a)
 					if @keys.include? object_t
 						@dict["#{object_t}"].push(a.to_s) #broken

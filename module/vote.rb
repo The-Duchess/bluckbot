@@ -161,7 +161,7 @@ class Vote < Pluginf
 
 			lock_vote(topic)
 
-			response = "#{topic}: locked"
+			response = "NOTICE #{chan} :#{topic}: locked"
 
 		elsif tokens[1] == "unlock"
 			topic = ""
@@ -170,7 +170,7 @@ class Vote < Pluginf
 
 			unlock_vote(topic)
 
-			response = "#{topic}: unlocked"
+			response = "NOTICE #{chan} :#{topic}: unlocked"
 
 		elsif tokens[1] == "list"
 			# fuck this noise
