@@ -76,7 +76,7 @@ class Ircbot
             #STDOUT.flush
             say "NICK #{$nick_name}"
             say "USER bluckbot 0 * bluckbot"
-            puts "	 "
+            # puts "	 "
             puts "	 ↪ Joining ##{@channel}"
             #STDOUT.flush
             say "JOIN ##{@channel}"
