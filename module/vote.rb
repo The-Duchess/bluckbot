@@ -146,6 +146,7 @@ class Vote < Pluginf
 	# `vote list topics
 	# `vote list choices topic
 	# `vote list voters topic
+	# `vote save topic
 	def script(message, nick, chan)
 
 		response = ""
@@ -182,6 +183,8 @@ class Vote < Pluginf
 			else
 				response = "bad arguments"
 			end
+		elsif tokens[1] == "save"
+			# fuck this noise
 		elsif tokens.length >= 3
 			choice = tokens[tokens.length - 1].to_s
 			topic = ""
