@@ -72,7 +72,7 @@ class Topic
 	end
 end
 
-class Template < Pluginf
+class Vote < Pluginf
 	#any functions you may need
 	def initialize(regex, name, help)
 		@regexp = Regexp.new(regex.to_s)
@@ -111,6 +111,7 @@ class Template < Pluginf
 	# `vote unlock topic
 	# `vote list topics
 	# `vote list choices topic
+	# `vote list voters topic
 	def script(message, nick, chan)
 		response = ""
 
@@ -125,11 +126,11 @@ end
 #
 # reg_p = Regexp.union(prefix)
 
-reg_p = // #regex to call the module
-na = "template" #name for plugin #same as file name without .rb
-de = "NOTES ^| HELP" #description
+reg_p = /^`vote / #regex to call the module
+na = "vote" #name for plugin #same as file name without .rb
+de = "`vote [add topic choices] | [topic choice] | [lock topic] | [unlock topic] | [list topics] | [list choices topic] | [list voters topic] " #description
 
 #plugin = Class_name.new(regex, name, help)
 #pushed onto to the end of plugins array array
-plugin = Template.new(reg_p, na, de)
+plugin = Vote.new(reg_p, na, de)
 $plugins_s.push(plugin)
