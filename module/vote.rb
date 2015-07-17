@@ -138,8 +138,7 @@ class Vote < Pluginf
 	end
 
 	# admin functions
-	# `vote add topic choices
-	# 	- add topic: <topic> choices: <choices delimited by a space>
+	# `vote add topic: <topic> choices: <choices delimited by a space>
 	# `vote lock topic
 	# `vote unlock topic
 	# general user functions
@@ -148,7 +147,38 @@ class Vote < Pluginf
 	# `vote list choices topic
 	# `vote list voters topic
 	def script(message, nick, chan)
+
 		response = ""
+		tokens = message.split(" ")
+
+		if tokens[1] == "add"
+			# fuck this noise
+		elsif tokens[1] == "lock"
+			topic = ""
+			1.upto(tokens.length - 1) { |a| topic.concat("#{a} ") }
+			topic = topic[0..-2].to_s
+
+			lock_vote(topic)
+		elsif tokens[1] == "unlock"
+			topic = ""
+			1.upto(tokens.length - 1) { |a| topic.concat("#{a} ") }
+			topic = topic[0..-2].to_s
+
+			unlock_vote(topic)
+		elsif tokens[1] == "list"
+			# fuck this noise
+		elsif tokens.length >= 3
+			choice = tokens[tokens.length - 1].to_s
+			topic = ""
+			1.upto(tokens.length - 2) { |a| topic.concat("#{a} ") }
+			topic = topic[0..-2].to_s
+
+			if vote(nick, topic, choice) then response.concat("NOTICE #{nick} :your vote has been added") end
+
+			response = "NOTICE #{nick} :unable to make vote"
+		else
+			response = "bad arguments"
+		end
 
 	end
 end
