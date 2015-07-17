@@ -141,12 +141,12 @@ class Vote < Pluginf
 	# `vote add topic: <topic> choices: <choices delimited by a space>
 	# `vote lock topic
 	# `vote unlock topic
+	# `vote save topic
 	# general user functions
 	# `vote topic choice
 	# `vote list topics
 	# `vote list choices topic
 	# `vote list voters topic
-	# `vote save topic
 	def script(message, nick, chan)
 
 		response = ""
@@ -205,7 +205,7 @@ end
 
 reg_p = /^`vote / #regex to call the module
 na = "vote" #name for plugin #same as file name without .rb
-de = "admin functions\n  `vote add topic: <topic> choices: <choices delimited by a space>\n  `vote lock topic\n  `vote unlock topic\ngeneral user functions\n  `vote topic choice\n  `vote list topics\n  `vote list choices topic  \n`vote list voters topic"
+de = "admin functions\n  `vote add topic: <topic> choices: <choices delimited by a space>\n  `vote lock topic\n  `vote unlock topic\n  `vote save topic\ngeneral user functions\n  `vote topic choice\n  `vote list topics\n  `vote list choices topic  \n`vote list voters topic"
 
 plugin = Vote.new(reg_p, na, de)
 $plugins_s.push(plugin)
