@@ -22,6 +22,10 @@ class Topic
 		@locked = false
 	end
 
+	def name
+		return @topic_name
+	end
+
 	def lock
 		@locked = true
 	end
@@ -84,24 +88,53 @@ class Vote < Pluginf
 		@topics = []
 	end
 
+	def get_topic(name)
+		temp_topic = nil
+
+		@topics.length < 1 then return nil end
+
+		@topics.each { |a| if a.name == name.to_s then return a end }
+
+		return nil
+	end
+
 	def vote(nick, topic, choice)
 
+		@topics.each do |a|
+			if a.name == topic.to_s
+				return a.vote(choice, nick)
+			end
+		end
+
+		return false
 	end
 
 	def add_topic(name, choices)
+		new_topic = Topic.new(name)
 
+		choices.each { |a| new_topic.add_choice(a) }
 	end
 
 	def remove_topic(name)
-
+		@topics.delete_if { |a| a.name == name.to_s }
 	end
 
 	def lock_vote(name)
-
+		@topics.each do |a|
+			if a.name == name.to_s
+				a.lock_vote
+				return
+			end
+		end
 	end
 
 	def unlock_vote(name)
-
+		@topics.each do |a|
+			if a.name == name.to_s
+				a.unlock_vote
+				return
+			end
+		end
 	end
 
 	# admin functions

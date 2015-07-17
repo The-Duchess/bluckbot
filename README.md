@@ -12,7 +12,7 @@
 - To create Plugins follow the [Instructions](https://github.com/The-Duchess/bluckbot/blob/master/makingplugins.md)
 - The screenshot below is the bot seen via PuTTY running in Windows 8.1
 
-> Note: some modules may have their own files, and gem requirements, also cah.rb and cah_2.rb are not complete
+> Note: some modules may have their own files, and gem requirements, also vote.rb, cah.rb and cah_2.rb are not complete
 
 **Libraries for Default Instance and All Existing Plugins**
 
