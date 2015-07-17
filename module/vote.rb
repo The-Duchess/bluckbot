@@ -73,7 +73,7 @@ class Topic
 end
 
 class Vote < Pluginf
-	#any functions you may need
+
 	def initialize(regex, name, help)
 		@regexp = Regexp.new(regex.to_s)
 		@name = name.to_s
@@ -104,7 +104,6 @@ class Vote < Pluginf
 
 	end
 
-	#your definition for script
 	# admin functions
 	# `vote add topic choices
 	# 	- add topic: <topic> choices: <choices delimited by a space>
@@ -121,19 +120,9 @@ class Vote < Pluginf
 	end
 end
 
-# allows you to support multiple regexes
-# prefix = [
-#		//,
-#		//
-#	   ]
-#
-# reg_p = Regexp.union(prefix)
-
 reg_p = /^`vote / #regex to call the module
 na = "vote" #name for plugin #same as file name without .rb
 de = "admin functions\n  `vote add topic: <topic> choices: <choices delimited by a space>\n  `vote lock topic\n  `vote unlock topic\ngeneral user functions\n  `vote topic choice\n  `vote list topics\n  `vote list choices topic  \n`vote list voters topic"
 
-#plugin = Class_name.new(regex, name, help)
-#pushed onto to the end of plugins array array
 plugin = Vote.new(reg_p, na, de)
 $plugins_s.push(plugin)
