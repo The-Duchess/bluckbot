@@ -152,8 +152,13 @@ class Vote < Pluginf
 		response = ""
 		tokens = message.split(" ")
 
-		if tokens[1] == "add"
-			# fuck this noise
+		if tokens[1] == "add" and tokens.include? "topic:" and tokens.include? "choices:"
+			tokens_2 = message.split(":")
+			topic = tokens_2[1].to_s[0..-9].to_s
+			choices = tokens_2.split(" ")
+			add_topic(topic, choices)
+
+			response = "NOTICE #{nick} :added"
 		elsif tokens[1] == "lock"
 			topic = ""
 			1.upto(tokens.length - 1) { |a| topic.concat("#{a} ") }
@@ -175,16 +180,16 @@ class Vote < Pluginf
 		elsif tokens[1] == "list"
 			# fuck this noise
 			if tokens[2] == "topics"
-
+				return "not implemented"
 			elsif tokens[2] == "choices"
-
+				return "not implemented"
 			elsif tokens[2] == "voters"
-
+				return "not implemented"
 			else
 				response = "bad arguments"
 			end
 		elsif tokens[1] == "save"
-			# fuck this noise
+			return "not implemented"
 		elsif tokens.length >= 3
 			choice = tokens[tokens.length - 1].to_s
 			topic = ""
