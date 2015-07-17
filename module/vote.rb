@@ -159,16 +159,22 @@ class Vote < Pluginf
 			topic = topic[0..-2].to_s
 
 			lock_vote(topic)
+
+			response = "#{topic}: locked"
+
 		elsif tokens[1] == "unlock"
 			topic = ""
 			1.upto(tokens.length - 1) { |a| topic.concat("#{a} ") }
 			topic = topic[0..-2].to_s
 
 			unlock_vote(topic)
+
+			response = "#{topic}: unlocked"
+
 		elsif tokens[1] == "list"
 			# fuck this noise
 			if tokens[2] == "topics"
-				
+
 			elsif tokens[2] == "choices"
 
 			elsif tokens[2] == "voters"
