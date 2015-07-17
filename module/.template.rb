@@ -5,7 +5,7 @@
 #############################################################################################
 # GLOBALS:
 # - $logs are stored like [most recent - least recent], they are also unparsed
-# - $admins is the list of admins
+# - $admin_s is the list of admins
 # - $plugins_s is the array of active plugins
 #############################################################################################
 
@@ -14,13 +14,13 @@ $LOAD_PATH << './module'
 require '.pluginf.rb'
 
 class Template < Pluginf
-	#any functions you may need
+      #any functions you may need
 
-	#your definition for script
-	def script(message, nick, chan)
+      #your definition for script
+      def script(message, nick, chan)
 
-		return "string"
-	end
+            return "string"
+      end
 end
 
 # allows you to support multiple regexes

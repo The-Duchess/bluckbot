@@ -5,7 +5,7 @@
 #############################################################################################
 # GLOBALS:
 # - $logs are stored like [most recent - least recent], they are also unparsed
-# - $admins is the list of admins
+# - $admin_s is the list of admins
 # - $plugins_s is the array of active plugins
 #############################################################################################
 
@@ -19,7 +19,7 @@ class Git_pull < Pluginf
       #your definition for script
       def script(message, nick, chan)
 
-            if !$admins.include? nick
+            if not $admin_s.include? nick
                   return "NOTICE: #{nick} :please do not disturb the irc bots"
             end
 
