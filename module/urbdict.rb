@@ -51,13 +51,13 @@ class UrbDict < Pluginf
 		i = 0
 		0.upto(len_a) do |a|
 			if @rt.length <= len
-				#@parts.push(@rt.to_s)
+				# @parts.push(@rt.to_s)
 				return @rt.to_s
 			end
 
 			if(@rt[a..-1].to_s.length <= len)
-				p "should be back"
-				p @rt[((len * a) + i)..-1].to_s
+				# p "should be back"
+				# p @rt[((len * a) + i)..-1].to_s
 				@parts.push(@rt[((len * a) + i)..-1])
 				break
 			end
