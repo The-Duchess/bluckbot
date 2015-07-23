@@ -2,7 +2,9 @@
 
 > check out [Husk](https://github.com/The-Duchess/husk), my new IRC bot project.
 
-# **Bluckbot Version 1.5.5**
+# **Bluckbot**
+
+**Version 1.5.5**
 
 - Bluckbot is a modular/plugable irc bot written with the Ruby programming language
 - Bluckbot is written by Alice "Duchess" Archer
