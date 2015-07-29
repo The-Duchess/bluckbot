@@ -5,10 +5,6 @@ gem 'rubysl-optparse'
 gem 'multi-json'
 gem 'json'
 
-group :markov
-	gem 'marky_markov'
-end
-
 group :youtube
 	gem 'google-api-client'
 end
