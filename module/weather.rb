@@ -279,18 +279,14 @@ class Weather < Pluginf
 		return @r_w
 	end
 
-	def get_forecast_yahoo(area_code)
-	end
-
-	def get_weather_yahoo(area_code)
-	end
-
 	def get_ac(nick)
 		begin
 			return @users.fetch(nick)
 		rescue => e
 			return "nick not found"
 		end
+
+		return "nick not found"
 	end
 
 	def parse(message, nick, chan)
@@ -382,7 +378,7 @@ class Weather < Pluginf
 				return "invalid arguments"
 			end
 
-			if not check_user(tokens[1])
+			if not check_user(nick)
 				ac_t = ""
 				if tokens.length > 2
 					1.upto(tokens.length - 1) do |i|
