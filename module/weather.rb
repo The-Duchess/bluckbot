@@ -291,6 +291,7 @@ class Weather < Pluginf
 
 	def parse(message, nick, chan)
 		tokens = message.split(' ')
+		puts tokens.to_s
 		cmd = tokens[0] # the command the user is calling [ `w <area code |s nick> | `ws <area code> ]
 		@r = ""
 
@@ -382,6 +383,7 @@ class Weather < Pluginf
 				ac_t = ""
 				if tokens.length > 2
 					1.upto(tokens.length - 1) do |i|
+						puts i
 						ac_t.concat("#{i}")
 					end
 				else
@@ -393,6 +395,7 @@ class Weather < Pluginf
 				ac_t = ""
 				if tokens.length > 2
 					1.upto(tokens.length - 1) do |i|
+						puts i
 						ac_t.concat("#{i}")
 					end
 				else
