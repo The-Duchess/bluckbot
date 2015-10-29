@@ -2,6 +2,8 @@
 
 > check out [Husk](https://github.com/The-Duchess/husk), my new IRC bot project.
 
+> actually [Husk](https://github.com/The-Duchess/husk) is now deprecated due to using the primitive early versions of my 'current' project [rirc](https://github.com/The-Duchess/ruby-irc-framework)
+
 # **Bluckbot**
 
 **About Bluckbot**
