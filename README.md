@@ -19,7 +19,6 @@
 - To setup run setup.sh and it will create the necessary files/folders for basic operation and you can configure manually
 - To run if configs are setup run ./run.sh
 - To create Plugins follow the [Instructions](https://github.com/The-Duchess/bluckbot/blob/master/makingplugins.md)
-- The screenshot below is the bot seen via PuTTY running in Windows 8.1
 
 **Libraries for Default Instance and All Existing Plugins**
 
@@ -64,10 +63,6 @@
 >- \`list : lists loaded modules
 >- \`help $MODULE : gives help on a certain module
 >- \`mass load : loads a preset set of modules in ./res/.modlist
-
-**Screenshot**
-
-![Alt text](https://github.com/The-Duchess/bluckbot/blob/master/demo.png)
 
 
 **Warranty and License**
