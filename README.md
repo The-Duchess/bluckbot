@@ -20,6 +20,24 @@
 - To run if configs are setup run ./run.sh
 - To create Plugins follow the [Instructions](https://github.com/The-Duchess/bluckbot/blob/master/makingplugins.md)
 
+**Provided Plugins**
+
+>- dictionary, allows you to add a definition to a term
+>- eightball,  performs an eightball roll to questions
+>- flood,      floods figlet text
+>- humor,      allows people to contribute jokes and get a random entry
+>- karma,      allows for ++ | -- on any object to change its karma
+>- quotes,     allows people to store quotes and get by a name
+>- sed,        let's people correct previous messages using sed
+>- smiles,     generates random unicode smiles
+>- stats,      gets server state
+>- trigger,    lets people add text to have the bot say when it sees specific text
+>- uptime,     gets server's uptime
+>- urbdict,    let's people search urban dictionary
+>- weather,    let's people store and get weather info [this is deprecated due to changes in openweather]
+>- youtube,    displays info for people's youtube urls
+>- np,         diplays banshee now playing info for the bot's host machine
+
 **Libraries for Default Instance and All Existing Plugins**
 
 >- 'cgi'
