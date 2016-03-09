@@ -6,5 +6,5 @@ gem 'multi-json'
 gem 'json'
 
 group :youtube
-	gem 'google-api-client'
+	gem 'google-api-client' -v 0.8.0
 end
